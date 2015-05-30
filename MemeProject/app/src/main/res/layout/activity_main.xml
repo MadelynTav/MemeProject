@@ -5,15 +5,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="madelyntav.c4q.nyc.memeproject.MainActivity">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Take New Photo"
-        android:onClick="takePic"/>
+        android:onClick="takePic"
+        android:id="@+id/takePic"
+        android:layout_marginLeft="40dp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose Photo From Album"/>
+        android:text="Choose Photo From Album"
+        android:id="@+id/choosePhoto"/>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
