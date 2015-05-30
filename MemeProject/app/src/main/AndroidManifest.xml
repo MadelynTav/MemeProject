@@ -11,6 +11,14 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity
+            android:name=".EditMeme"
+            android:label="@string/title_activity_edit_meme" >
+        </activity>
+        <activity
+            android:name=".EditPhoto"
+            android:label="@string/title_activity_edit_photo" >
+        </activity>
     </application>
 
 </manifest>
