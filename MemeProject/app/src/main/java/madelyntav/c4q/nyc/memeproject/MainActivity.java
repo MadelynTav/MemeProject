@@ -30,9 +30,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 
 
         targetImage = (ImageView) findViewById(R.id.targetImage);
+=======
+        //mImageView = (ImageView) findViewById(R.id.mImageView);
+>>>>>>> ray
     }
     public void usePic (View v){
         Intent choosePictureIntent = new Intent(Intent.ACTION_PICK,
