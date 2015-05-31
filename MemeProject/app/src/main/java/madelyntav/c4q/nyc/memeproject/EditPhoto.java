@@ -1,19 +1,29 @@
 package madelyntav.c4q.nyc.memeproject;
 
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 
 public class EditPhoto extends ActionBarActivity {
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
-    }
+        imageView = (ImageView) findViewById(R.id.imageView);
 
+        //opens pic in this activity
+        if(getIntent().hasExtra("byteArray")) {
+            Bitmap b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            imageView.setImageBitmap(b);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
