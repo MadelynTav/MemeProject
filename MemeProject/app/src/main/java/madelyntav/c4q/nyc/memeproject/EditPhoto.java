@@ -31,6 +31,8 @@ public class EditPhoto extends ActionBarActivity {
         imageView = (ImageView) findViewById(R.id.mImageView);
 
 
+
+
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
@@ -42,8 +44,6 @@ public class EditPhoto extends ActionBarActivity {
                 public void onClick(View v) {
                     String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
                     Uri bmpUri= Uri.parse(pathOfBmp);
-
-
                     Intent attachIntent = new Intent(Intent.ACTION_SEND);
                     attachIntent.putExtra(Intent.EXTRA_STREAM,  bmpUri);
                     attachIntent.setType("image/png");
