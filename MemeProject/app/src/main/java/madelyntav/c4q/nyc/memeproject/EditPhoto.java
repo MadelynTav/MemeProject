@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import static android.graphics.Color.WHITE;
+
 
 public class EditPhoto extends ActionBarActivity {
     private ImageView imageView;
@@ -33,13 +35,21 @@ public class EditPhoto extends ActionBarActivity {
             Bitmap bm = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
             imageView.setImageBitmap(bm);
         }
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clear(editText);
-            }
-        });
-    }
+//        editText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clear(editText);
+//
+//           }
+//        });
+//        editText2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clear2(editText2);
+//
+//        }
+//    });
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,13 +73,19 @@ public class EditPhoto extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void vanillaM (View v){
-        editText.setText("write something here");
-        editText2.setText("and here");
+        editText.setBackgroundColor(WHITE);
+        editText2.setBackgroundColor(WHITE);
+        editText.setHint("write something here");
+        editText2.setHint("and here");
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
     }
-    public void clear (View v){
-        editText.setText("");
-        editText2.setText("");
-    }
+//    public void clear (View v){
+//        editText.setText("");
+//        editText.setBackground(null);
+//    }
+//    public void clear2 (View v){
+//        editText2.setText("");
+//        editText2.setBackground(null);
+//    }
 }
