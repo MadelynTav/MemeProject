@@ -36,6 +36,7 @@ public class EditPhoto extends ActionBarActivity {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView.setImageBitmap(b);
 
+            //Code to share photo with any app that allows a photo as an attachment
             Button share = (Button) findViewById(R.id.share);
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
