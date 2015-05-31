@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Share"
-            android:onClick="sharePhoto"
+
             android:id="@+id/share"
             android:layout_marginLeft="40dp" />
     </LinearLayout>
