@@ -37,7 +37,7 @@ public class EditPhoto extends ActionBarActivity {
         if (getIntent().hasExtra("byteArray")) {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView.setImageBitmap(b);
-            //shares photo with other apps
+
             Button share = (Button) findViewById(R.id.share);
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
