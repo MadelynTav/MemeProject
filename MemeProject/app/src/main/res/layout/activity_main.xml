@@ -25,11 +25,20 @@
         android:layout_height="wrap_content"
         android:text="Choose Photo From Album"
         android:onClick="usePic"/>
+
         <ImageView
             android:id="@+id/targetImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/loadImageButton"/>
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mImageView"/>
+
     </LinearLayout>
 
 
