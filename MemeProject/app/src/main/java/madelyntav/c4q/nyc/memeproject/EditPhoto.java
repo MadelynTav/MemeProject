@@ -22,6 +22,8 @@ public class EditPhoto extends ActionBarActivity {
         if(getIntent().hasExtra("byteArray")) {
             Bitmap b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView.setImageBitmap(b);
+
+
         }
     }
 
