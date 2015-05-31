@@ -41,7 +41,6 @@
             android:text="Save"
             android:id="@+id/save"
             android:layout_weight="1"
-            android:onClick="savePicture"
             />
 
     </LinearLayout>
