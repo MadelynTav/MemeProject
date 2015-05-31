@@ -6,23 +6,39 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class EditPhoto extends ActionBarActivity {
     private ImageView imageView;
+    private Button Vanilla;
+    private EditText editText;
+    private EditText editText2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
         imageView = (ImageView) findViewById(R.id.imageView);
-
+        Vanilla = (Button) findViewById(R.id.vanilla);
+        editText = (EditText) findViewById(R.id.editText);
+        editText2 = (EditText) findViewById(R.id.editText2);
         //opens pic in this activity
         if(getIntent().hasExtra("byteArray")) {
-            Bitmap b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            imageView.setImageBitmap(b);
+            Bundle extras = getIntent().getExtras();
+            byte[] byteArray = extras.getByteArray("byteArray");
+            Bitmap bm = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+            imageView.setImageBitmap(bm);
         }
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear(editText);
+            }
+        });
     }
 
     @Override
@@ -45,5 +61,15 @@ public class EditPhoto extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void vanillaM (View v){
+        editText.setText("write something here");
+        editText2.setText("and here");
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+    }
+    public void clear (View v){
+        editText.setText("");
+        editText2.setText("");
     }
 }
