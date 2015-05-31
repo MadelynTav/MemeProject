@@ -15,23 +15,35 @@
         android:id="@+id/linearLayout">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/vanilla"
-            android:text="Vanilla" />
+            android:text="Vanilla"
+            android:layout_weight="1"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Demotivational"
-            android:id="@+id/demotivational" />
+            android:id="@+id/demotivational"
+            android:layout_weight="1"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Share"
             android:id="@+id/share"
-            android:layout_marginLeft="40dp" />
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/save"
+            android:layout_weight="1"
+            android:onClick="savePicture"
+            />
+
     </LinearLayout>
 
     <ImageView
