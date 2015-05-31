@@ -68,8 +68,11 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1d6fcf8552d0cefde00fc0b43ec2a4e0a59f1eb8
     //opens camera
     public void takePic (View v) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -77,4 +80,5 @@ public class MainActivity extends ActionBarActivity {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
+
 }
