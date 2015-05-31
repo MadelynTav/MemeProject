@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class EditPhoto extends ActionBarActivity implements View.OnClickListener {
+public class EditPhoto extends ActionBarActivity {
     private ImageView imageView;
     Button save;
 
@@ -39,14 +39,9 @@ public class EditPhoto extends ActionBarActivity implements View.OnClickListener
             imageView.setImageBitmap(b);
         }
 
-        //instantiating button to be clicked
-        save = (Button) findViewById(R.id.save);
-        save.setOnClickListener(this);
     }
 
-
-
-    private void storeImage() {
+    public void storeImage(View v) {
         //converts the current imageview into a bitmap for storage purposes
         Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         //Calls the getOutputMediaFile method to create the file the image will be stored in
@@ -90,9 +85,4 @@ public class EditPhoto extends ActionBarActivity implements View.OnClickListener
         return mediaFile;
     }
 
-    //On click method to call storeImage
-    @Override
-    public void onClick(View v) {
-        storeImage();
-    }
 }
