@@ -24,7 +24,7 @@ public class EditPhoto extends ActionBarActivity {
 
     public void sharePhoto(View view){
 
-
+        imageView=(ImageView)findViewById(R.id.mImageView);
         if(imageView.getDrawable()!=null) {
             Uri imageUri = Uri.parse(String.valueOf(imageView.getDrawable()));
 
