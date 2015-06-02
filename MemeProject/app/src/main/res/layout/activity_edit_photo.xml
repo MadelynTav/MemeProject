@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/vanilla"
             android:text="Vanilla"
+            android:onClick="vanillaM"
             android:layout_weight="1"/>
 
         <Button
@@ -47,38 +48,38 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
+  <RelativeLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/meme"
+      android:layout_below="@+id/linearLayout"
+>
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="400dp"
         android:id="@+id/mImageView"
-        android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp" />
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="226dp"
+            android:text="New Text"
+            android:layout_alignTop="@+id/mImageView"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/editText" />
+      <EditText
+          android:layout_width="wrap_content"
+          android:layout_height="226dp"
+          android:text="New Text"
+          android:layout_centerHorizontal="true"
+          android:layout_alignBottom="@+id/mImageView"
+          android:id="@+id/editText2" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-        />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:visibility="invisible"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
