@@ -2,10 +2,8 @@ package madelyntav.c4q.nyc.memeproject;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
@@ -15,8 +13,6 @@ import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-
-import java.io.ByteArrayOutputStream;
 
 
 public class MainActivity extends ActionBarActivity {
