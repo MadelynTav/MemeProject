@@ -53,31 +53,27 @@ public class EditPhoto extends ActionBarActivity {
 
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
-
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-
-        imageView = (ImageView) findViewById(R.id.mImageView);
-        Vanilla = (Button) findViewById(R.id.vanilla);
-        editText = (EditText) findViewById(R.id.editText);
-        editText2 = (EditText) findViewById(R.id.editText2);
-        //opens pic in this activity
-
+            imageView = (ImageView) findViewById(R.id.mImageView);
+            Vanilla = (Button) findViewById(R.id.vanilla);
+            editText = (EditText) findViewById(R.id.editText);
+            editText2 = (EditText) findViewById(R.id.editText2);
             imageView.setImageBitmap(b);
         }else{
-               //retrieve passed uri
-               Uri uri = getIntent().getExtras().getParcelable("image");
-               //retrieve bitmap uri from intent
-               try {
-                   bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-               } catch (IOException e) {
+            //retrieve passed uri
+            Uri uri = getIntent().getExtras().getParcelable("image");
+            //retrieve bitmap uri from intent
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                } catch (IOException e) {
                    e.printStackTrace();
-               }
-               //create bitmap for use within activity
-               try {
-                   bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-               } catch (IOException e) {
+                }
+            //create bitmap for use within activity
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+                } catch (IOException e) {
                    e.printStackTrace();
-               }
+                }
             imageView.setImageBitmap(bitmap);
         }
 
