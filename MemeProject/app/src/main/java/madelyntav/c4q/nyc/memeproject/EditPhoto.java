@@ -3,13 +3,13 @@ package madelyntav.c4q.nyc.memeproject;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class EditPhoto extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.mImageView);
 
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
@@ -43,7 +43,11 @@ public class EditPhoto extends ActionBarActivity {
 
     public void storeImage(View v) {
         //converts the current imageview into a bitmap for storage purposes
-        Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        //Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+        //RelativeLayout rel = (RelativeLayout) findViewById(R.id.meme);
+        Bitmap image = createBitmap();
+
         //Calls the getOutputMediaFile method to create the file the image will be stored in
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
@@ -84,5 +88,15 @@ public class EditPhoto extends ActionBarActivity {
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
         return mediaFile;
     }
+
+    public Bitmap createBitmap(){
+        RelativeLayout view = (RelativeLayout)findViewById(R.id.meme);
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bm = view.getDrawingCache();
+        Toast.makeText(this,"created Bitmap method worked", Toast.LENGTH_SHORT).show();
+        return bm;
+    }
+
 
 }

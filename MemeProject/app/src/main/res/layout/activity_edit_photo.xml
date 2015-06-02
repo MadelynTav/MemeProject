@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/vanilla"
             android:text="Vanilla"
+            android:onClick="vanillaM"
             android:layout_weight="1"/>
 
         <Button
@@ -32,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Share"
+
             android:id="@+id/share"
             android:layout_weight="1"/>
 
@@ -46,12 +48,38 @@
 
     </LinearLayout>
 
-    <ImageView
+
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
-        android:id="@+id/imageView"
+        android:layout_height="wrap_content"
+        android:id="@+id/meme"
         android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
+        >
+
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:id="@+id/mImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="49dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="226dp"
+            android:text="New Text"
+            android:layout_alignTop="@+id/mImageView"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/editText" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="226dp"
+            android:text="New Text"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/mImageView"
+            android:id="@+id/editText2" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>
