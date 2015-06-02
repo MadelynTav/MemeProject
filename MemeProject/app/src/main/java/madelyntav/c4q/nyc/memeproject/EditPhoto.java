@@ -1,25 +1,18 @@
 package madelyntav.c4q.nyc.memeproject;
 
 
+import android.content.Context;
 import android.content.Intent;
-
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-
-import android.content.Context;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -40,6 +32,7 @@ public class EditPhoto extends ActionBarActivity {
     private ImageView imageView;
 
     Bitmap b;
+    Bitmap bitmap;
 
     private Button Vanilla;
     private EditText editText;
@@ -60,21 +53,28 @@ public class EditPhoto extends ActionBarActivity {
 
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
-
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-
-        imageView = (ImageView) findViewById(R.id.mImageView);
-        Vanilla = (Button) findViewById(R.id.vanilla);
-        editText = (EditText) findViewById(R.id.editText);
-        editText2 = (EditText) findViewById(R.id.editText2);
-        //opens pic in this activity
-
-
-        if(getIntent().hasExtra("byteArray")) {
-            Bundle extras = getIntent().getExtras();
-            byte[] byteArray = extras.getByteArray("byteArray");
-            Bitmap bm = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
-            imageView.setImageBitmap(bm);
+            imageView = (ImageView) findViewById(R.id.mImageView);
+            Vanilla = (Button) findViewById(R.id.vanilla);
+            editText = (EditText) findViewById(R.id.editText);
+            editText2 = (EditText) findViewById(R.id.editText2);
+            imageView.setImageBitmap(b);
+        }else{
+            //retrieve passed uri
+            Uri uri = getIntent().getExtras().getParcelable("image");
+            //retrieve bitmap uri from intent
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                } catch (IOException e) {
+                   e.printStackTrace();
+                }
+            //create bitmap for use within activity
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+                } catch (IOException e) {
+                   e.printStackTrace();
+                }
+            imageView.setImageBitmap(bitmap);
         }
 
             Button share = (Button) findViewById(R.id.share);
@@ -92,10 +92,7 @@ public class EditPhoto extends ActionBarActivity {
                     startActivity(attachIntent);
                 }
             });
-
-
         }
-    }
 
     public static Bitmap getBitmapFromView(View view) {
         Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
