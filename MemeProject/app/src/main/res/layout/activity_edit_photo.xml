@@ -56,7 +56,6 @@
         android:layout_below="@+id/linearLayout"
         >
 
-
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="400dp"
@@ -81,5 +80,6 @@
 
 
     </RelativeLayout>
+
 
 </RelativeLayout>

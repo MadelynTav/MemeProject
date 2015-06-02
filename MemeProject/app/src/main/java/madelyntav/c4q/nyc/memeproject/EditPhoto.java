@@ -9,10 +9,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -25,6 +27,14 @@ import java.util.Date;
 
 
 public class EditPhoto extends ActionBarActivity {
+
+    Bitmap b;
+    Bitmap bitmap;
+
+    private Button Vanilla;
+    private EditText editText;
+    private EditText editText2;
+
     private ImageView imageView;
     Button save;
 
@@ -36,16 +46,60 @@ public class EditPhoto extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
+
         imageView = (ImageView) findViewById(R.id.mImageView);
         memeLayout = (RelativeLayout)findViewById(R.id.meme);
 
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            imageView = (ImageView) findViewById(R.id.mImageView);
+            Vanilla = (Button) findViewById(R.id.vanilla);
+            editText = (EditText) findViewById(R.id.editText);
+            editText2 = (EditText) findViewById(R.id.editText2);
             imageView.setImageBitmap(b);
-
+        }else{
+            //retrieve passed uri
+            Uri uri = getIntent().getExtras().getParcelable("image");
+            //retrieve bitmap uri from intent
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //create bitmap for use within activity
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageView.setImageBitmap(bitmap);
         }
 
+        Button share = (Button) findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b=getBitmapFromView(findViewById(R.id.meme));
+
+                String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
+                Uri bmpUri= Uri.parse(pathOfBmp);
+
+                Intent attachIntent = new Intent(Intent.ACTION_SEND);
+                attachIntent.putExtra(Intent.EXTRA_STREAM,  bmpUri);
+                attachIntent.setType("image/png");
+                startActivity(attachIntent);
+            }
+        });
+    }
+
+    public void vanillaM (View v){
+        editText.setBackgroundColor(Color.WHITE);
+        editText2.setBackgroundColor(Color.WHITE);
+        editText.setHint("write something here");
+        editText2.setHint("and here");
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
     }
 
     //onClick method for the save button. Calls other methods to create the save image function
@@ -116,3 +170,8 @@ public class EditPhoto extends ActionBarActivity {
         return returnedBitmap;
     }
 }
+
+
+
+
+
