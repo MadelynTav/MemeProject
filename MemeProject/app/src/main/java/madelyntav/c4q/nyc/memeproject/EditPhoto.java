@@ -1,5 +1,6 @@
 package madelyntav.c4q.nyc.memeproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,16 +26,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class EditPhoto extends ActionBarActivity {
+public class EditPhoto extends Activity {
 
     Bitmap b;
     Bitmap bitmap;
 
     private Button Vanilla;
-    private EditText editText;
-    private EditText editText2;
+    private Button demotivational;
+    private EditText editText, editText2, demoTitle, demoText;
 
-    private ImageView imageView;
+    private ImageView imageView, demoImage;
     Button save;
 
     private File file;
@@ -48,6 +48,7 @@ public class EditPhoto extends ActionBarActivity {
         setContentView(R.layout.activity_edit_photo);
 
         imageView = (ImageView) findViewById(R.id.mImageView);
+        demoImage = (ImageView)findViewById(R.id.demotivationalImage);
         memeLayout = (RelativeLayout)findViewById(R.id.meme);
 
         //opens pic in this activity
@@ -57,7 +58,11 @@ public class EditPhoto extends ActionBarActivity {
             Vanilla = (Button) findViewById(R.id.vanilla);
             editText = (EditText) findViewById(R.id.editText);
             editText2 = (EditText) findViewById(R.id.editText2);
+            demoTitle = (EditText)findViewById(R.id.demotivationalTitle);
+            demoText = (EditText)findViewById(R.id.demotivationalText);
             imageView.setImageBitmap(b);
+            demoImage.setImageBitmap(b);
+
         }else{
             //retrieve passed uri
             Uri uri = getIntent().getExtras().getParcelable("image");
@@ -74,13 +79,14 @@ public class EditPhoto extends ActionBarActivity {
                 e.printStackTrace();
             }
             imageView.setImageBitmap(bitmap);
+            demoImage.setImageBitmap(bitmap);
         }
 
         Button share = (Button) findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b=getBitmapFromView(findViewById(R.id.meme));
+                b=getBitmapFromView(memeLayout);
 
                 String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
                 Uri bmpUri= Uri.parse(pathOfBmp);
@@ -94,12 +100,24 @@ public class EditPhoto extends ActionBarActivity {
     }
 
     public void vanillaM (View v){
+        memeLayout.setBackgroundColor(Color.WHITE);
         editText.setBackgroundColor(Color.WHITE);
         editText2.setBackgroundColor(Color.WHITE);
         editText.setHint("write something here");
         editText2.setHint("and here");
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
+        demoTitle.setVisibility(View.INVISIBLE);
+        demoText.setVisibility(View.INVISIBLE);
+    }
+
+    public void demotivate(View v){
+        memeLayout.setBackgroundColor(Color.BLACK);
+        editText.setVisibility(View.INVISIBLE);
+        editText2.setVisibility(View.INVISIBLE);
+        demoTitle.setVisibility(View.VISIBLE);
+        demoText.setVisibility(View.VISIBLE);
+
     }
 
     //onClick method for the save button. Calls other methods to create the save image function
