@@ -1,19 +1,57 @@
 package madelyntav.c4q.nyc.memeproject;
 
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import java.io.IOException;
 
 
 public class EditPhoto extends ActionBarActivity {
+
+    ImageView imageView;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
-    }
 
+        imageView = (ImageView) findViewById(R.id.imageView);
+
+        if(getIntent().hasExtra("byteArray")){
+            Bundle extras = getIntent().getExtras();
+            byte[] byteArray = extras.getByteArray("byteArray");
+            Bitmap bm = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
+            imageView.setImageBitmap(bm);
+        }else {
+            //retrieve passed uri
+            Uri uri = getIntent().getExtras().getParcelable("image");
+
+            //retrieve bitmap uri from intent
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //create bitmap for use within activity
+
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
