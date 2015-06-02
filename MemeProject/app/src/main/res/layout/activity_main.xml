@@ -11,20 +11,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true">
-        <Button
-            android:id="@+id/takePic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Take New Photo"
-            android:onClick="takePic"
-            android:layout_marginLeft="40dp" />
 
-        <Button
-            android:id="@+id/loadImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose Photo From Album"
-            android:onClick="usePic"/>
+
+    <Button
+        android:id="@+id/takePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take New Photo"
+        android:onClick="takePic"
+        android:layout_marginLeft="40dp" />
+
+    <Button
+        android:id="@+id/loadImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Photo From Album"
+        android:onClick="usePic"/>
+
 
         <ImageView
             android:id="@+id/mImageView"
@@ -35,6 +38,11 @@
 
 
 
+
     </LinearLayout>
 
 </RelativeLayout>
+
+
+
+
