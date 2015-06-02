@@ -1,30 +1,24 @@
 package madelyntav.c4q.nyc.memeproject;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-
+import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import java.io.ByteArrayOutputStream;
 
 
 public class MainActivity extends ActionBarActivity {
-    private ImageView mImageView;
-    private Bitmap mImageBitmap;
-    TextView textTargetUri;
     ImageView targetImage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int EXTERNAL_CONTENT_URI = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +26,27 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
     }
-    public void usePic (View v){
+
+    public void usePic(View v) {
         Intent choosePictureIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(choosePictureIntent, 0);
     }
 
+
+    public void takePic(View v) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+
     @Override // saves pic and sends it to editPhoto activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            Intent intent = new Intent(MainActivity.this, EditPhoto.class);
+        Intent intent = new Intent(MainActivity.this, EditPhoto.class);
 
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
@@ -52,27 +56,27 @@ public class MainActivity extends ActionBarActivity {
             intent.putExtra("byteArray", bs.toByteArray());
             startActivity(intent);
 
-        }else {
-            if (resultCode == RESULT_OK) {
+        } else {
+            if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
+                //Image selected message
+                Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
+
+                //get Uri from selected image
                 Uri targetUri = data.getData();
-                Bitmap bitmap;
+                Bitmap bitmap = null;
+                ContentResolver cr = getContentResolver();
+
+                //turn selected image into a Bitmap image
                 try {
-                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                    targetImage.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
+                    bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+                //pass image to intent
+                intent.putExtra("image", targetUri);
+                targetImage.setImageBitmap(bitmap);
                 startActivity(intent);
             }
         }
     }
-
-    //opens camera
-    public void takePic (View v) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
-
 }

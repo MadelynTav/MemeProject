@@ -1,6 +1,7 @@
 package madelyntav.c4q.nyc.memeproject;
 
 
+
 import android.content.Intent;
 
 
@@ -34,9 +35,21 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+
+import java.io.IOException;
+
 
 public class EditPhoto extends ActionBarActivity {
-    private ImageView imageView;
+    private ImageView mImageView;
 
     Bitmap b;
 
@@ -50,38 +63,71 @@ public class EditPhoto extends ActionBarActivity {
     private String TAG = "GallerySaving";
 
 
+    ImageView imageView;
+    Bitmap bitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
 
+
         imageView = (ImageView) findViewById(R.id.mImageView);
+
+
+        if (getIntent().hasExtra("byteArray")) {
+            Bundle extras = getIntent().getExtras();
+            byte[] byteArray = extras.getByteArray("byteArray");
+            Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            imageView.setImageBitmap(bm);
+        } else {
+            //retrieve passed uri
+            Uri uri = getIntent().getExtras().getParcelable("image");
+
+            //retrieve bitmap uri from intent
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //create bitmap for use within activity
+
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            imageView.setImageBitmap(bitmap);
+        }
+
 
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
 
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
 
-        imageView = (ImageView) findViewById(R.id.mImageView);
-        Vanilla = (Button) findViewById(R.id.vanilla);
-        editText = (EditText) findViewById(R.id.editText);
-        editText2 = (EditText) findViewById(R.id.editText2);
-        //opens pic in this activity
-        if(getIntent().hasExtra("byteArray")) {
-            Bundle extras = getIntent().getExtras();
-            byte[] byteArray = extras.getByteArray("byteArray");
-            Bitmap bm = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
-            imageView.setImageBitmap(bm);
-        }
+            imageView = (ImageView) findViewById(R.id.mImageView);
+            Vanilla = (Button) findViewById(R.id.vanilla);
+            editText = (EditText) findViewById(R.id.editText);
+            editText2 = (EditText) findViewById(R.id.editText2);
+            //opens pic in this activity
+            if (getIntent().hasExtra("byteArray")) {
+                Bundle extras = getIntent().getExtras();
+                byte[] byteArray = extras.getByteArray("byteArray");
+                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                imageView.setImageBitmap(bm);
+            }
 
             Button share = (Button) findViewById(R.id.share);
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
-                    Uri bmpUri= Uri.parse(pathOfBmp);
+                    String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b, "title", null);
+                    Uri bmpUri = Uri.parse(pathOfBmp);
                     Intent attachIntent = new Intent(Intent.ACTION_SEND);
-                    attachIntent.putExtra(Intent.EXTRA_STREAM,  bmpUri);
+                    attachIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                     attachIntent.setType("image/png");
                     startActivity(attachIntent);
                 }
@@ -90,6 +136,7 @@ public class EditPhoto extends ActionBarActivity {
 
         }
     }
+
 
     public void vanillaM (View v){
         editText.setBackgroundColor(Color.WHITE);
