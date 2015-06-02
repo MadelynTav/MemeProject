@@ -32,6 +32,7 @@ public class EditPhoto extends ActionBarActivity {
     private ImageView imageView;
 
     Bitmap b;
+    Bitmap bitmap;
 
     private Button Vanilla;
     private EditText editText;
@@ -61,12 +62,23 @@ public class EditPhoto extends ActionBarActivity {
         editText2 = (EditText) findViewById(R.id.editText2);
         //opens pic in this activity
 
-
-        if(getIntent().hasExtra("byteArray")) {
-            Bundle extras = getIntent().getExtras();
-            byte[] byteArray = extras.getByteArray("byteArray");
-            Bitmap bm = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length);
-            imageView.setImageBitmap(bm);
+            imageView.setImageBitmap(b);
+        }else{
+               //retrieve passed uri
+               Uri uri = getIntent().getExtras().getParcelable("image");
+               //retrieve bitmap uri from intent
+               try {
+                   bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+               //create bitmap for use within activity
+               try {
+                   bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+            imageView.setImageBitmap(bitmap);
         }
 
             Button share = (Button) findViewById(R.id.share);
@@ -84,10 +96,7 @@ public class EditPhoto extends ActionBarActivity {
                     startActivity(attachIntent);
                 }
             });
-
-
         }
-    }
 
     public static Bitmap getBitmapFromView(View view) {
         Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
