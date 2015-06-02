@@ -4,6 +4,7 @@ package madelyntav.c4q.nyc.memeproject;
 import android.content.Intent;
 
 
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -67,6 +68,8 @@ public class EditPhoto extends ActionBarActivity {
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
         //opens pic in this activity
+
+
         if(getIntent().hasExtra("byteArray")) {
             Bundle extras = getIntent().getExtras();
             byte[] byteArray = extras.getByteArray("byteArray");
@@ -78,8 +81,11 @@ public class EditPhoto extends ActionBarActivity {
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    b=getBitmapFromView(findViewById(R.id.meme));
+
                     String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
                     Uri bmpUri= Uri.parse(pathOfBmp);
+
                     Intent attachIntent = new Intent(Intent.ACTION_SEND);
                     attachIntent.putExtra(Intent.EXTRA_STREAM,  bmpUri);
                     attachIntent.setType("image/png");
@@ -89,6 +95,18 @@ public class EditPhoto extends ActionBarActivity {
 
 
         }
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            bgDrawable.draw(canvas);
+        else
+            canvas.drawColor(Color.WHITE);
+        view.draw(canvas);
+        return returnedBitmap;
     }
 
     public void vanillaM (View v){
