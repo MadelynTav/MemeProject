@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true">
+
+
     <Button
         android:id="@+id/takePic"
         android:layout_width="wrap_content"
@@ -26,6 +28,7 @@
         android:text="Choose Photo From Album"
         android:onClick="usePic"/>
 
+
         <ImageView
             android:id="@+id/mImageView"
             android:layout_width="wrap_content"
@@ -35,6 +38,11 @@
 
 
 
+
     </LinearLayout>
 
 </RelativeLayout>
+
+
+
+

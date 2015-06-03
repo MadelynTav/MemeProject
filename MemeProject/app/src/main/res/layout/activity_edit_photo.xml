@@ -49,19 +49,19 @@
     </LinearLayout>
 
 
-  <RelativeLayout
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/meme"
-      android:layout_below="@+id/linearLayout"
->
-
-    <ImageView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
-        android:id="@+id/mImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/meme"
+        android:layout_below="@+id/linearLayout"
+        >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:id="@+id/mImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="49dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -70,13 +70,13 @@
             android:layout_alignTop="@+id/mImageView"
             android:layout_centerHorizontal="true"
             android:id="@+id/editText" />
-      <EditText
-          android:layout_width="wrap_content"
-          android:layout_height="226dp"
-          android:text="New Text"
-          android:layout_centerHorizontal="true"
-          android:layout_alignBottom="@+id/mImageView"
-          android:id="@+id/editText2" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="226dp"
+            android:text="New Text"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/mImageView"
+            android:id="@+id/editText2" />
 
 
     </RelativeLayout>
