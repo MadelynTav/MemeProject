@@ -91,35 +91,6 @@ public class EditPhoto extends ActionBarActivity {
             }
             imageView.setImageBitmap(bitmap);
         }
-
-//        Button share = (Button) findViewById(R.id.share);
-//        share.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                b=getBitmapFromView(findViewById(R.id.meme));
-//
-//                String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
-//                Uri bmpUri= Uri.parse(pathOfBmp);
-//
-//                Intent attachIntent = new Intent(Intent.ACTION_SEND);
-//                attachIntent.putExtra(Intent.EXTRA_STREAM,  bmpUri);
-//                attachIntent.setType("image/png");
-//                startActivity(attachIntent);
-//            }
-//        });
-//=======
-//                } catch (IOException e) {
-//                   e.printStackTrace();
-//                }
-//            //create bitmap for use within activity
-//            try {
-//                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-//                } catch (IOException e) {
-//                   e.printStackTrace();
-//                }
-//            imageView.setImageBitmap(bitmap);
-//        }
-
         Button share = (Button) findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +107,6 @@ public class EditPhoto extends ActionBarActivity {
             }
         });
     }
-
 
     public void vanillaM (View v){
         editText.setBackgroundColor(Color.WHITE);
