@@ -107,14 +107,17 @@ public class EditPhoto extends Activity {
         editText2.setHint("and here");
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
+        demoImage.setVisibility(View.INVISIBLE);
         demoTitle.setVisibility(View.INVISIBLE);
         demoText.setVisibility(View.INVISIBLE);
     }
 
     public void demotivate(View v){
         memeLayout.setBackgroundColor(Color.BLACK);
+        imageView.setVisibility(View.INVISIBLE);
         editText.setVisibility(View.INVISIBLE);
         editText2.setVisibility(View.INVISIBLE);
+        demoImage.setVisibility(View.VISIBLE);
         demoTitle.setVisibility(View.VISIBLE);
         demoText.setVisibility(View.VISIBLE);
 
