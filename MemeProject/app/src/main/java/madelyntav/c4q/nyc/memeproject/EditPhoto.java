@@ -38,7 +38,7 @@ import java.util.Date;
 
 
 public class EditPhoto extends ActionBarActivity {
-    
+
     private ImageView imageView;
 
     Bitmap b;
