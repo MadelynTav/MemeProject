@@ -1,10 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto">
+    android:id="@+id/root"
+    tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto"
+    android:background="@drawable/images">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -27,6 +31,7 @@
             android:layout_height="wrap_content"
             android:text="Demotivational"
             android:id="@+id/demotivational"
+            android:onClick="demotivate"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -58,7 +63,8 @@
             android:text="TEST"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="engrainImage"/>
+            android:onClick="invertColors"/>
+            android:onClick="storeImage"/>
 
     </LinearLayout>
 
@@ -70,6 +76,11 @@
         android:id="@+id/linearLayout2"
         android:layout_below="@+id/linearLayout1"
         android:visibility="gone">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"></RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -169,30 +180,113 @@
         android:layout_below="@+id/linearLayout3">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:id="@+id/mImageView"
-            android:layout_marginTop="49dp" />
+            android:layout_centerInParent="true"
+             />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="133.3333dp"
+            android:paddingLeft="90dp"
+            android:paddingRight="90dp"
+            android:textAlignment="center"
+            android:background="#0000ffff"
+            android:id="@+id/textTop"
+            />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="133.3333dp"
+            android:background="#0000ffff"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textTop"
+            android:id="@+id/textMid"
+            android:paddingLeft="90dp"
+            android:paddingRight="90dp"
+            android:singleLine="false" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="133.33333dp"
+            android:background="#0000ffff"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textMid"
+            android:id="@+id/textBottom"
+            android:paddingTop="50dp"
+            android:paddingLeft="90dp"
+            android:paddingRight="90dp"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/mImageView"
+            android:hint="Type Text Here"
+            android:textSize="30dp"
+            android:background="@null"
             android:layout_centerHorizontal="true"
             android:id="@+id/editText"
-            android:hint="Write something here"
             android:visibility="invisible"
             android:gravity="center_horizontal"
-            android:background="@null"/>
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:shadowColor="#000000"
+            android:layout_alignParentTop="true" />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="Type Text Here"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:background="@null"
+            android:textColor="#ffffff"
+            android:shadowColor="#000000"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_alignBottom="@+id/mImageView"
             android:id="@+id/editText2"
-            android:hint="and here"
+
+            />
+
+        <ImageView
+            android:visibility="invisible"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:id="@+id/demotivationalImage"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            />
+        <EditText
             android:visibility="invisible"
             android:gravity="center_horizontal"
-            android:background="@null"/>
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:textColorHint="#FFFFFF"
+            android:maxLength="15"
+            android:textSize="40sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/demotivationalImage"
+            android:id="@+id/demotivationalTitle" />
+
+        <EditText
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Sarcastic text"
+            android:textColorHint="#FFFFFF"
+            android:maxLength="36"
+            android:textColor="#FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/demotivationalTitle"
+            android:id="@+id/demotivationalText"
+            />
 
     </RelativeLayout>
 
@@ -202,7 +296,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout5"
-        android:layout_below="@+id/meme">
+        >
 
     </LinearLayout>
 
