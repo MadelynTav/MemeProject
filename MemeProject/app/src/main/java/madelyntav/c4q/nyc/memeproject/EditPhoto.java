@@ -273,7 +273,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         return returnedBitmap;
     }
 
-
+    // onTouch and onDrag work together to allow for views to be moved around within the layout
+    //to children of that layout
     public boolean onTouch(View v, MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
