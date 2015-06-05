@@ -9,7 +9,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
-
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         mImageView = (ImageView) findViewById(R.id.mImageView);
+        mImageView.setVisibility(View.INVISIBLE);
     }
     public void usePic (View v){
         Intent choosePictureIntent = new Intent(Intent.ACTION_PICK,
