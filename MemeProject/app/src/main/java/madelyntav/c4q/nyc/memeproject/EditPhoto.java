@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,12 +46,39 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
     private File file;
     private String TAG = "GallerySaving";
     RelativeLayout memeLayout;
+    LinearLayout linearLayout2;
+    LinearLayout linearLayout3;
+    Button ten;
+    Button fifteen;
+    Button twenty;
+    Button twentyfive;
+    Button black;
+    Button white;
+    Button red;
+    Button blue;
+    RelativeLayout root;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
+
+
+        root = (RelativeLayout) findViewById(R.id.root);
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        ten = (Button) findViewById(R.id.ten);
+        fifteen = (Button) findViewById(R.id.fifteen);
+        twenty = (Button) findViewById(R.id.twenty);
+        twentyfive = (Button) findViewById(R.id.twentyfive);
+        black = (Button) findViewById(R.id.black);
+        white = (Button) findViewById(R.id.white);
+        red = (Button) findViewById(R.id.red);
+        blue = (Button) findViewById(R.id.blue);
+        Vanilla = (Button) findViewById(R.id.vanilla);
+
+
 
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
@@ -118,33 +146,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
             demoImage.setImageBitmap(bitmap);
         }
 
-//        Button share = (Button) findViewById(R.id.share);
-//        share.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                b=getBitmapFromView(findViewById(R.id.meme));
-//
-//                String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b,"title", null);
-//                Uri bmpUri= Uri.parse(pathOfBmp);
-//
-//                Intent attachIntent = new Intent(Intent.ACTION_SEND);
-//                attachIntent.putExtra(Intent.EXTRA_STREAM,  bmpUri);
-//                attachIntent.setType("image/png");
-//                startActivity(attachIntent);
-//            }
-//        });
-//=======
-//                } catch (IOException e) {
-//                   e.printStackTrace();
-//                }
-//            //create bitmap for use within activity
-//            try {
-//                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-//                } catch (IOException e) {
-//                   e.printStackTrace();
-//                }
-//            imageView.setImageBitmap(bitmap);
-//        }
 
         Button share = (Button) findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +168,10 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
 
     public void vanillaM (View v){
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+
+        linearLayout2.setVisibility(View.VISIBLE);
 
         editText= (EditText) findViewById(R.id.editText);
         editText2=(EditText)findViewById(R.id.editText2);
@@ -302,6 +307,76 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
         }
         return true;
+    }
+
+
+
+    public void setTen (View v){
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+    }
+    public void setFifteen (View v){
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+    }
+    public void setTwenty (View v){
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+    }
+    public void setTwentyfive (View v){
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+    }
+
+    public void setBlack (View v){
+
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+    }
+    public void setWhite (View v){
+
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText.setTextColor(Color.WHITE);
+        editText2.setTextColor(Color.WHITE);
+    }
+    public void setRed (View v){
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText.setTextColor(Color.RED);
+        editText2.setTextColor(Color.RED);
+    }
+    public void setBlue (View v){
+
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText.setTextColor(Color.BLUE);
+        editText2.setTextColor(Color.BLUE);
     }
 }
 
