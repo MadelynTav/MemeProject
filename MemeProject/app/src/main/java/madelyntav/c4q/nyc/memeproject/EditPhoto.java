@@ -43,8 +43,6 @@ import java.util.Date;
         private Button demotivational;
         private EditText editText, editText2, demoTitle, demoText;
         private ImageView imageView, demoImage;
-        Button save;
-        private File file;
         private String TAG = "GallerySaving";
         RelativeLayout memeLayout;
         LinearLayout linearLayout2;
@@ -178,7 +176,6 @@ import java.util.Date;
                             }
                         });
 
-//                b = getBitmapFromView(findViewById(R.id.meme));
                         b = getBitmapFromView(memeLayout);
 
                         String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b, "title", null);
@@ -411,6 +408,98 @@ import java.util.Date;
             editText2.setVisibility(View.VISIBLE);
             editText.setTextColor(Color.BLUE);
             editText2.setTextColor(Color.BLUE);
+        }
+
+
+        // Applies engrave effect to image
+        public void engravedImage(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap engraved = ApplyFilters.engrave(b);
+                imageView.setImageBitmap(engraved);
+                demoImage.setImageBitmap(engraved);
+            } else {
+                Bitmap engraved = ApplyFilters.engrave(bitmap);
+                imageView.setImageBitmap(engraved);
+                demoImage.setImageBitmap(engraved);
+            }
+        }
+
+        // Applies inverted colors effect to image
+        public void invertColors(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap inverted = ApplyFilters.doInvert(b);
+                imageView.setImageBitmap(inverted);
+                demoImage.setImageBitmap(inverted);
+            } else {
+                Bitmap inverted = ApplyFilters.doInvert(bitmap);
+                imageView.setImageBitmap(inverted);
+                demoImage.setImageBitmap(inverted);
+            }
+        }
+
+        // Applies greyscale effect to image
+        public void greyscaleImage(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap greyscaled = ApplyFilters.doGreyscale(b);
+                imageView.setImageBitmap(greyscaled);
+                demoImage.setImageBitmap(greyscaled);
+            } else {
+                Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+                imageView.setImageBitmap(greyscaled);
+                demoImage.setImageBitmap(greyscaled);
+            }
+        }
+
+        // Applies blue shading effect to image
+        public void shadingFilterBlue(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
+                imageView.setImageBitmap(blueShade);
+                demoImage.setImageBitmap(blueShade);
+            } else {
+                Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
+                imageView.setImageBitmap(blueShade);
+                demoImage.setImageBitmap(blueShade);
+            }
+        }
+
+        // Applies red shading effect to image
+        public void shadingFilterRed(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
+                imageView.setImageBitmap(redShade);
+                demoImage.setImageBitmap(redShade);
+            } else {
+                Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
+                imageView.setImageBitmap(redShade);
+                demoImage.setImageBitmap(redShade);
+            }
+        }
+
+        // Applies green shading effect to image
+        public void shadingFilterGreen(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
+                imageView.setImageBitmap(greenShade);
+                demoImage.setImageBitmap(greenShade);
+            } else {
+                Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
+                imageView.setImageBitmap(greenShade);
+                demoImage.setImageBitmap(greenShade);
+            }
+        }
+
+        // Applies reflection effect to image
+        public void reflectionEffect(View view) {
+            if (getIntent().hasExtra("byteArray")) {
+                Bitmap reflected = ApplyFilters.applyReflection(b);
+                imageView.setImageBitmap(reflected);
+                demoImage.setImageBitmap(reflected);
+            } else {
+                Bitmap reflected = ApplyFilters.applyReflection(bitmap);
+                imageView.setImageBitmap(reflected);
+                demoImage.setImageBitmap(reflected);
+            }
         }
     }
 
