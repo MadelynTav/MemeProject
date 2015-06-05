@@ -361,7 +361,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
             v.startDrag(null, shadowBuilder, v, 0);
             v.isInEditMode();
             v.setVisibility(View.INVISIBLE);
-
             return true;
         } else {
             return false;
