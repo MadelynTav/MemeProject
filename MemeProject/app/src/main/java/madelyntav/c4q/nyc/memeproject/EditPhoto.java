@@ -1,30 +1,18 @@
 package madelyntav.c4q.nyc.memeproject;
 
 
-
-
 import android.content.Context;
-
-
 import android.app.Activity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.DragEvent;
@@ -38,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,16 +37,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
     Bitmap b;
     Bitmap bitmap;
-
     private Button Vanilla;
     private Button demotivational;
     private EditText editText, editText2, demoTitle, demoText;
-
-
     private ImageView imageView, demoImage;
-
     Button save;
-
     private File file;
     private String TAG = "GallerySaving";
     RelativeLayout memeLayout;
@@ -76,6 +58,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
         editText.setTypeface(custom_font);
         editText2.setTypeface(custom_font);
+
+
 
         editText.setOnTouchListener(this);
         editText2.setOnTouchListener(this);
@@ -106,6 +90,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         memeLayout = (RelativeLayout) findViewById(R.id.meme);
         demoImage = (ImageView)findViewById(R.id.demotivationalImage);
         memeLayout = (RelativeLayout)findViewById(R.id.meme);
+
+
 
 
         //opens pic in this activity
@@ -195,9 +181,14 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
 
     public void vanillaM (View v){
-        memeLayout.setBackgroundColor(Color.WHITE);
-        editText.setBackgroundColor(Color.WHITE);
-        editText2.setBackgroundColor(Color.WHITE);
+
+        editText= (EditText) findViewById(R.id.editText);
+        editText2=(EditText)findViewById(R.id.editText2);
+        memeLayout=(RelativeLayout)findViewById(R.id.meme);
+        demoImage= (ImageView)findViewById(R.id.demotivationalImage);
+        demoTitle= (EditText)findViewById(R.id.demotivationalTitle);
+        demoText = (EditText)findViewById(R.id.demotivationalText);
+
         editText.setHint("write something here");
         editText2.setHint("and here");
         editText.setVisibility(View.VISIBLE);
@@ -208,6 +199,15 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
     }
 
     public void demotivate(View v){
+
+        editText= (EditText) findViewById(R.id.editText);
+        editText2=(EditText)findViewById(R.id.editText2);
+        memeLayout=(RelativeLayout)findViewById(R.id.meme);
+        demoImage= (ImageView)findViewById(R.id.demotivationalImage);
+        demoTitle= (EditText)findViewById(R.id.demotivationalTitle);
+        demoText = (EditText)findViewById(R.id.demotivationalText);
+
+
         memeLayout.setBackgroundColor(Color.BLACK);
         imageView.setVisibility(View.INVISIBLE);
         editText.setVisibility(View.INVISIBLE);
@@ -287,6 +287,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         return returnedBitmap;
     }
 
+    // Applies engrain effect to image
     public void engrainImage(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.engrave(b);
@@ -297,6 +298,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
+    // Applies inverted colors effect to image
     public void invertColors(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.doInvert(b);
@@ -307,6 +309,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
+    // Applies greyscale effect to image
     public void greyscaleImage(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.doGreyscale(b);
@@ -317,6 +320,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
+    // Applies blue shading effect to image
     public void shadingFilterBlue(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.BLUE);
@@ -327,6 +331,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
+    // Applies red shading effect to image
     public void shadingFilterRed(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.RED);
@@ -337,6 +342,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
+    // Applies green shading effect to image
     public void shadingFilterGreen(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.GREEN);
@@ -347,9 +353,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
+    // onTouch and onDrag work together to allow for views to be moved around within the layout
+    //to children of that layout
     public boolean onTouch(View v, MotionEvent e) {
-        if (e.getAction() == MotionEvent.ACTION_DOWN) {
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+        if (e.getAction() == MotionEvent.ACTION_DOWN) {//Action_Down means a pressed gesture had started, view has been set in motion
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);//Creates an image that the system displays during the drag and drop operation.
             v.startDrag(null, shadowBuilder, v, 0);
             v.isInEditMode();
             v.setVisibility(View.INVISIBLE);
@@ -362,7 +370,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
 
     public boolean onDrag(View v, DragEvent e) {
-        if (e.getAction() == DragEvent.ACTION_DROP) {
+        if (e.getAction() == DragEvent.ACTION_DROP) {//if the shadow has been released within the view
             View view = (View) e.getLocalState();
             ViewGroup from = (ViewGroup) view.getParent();
             from.removeView(view);

@@ -78,9 +78,9 @@
         android:visibility="gone">
 
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="400dp"></RelativeLayout>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="400dp"></RelativeLayout>-->
 
         <TextView
             android:layout_width="match_parent"
@@ -180,7 +180,6 @@
         android:layout_below="@+id/linearLayout3">
 
         <ImageView
-
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/mImageView"
@@ -226,6 +225,7 @@
             android:hint="Type Text Here"
             android:textSize="30dp"
             android:background="@null"
+            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/editText"
             android:visibility="invisible"
@@ -240,6 +240,8 @@
             android:layout_height="wrap_content"
             android:hint="Type Text Here"
             android:textSize="30dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
             android:textStyle="bold"
             android:background="@null"
             android:textColor="#ffffff"
@@ -247,7 +249,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/editText2"
-
             />
 
         <ImageView
@@ -257,7 +258,8 @@
             android:scaleType="fitXY"
             android:id="@+id/demotivationalImage"
             android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
+
             />
         <EditText
             android:visibility="invisible"
@@ -267,8 +269,8 @@
             android:layout_height="wrap_content"
             android:hint="Title"
             android:textColorHint="#FFFFFF"
-            android:maxLength="15"
             android:textSize="40sp"
+            android:maxLength="12"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
@@ -281,13 +283,12 @@
             android:layout_height="wrap_content"
             android:hint="Sarcastic text"
             android:textColorHint="#FFFFFF"
-            android:maxLength="36"
+            android:maxLength="50"
+            android:gravity="center"
             android:textColor="#FFFFFF"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/demotivationalTitle"
-            android:id="@+id/demotivationalText"
-            />
-
+            android:id="@+id/demotivationalText"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -295,9 +296,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout5"
-        >
-
+        android:id="@+id/linearLayout5" >
     </LinearLayout>
 
 </RelativeLayout>
