@@ -57,7 +57,8 @@
             android:text="Save"
             android:id="@+id/save"
             android:layout_weight="1"
-            android:onClick="storeImage"/>
+            android:onClick="storeImage" />
+
 
     </LinearLayout>
 
@@ -172,12 +173,64 @@
         android:id="@+id/meme"
         android:layout_below="@+id/linearLayout3">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/engrave"
+                    android:text="Engrave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="engravedImage"/>
+                <Button
+                    android:id="@+id/invert"
+                    android:text="Invert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="invertColors"/>
+                <Button
+                    android:id="@+id/greyscale"
+                    android:text="Grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="greyscaleImage"/>
+                <Button
+                    android:id="@+id/blueShade"
+                    android:text="Blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="shadingFilterBlue"/>
+                <Button
+                    android:id="@+id/redShade"
+                    android:text="Red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="shadingFilterRed"/>
+                <Button
+                    android:id="@+id/greenShade"
+                    android:text="Green"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="shadingFilterGreen"/>
+                <Button
+                    android:id="@+id/reflect"
+                    android:text="Reflect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="reflectionEffect"/>
+
+            </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/mImageView"
-            android:layout_centerInParent="true"
-             />
+            android:id="@+id/mImageView" />
+
+        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -217,16 +270,17 @@
             android:layout_height="wrap_content"
             android:hint="Type Text Here"
             android:textSize="30dp"
-            android:gravity="center"
             android:background="@null"
             android:maxLength="20"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
+            android:id="@+id/editText"
+            android:visibility="invisible"
+            android:gravity="center_horizontal"
             android:textStyle="bold"
             android:textColor="#ffffff"
             android:shadowColor="#000000"
-            android:layout_alignParentTop="true"
-            android:id="@+id/editText"/>
+            android:layout_alignParentTop="true" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -257,19 +311,19 @@
             />
         <EditText
             android:visibility="invisible"
+            android:gravity="center_horizontal"
+            android:background="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Title"
             android:textColorHint="#FFFFFF"
-            android:gravity="center"
             android:textSize="40sp"
             android:maxLength="12"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/demotivationalImage"
-            android:id="@+id/demotivationalTitle"
-            />
+            android:id="@+id/demotivationalTitle" />
 
         <EditText
             android:visibility="invisible"
@@ -282,9 +336,7 @@
             android:textColor="#FFFFFF"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/demotivationalTitle"
-            android:id="@+id/demotivationalText"
-            />
-
+            android:id="@+id/demotivationalText"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -292,8 +344,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout5"
-        >
+        android:id="@+id/linearLayout5" >
+
     </LinearLayout>
 
 </RelativeLayout>

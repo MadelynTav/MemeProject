@@ -1,5 +1,6 @@
 package madelyntav.c4q.nyc.memeproject;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;

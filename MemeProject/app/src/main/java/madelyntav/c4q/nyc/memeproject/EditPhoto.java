@@ -8,12 +8,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.DragEvent;
@@ -92,8 +94,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         editText.setOnTouchListener(this);
         editText2.setOnTouchListener(this);
 
-
-
         LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
         LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
         LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
@@ -103,6 +103,21 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         textTop.setOnDragListener(this);
 
         imageView = (ImageView) findViewById(R.id.mImageView);
+        Vanilla = (Button) findViewById(R.id.vanilla);
+        editText = (EditText) findViewById(R.id.editText);
+        editText2 = (EditText) findViewById(R.id.editText2);
+
+        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        LinearLayout linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        Button ten = (Button) findViewById(R.id.ten);
+        Button fifteen = (Button) findViewById(R.id.fifteen);
+        Button twenty = (Button) findViewById(R.id.twenty);
+        Button twentyfive = (Button) findViewById(R.id.twentyfive);
+        Button black = (Button) findViewById(R.id.black);
+        Button white = (Button) findViewById(R.id.white);
+        Button red = (Button) findViewById(R.id.red);
+        Button blue = (Button) findViewById(R.id.blue);
+        memeLayout = (RelativeLayout) findViewById(R.id.meme);
         demoImage = (ImageView)findViewById(R.id.demotivationalImage);
         memeLayout = (RelativeLayout)findViewById(R.id.meme);
 
@@ -112,6 +127,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+
             imageView = (ImageView) findViewById(R.id.mImageView);
             Vanilla = (Button) findViewById(R.id.vanilla);
             editText = (EditText) findViewById(R.id.editText);
@@ -260,7 +276,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         Log.d(TAG,"fos did not close "+e.getMessage());
         }
         }
-
         }
 
 
@@ -278,6 +293,82 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         return returnedBitmap;
     }
 
+    // Applies engrave effect to image
+    public void engravedImage(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.engrave(b);
+        imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.engrave(bitmap);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
+    // Applies inverted colors effect to image
+    public void invertColors(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap inverted = ApplyFilters.doInvert(b);
+            imageView.setImageBitmap(inverted);
+        }else{
+            Bitmap inverted = ApplyFilters.doInvert(bitmap);
+            imageView.setImageBitmap(inverted);
+        }
+    }
+
+    // Applies greyscale effect to image
+    public void greyscaleImage(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap greyscaled = ApplyFilters.doGreyscale(b);
+            imageView.setImageBitmap(greyscaled);
+        }else{
+            Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+            imageView.setImageBitmap(greyscaled);
+        }
+    }
+
+    // Applies blue shading effect to image
+    public void shadingFilterBlue(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
+            imageView.setImageBitmap(blueShade);
+        }else{
+            Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
+            imageView.setImageBitmap(blueShade);
+        }
+    }
+
+    // Applies red shading effect to image
+    public void shadingFilterRed(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
+            imageView.setImageBitmap(redShade);
+        }else{
+            Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
+            imageView.setImageBitmap(redShade);
+        }
+    }
+
+    // Applies green shading effect to image
+    public void shadingFilterGreen(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
+            imageView.setImageBitmap(greenShade);
+        }else{
+            Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
+            imageView.setImageBitmap(greenShade);
+        }
+    }
+
+    // Applies reflection effect to image
+    public void reflectionEffect(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap reflected = ApplyFilters.applyReflection(b);
+            imageView.setImageBitmap(reflected);
+        }else{
+            Bitmap reflected = ApplyFilters.applyReflection(bitmap);
+            imageView.setImageBitmap(reflected);
+        }
+    }
     // onTouch and onDrag work together to allow for views to be moved around within the layout
     //to children of that layout
     public boolean onTouch(View v, MotionEvent e) {
@@ -292,7 +383,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
-
     public boolean onDrag(View v, DragEvent e) {
         if (e.getAction() == DragEvent.ACTION_DROP) {//if the shadow has been released within the view
             View view = (View) e.getLocalState();
@@ -304,7 +394,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
             view.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-
         }
         return true;
     }
