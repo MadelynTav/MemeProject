@@ -54,6 +54,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
 
+
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/impact.ttf");
@@ -110,10 +111,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
         } else {
 
-            demoImage.setImageBitmap(b);
-
-
-//        } else {
+//            demoImage.setImageBitmap(b);
 
             //retrieve passed uri
             Uri uri = getIntent().getExtras().getParcelable("image");
@@ -193,6 +191,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 
         editText.setHint("write something here");
         editText2.setHint("and here");
+        memeLayout.setBackgroundColor(Color.TRANSPARENT);
+        imageView.setVisibility(View.VISIBLE);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
         demoImage.setVisibility(View.INVISIBLE);
@@ -292,10 +292,12 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
     public void engravedImage(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.engrave(b);
-        imageView.setImageBitmap(engraved);
+            imageView.setImageBitmap(engraved);
+            demoImage.setImageBitmap(engraved);
         }else{
             Bitmap engraved = ApplyFilters.engrave(bitmap);
             imageView.setImageBitmap(engraved);
+            demoImage.setImageBitmap(engraved);
         }
     }
 
@@ -304,9 +306,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         if (getIntent().hasExtra("byteArray")) {
             Bitmap inverted = ApplyFilters.doInvert(b);
             imageView.setImageBitmap(inverted);
+            demoImage.setImageBitmap(inverted);
         }else{
             Bitmap inverted = ApplyFilters.doInvert(bitmap);
             imageView.setImageBitmap(inverted);
+            demoImage.setImageBitmap(inverted);
         }
     }
 
@@ -315,9 +319,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         if (getIntent().hasExtra("byteArray")) {
             Bitmap greyscaled = ApplyFilters.doGreyscale(b);
             imageView.setImageBitmap(greyscaled);
+            demoImage.setImageBitmap(greyscaled);
         }else{
             Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
             imageView.setImageBitmap(greyscaled);
+            demoImage.setImageBitmap(greyscaled);
         }
     }
 
@@ -326,9 +332,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         if (getIntent().hasExtra("byteArray")) {
             Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
             imageView.setImageBitmap(blueShade);
+            demoImage.setImageBitmap(blueShade);
         }else{
             Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
             imageView.setImageBitmap(blueShade);
+            demoImage.setImageBitmap(blueShade);
         }
     }
 
@@ -337,9 +345,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         if (getIntent().hasExtra("byteArray")) {
             Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
             imageView.setImageBitmap(redShade);
+            demoImage.setImageBitmap(redShade);
         }else{
             Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
             imageView.setImageBitmap(redShade);
+            demoImage.setImageBitmap(redShade);
         }
     }
 
@@ -348,9 +358,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         if (getIntent().hasExtra("byteArray")) {
             Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
             imageView.setImageBitmap(greenShade);
+            demoImage.setImageBitmap(greenShade);
         }else{
             Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
             imageView.setImageBitmap(greenShade);
+            demoImage.setImageBitmap(greenShade);
         }
     }
 
@@ -359,9 +371,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         if (getIntent().hasExtra("byteArray")) {
             Bitmap reflected = ApplyFilters.applyReflection(b);
             imageView.setImageBitmap(reflected);
+            demoImage.setImageBitmap(reflected);
         }else{
             Bitmap reflected = ApplyFilters.applyReflection(bitmap);
             imageView.setImageBitmap(reflected);
+            demoImage.setImageBitmap(reflected);
         }
     }
     // onTouch and onDrag work together to allow for views to be moved around within the layout
@@ -393,8 +407,3 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         return true;
     }
 }
-
-
-
-
-
