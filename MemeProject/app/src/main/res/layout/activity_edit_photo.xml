@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:text="Demotivational"
             android:id="@+id/demotivational"
+            android:onClick="demotivate"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -233,6 +234,44 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/editText2"
 
+            />
+
+        <ImageView
+            android:visibility="invisible"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:id="@+id/demotivationalImage"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            />
+        <EditText
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:textColorHint="#FFFFFF"
+            android:maxLength="15"
+            android:textSize="40sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/demotivationalImage"
+            android:id="@+id/demotivationalTitle"
+
+            />
+
+        <EditText
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Sarcastic text"
+            android:textColorHint="#FFFFFF"
+            android:maxLength="36"
+            android:textColor="#FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/demotivationalTitle"
+            android:id="@+id/demotivationalText"
             />
 
     </RelativeLayout>
