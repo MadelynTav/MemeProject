@@ -8,12 +8,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Layout;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
@@ -269,7 +271,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         Log.d(TAG,"fos did not close "+e.getMessage());
         }
         }
-
         }
 
 
@@ -287,8 +288,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         return returnedBitmap;
     }
 
-    // Applies engrain effect to image
-    public void engrainImage(View view){
+    // Applies engrave effect to image
+    public void engravedImage(View view){
         if (getIntent().hasExtra("byteArray")) {
             Bitmap engraved = ApplyFilters.engrave(b);
         imageView.setImageBitmap(engraved);
@@ -301,58 +302,68 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
     // Applies inverted colors effect to image
     public void invertColors(View view){
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap engraved = ApplyFilters.doInvert(b);
-            imageView.setImageBitmap(engraved);
+            Bitmap inverted = ApplyFilters.doInvert(b);
+            imageView.setImageBitmap(inverted);
         }else{
-            Bitmap engraved = ApplyFilters.doInvert(bitmap);
-            imageView.setImageBitmap(engraved);
+            Bitmap inverted = ApplyFilters.doInvert(bitmap);
+            imageView.setImageBitmap(inverted);
         }
     }
 
     // Applies greyscale effect to image
     public void greyscaleImage(View view){
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap engraved = ApplyFilters.doGreyscale(b);
-            imageView.setImageBitmap(engraved);
+            Bitmap greyscaled = ApplyFilters.doGreyscale(b);
+            imageView.setImageBitmap(greyscaled);
         }else{
-            Bitmap engraved = ApplyFilters.doGreyscale(bitmap);
-            imageView.setImageBitmap(engraved);
+            Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+            imageView.setImageBitmap(greyscaled);
         }
     }
 
     // Applies blue shading effect to image
     public void shadingFilterBlue(View view){
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.BLUE);
-            imageView.setImageBitmap(engraved);
+            Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
+            imageView.setImageBitmap(blueShade);
         }else{
-            Bitmap engraved = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
-            imageView.setImageBitmap(engraved);
+            Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
+            imageView.setImageBitmap(blueShade);
         }
     }
 
     // Applies red shading effect to image
     public void shadingFilterRed(View view){
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.RED);
-            imageView.setImageBitmap(engraved);
+            Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
+            imageView.setImageBitmap(redShade);
         }else{
-            Bitmap engraved = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
-            imageView.setImageBitmap(engraved);
+            Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
+            imageView.setImageBitmap(redShade);
         }
     }
 
     // Applies green shading effect to image
     public void shadingFilterGreen(View view){
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.GREEN);
-            imageView.setImageBitmap(engraved);
+            Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
+            imageView.setImageBitmap(greenShade);
         }else{
-            Bitmap engraved = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
-            imageView.setImageBitmap(engraved);
+            Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
+            imageView.setImageBitmap(greenShade);
         }
     }
 
+    // Applies reflection effect to image
+    public void reflectionEffect(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap reflected = ApplyFilters.applyReflection(b);
+            imageView.setImageBitmap(reflected);
+        }else{
+            Bitmap reflected = ApplyFilters.applyReflection(bitmap);
+            imageView.setImageBitmap(reflected);
+        }
+    }
     // onTouch and onDrag work together to allow for views to be moved around within the layout
     //to children of that layout
     public boolean onTouch(View v, MotionEvent e) {
@@ -367,7 +378,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         }
     }
 
-
     public boolean onDrag(View v, DragEvent e) {
         if (e.getAction() == DragEvent.ACTION_DROP) {//if the shadow has been released within the view
             View view = (View) e.getLocalState();
@@ -379,7 +389,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
             view.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-
         }
         return true;
     }
