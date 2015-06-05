@@ -155,8 +155,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
 //                b = getBitmapFromView(findViewById(R.id.meme));
                 b=getBitmapFromView(memeLayout);
 
-                String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b, "title", null);
-                Uri bmpUri = Uri.parse(pathOfBmp);
+                    String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b, "title", null);
+                    Uri bmpUri = Uri.parse(pathOfBmp);
 
                 Intent attachIntent = new Intent(Intent.ACTION_SEND);
                 attachIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
