@@ -1,10 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto">
+    android:id="@+id/root"
+    tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto"
+    android:background="@drawable/images">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -52,8 +56,7 @@
             android:text="Save"
             android:id="@+id/save"
             android:layout_weight="1"
-            android:onClick="storeImage"
-            />
+            android:onClick="storeImage"/>
 
     </LinearLayout>
 
@@ -166,8 +169,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/mImageView"
-            android:layout_marginTop="49dp" />
+            android:id="@+id/mImageView"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
