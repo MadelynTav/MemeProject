@@ -77,6 +77,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         editText.setTypeface(custom_font);
         editText2.setTypeface(custom_font);
 
+
+
         editText.setOnTouchListener(this);
         editText2.setOnTouchListener(this);
 
@@ -93,6 +95,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener,View.OnD
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView)findViewById(R.id.demotivationalImage);
         memeLayout = (RelativeLayout)findViewById(R.id.meme);
+
+
 
 
         //opens pic in this activity
