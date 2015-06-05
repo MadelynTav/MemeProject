@@ -52,8 +52,13 @@
             android:text="Save"
             android:id="@+id/save"
             android:layout_weight="1"
-            android:onClick="storeImage"
-            />
+            android:onClick="storeImage" />
+        <Button
+            android:id="@+id/test"
+            android:text="TEST"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="engrainImage"/>
 
     </LinearLayout>
 

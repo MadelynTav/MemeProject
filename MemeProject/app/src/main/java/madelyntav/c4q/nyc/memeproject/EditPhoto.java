@@ -238,6 +238,17 @@ public class EditPhoto extends ActionBarActivity {
         view.draw(canvas);
         return returnedBitmap;
     }
+
+    public void engrainImage(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.engrave(b);
+        imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.engrave(bitmap);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
 }
 
 
