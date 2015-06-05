@@ -232,7 +232,6 @@
             android:layout_height="wrap_content"
             android:hint="Type Text Here"
             android:textSize="30dp"
-            android:maxLength="15"
             android:gravity="center"
             android:layout_centerInParent="true"
             android:textStyle="bold"
@@ -242,7 +241,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/editText2"
-
             />
 
         <ImageView
@@ -252,7 +250,8 @@
             android:scaleType="fitXY"
             android:id="@+id/demotivationalImage"
             android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
+
             />
         <EditText
             android:visibility="invisible"
@@ -260,15 +259,14 @@
             android:layout_height="wrap_content"
             android:hint="Title"
             android:textColorHint="#FFFFFF"
-            android:maxLength="15"
             android:gravity="center"
             android:textSize="40sp"
+            android:maxLength="12"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/demotivationalImage"
             android:id="@+id/demotivationalTitle"
-
             />
 
         <EditText
@@ -277,7 +275,7 @@
             android:layout_height="wrap_content"
             android:hint="Sarcastic text"
             android:textColorHint="#FFFFFF"
-            android:maxLength="36"
+            android:maxLength="50"
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:layout_centerHorizontal="true"
