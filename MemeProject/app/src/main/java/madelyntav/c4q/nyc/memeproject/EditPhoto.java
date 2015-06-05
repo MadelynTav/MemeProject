@@ -61,6 +61,10 @@ public class EditPhoto extends ActionBarActivity {
         setContentView(R.layout.activity_edit_photo);
 
         imageView = (ImageView) findViewById(R.id.mImageView);
+        Vanilla = (Button) findViewById(R.id.vanilla);
+        editText = (EditText) findViewById(R.id.editText);
+        editText2 = (EditText) findViewById(R.id.editText2);
+
         linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
         linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         ten = (Button) findViewById(R.id.ten);
@@ -76,10 +80,7 @@ public class EditPhoto extends ActionBarActivity {
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            imageView = (ImageView) findViewById(R.id.mImageView);
-            Vanilla = (Button) findViewById(R.id.vanilla);
-            editText = (EditText) findViewById(R.id.editText);
-            editText2 = (EditText) findViewById(R.id.editText2);
+
             imageView.setImageBitmap(b);
         } else {
             //retrieve passed uri
