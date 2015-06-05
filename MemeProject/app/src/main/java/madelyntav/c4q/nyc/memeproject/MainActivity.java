@@ -14,9 +14,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
-
 public class MainActivity extends ActionBarActivity {
-    ImageView targetImage;
+    private ImageView mImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
 
@@ -25,6 +24,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        mImageView = (ImageView) findViewById(R.id.mImageView);
+        mImageView.setVisibility(View.INVISIBLE);
     }
 
     public void usePic(View v) {
@@ -44,27 +47,55 @@ public class MainActivity extends ActionBarActivity {
 
     @Override // saves pic and sends it to editPhoto activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         Intent intent = new Intent(MainActivity.this, EditPhoto.class);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
             intent.putExtra("byteArray", bs.toByteArray());
             startActivity(intent);
 
-        } else {
-            if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
+
+        } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
+            //Image selected message
+            Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
+
+            //get Uri from selected image
+            Uri targetUri = data.getData();
+            Bitmap bitmap = null;
+            ContentResolver cr = getContentResolver();
+
+            //turn selected image into a Bitmap image
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //pass image to intent
+            intent.putExtra("image", targetUri);
+            mImageView.setImageBitmap(bitmap);
+            startActivity(intent);
+
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+                intent.putExtra("byteArray", bs.toByteArray());
+                startActivity(intent);
+
+            } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
                 //Image selected message
                 Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
 
                 //get Uri from selected image
-                Uri targetUri = data.getData();
-                Bitmap bitmap = null;
-                ContentResolver cr = getContentResolver();
+                targetUri = data.getData();
+                bitmap = null;
+                cr = getContentResolver();
 
                 //turn selected image into a Bitmap image
                 try {
@@ -72,11 +103,14 @@ public class MainActivity extends ActionBarActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 //pass image to intent
                 intent.putExtra("image", targetUri);
-                targetImage.setImageBitmap(bitmap);
+                mImageView.setImageBitmap(bitmap);
                 startActivity(intent);
+
             }
         }
     }
+
 }
