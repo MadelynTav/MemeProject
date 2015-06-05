@@ -9,8 +9,10 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -19,12 +21,8 @@ import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
     private ImageView mImageView;
-    private Bitmap mImageBitmap;
-    TextView textTargetUri;
-    ImageView targetImage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,6 @@ public class MainActivity extends ActionBarActivity {
 
 
         mImageView = (ImageView) findViewById(R.id.mImageView);
-
     }
     public void usePic (View v){
         Intent choosePictureIntent = new Intent(Intent.ACTION_PICK,
@@ -75,7 +72,6 @@ public class MainActivity extends ActionBarActivity {
             intent.putExtra("image", targetUri);
             mImageView.setImageBitmap(bitmap);
             startActivity(intent);
-
 
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
                 Bundle extras = data.getExtras();

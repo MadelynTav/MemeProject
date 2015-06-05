@@ -1,21 +1,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto">
+    android:id="@+id/root"
+    tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto"
+    android:background="@drawable/images">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout">
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/vanilla"
             android:text="Vanilla"
@@ -23,40 +27,152 @@
             android:layout_weight="1"/>
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Demotivational"
             android:id="@+id/demotivational"
             android:layout_weight="1"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout">
+
         <Button
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Share"
-
             android:id="@+id/share"
             android:layout_weight="1"/>
 
         <Button
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save"
             android:id="@+id/save"
             android:layout_weight="1"
-            android:onClick="storeImage"
-            />
+            android:onClick="storeImage"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout1"
+        android:visibility="gone">
 
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="400dp"
+        android:layout_height="400dp"></RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Chose text size:"
+            android:onClick="vanillaM"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="10"
+            android:textSize="10dp"
+            android:id="@+id/ten"
+            android:onClick="setTen"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="15"
+            android:textSize="15dp"
+            android:id="@+id/fifteen"
+            android:onClick="setFifteen"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="20"
+            android:textSize="20dp"
+            android:id="@+id/twenty"
+            android:onClick="setTwenty"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:textSize="25dp"
+            android:id="@+id/twentyfive"
+            android:onClick="setTwentyfive"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayout2"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Chose text color:"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="black"
+            android:textSize="10dp"
+            android:id="@+id/black"
+            android:onClick="setBlack"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="white"
+            android:textSize="10dp"
+            android:textColor="#ffffff"
+            android:id="@+id/white"
+            android:onClick="setWhite"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="red"
+            android:textColor="#FF0000"
+            android:id="@+id/red"
+            android:onClick="setRed"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="blue"
+            android:textColor="#0000FF"
+            android:id="@+id/blue"
+            android:onClick="setBlue"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/meme"
-        android:layout_below="@+id/linearLayout"
-        >
+        android:layout_below="@+id/linearLayout3">
 
         <ImageView
+
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/mImageView"
@@ -98,12 +214,13 @@
             android:layout_height="wrap_content"
             android:hint="Type Text Here"
             android:textSize="30dp"
+            android:layout_centerHorizontal="true"
             android:textStyle="bold"
             android:textColor="#ffffff"
             android:shadowColor="#000000"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/editText" />
+            android:id="@+id/editText"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,5 +237,14 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout5"
+        >
+
+    </LinearLayout>
 
 </RelativeLayout>

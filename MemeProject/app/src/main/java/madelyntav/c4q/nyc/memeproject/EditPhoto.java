@@ -1,36 +1,30 @@
 package madelyntav.c4q.nyc.memeproject;
 
-
-
 import android.app.Service;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
-
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.TextKeyListener;
 import android.util.Log;
+
 import android.view.DragEvent;
 import android.view.MotionEvent;
+
+import android.util.TypedValue;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -58,8 +52,9 @@ import static android.view.View.DragShadowBuilder;
 public class EditPhoto extends ActionBarActivity implements View.OnTouchListener,View.OnDragListener {
 
 
-    private ImageView imageView;
 
+    private ImageView imageView;
+    boolean isImageFitToScreen;
     Bitmap b;
     Bitmap bitmap;
     private Button Vanilla;
@@ -69,12 +64,24 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
     private File file;
     private String TAG = "GallerySaving";
     RelativeLayout memeLayout;
+    RelativeLayout root;
 
+    LinearLayout linearLayout2;
+    LinearLayout linearLayout3;
+    Button ten;
+    Button fifteen;
+    Button twenty;
+    Button twentyfive;
+    Button black;
+    Button white;
+    Button red;
+    Button blue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
+
 
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
@@ -102,18 +109,28 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
         textTop.setOnDragListener(this);
 
 
+
+        root = (RelativeLayout) findViewById(R.id.root);
+
         imageView = (ImageView) findViewById(R.id.mImageView);
-
+        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+        ten = (Button) findViewById(R.id.ten);
+        fifteen = (Button) findViewById(R.id.fifteen);
+        twenty = (Button) findViewById(R.id.twenty);
+        twentyfive = (Button) findViewById(R.id.twentyfive);
+        black = (Button) findViewById(R.id.black);
+        white = (Button) findViewById(R.id.white);
+        red = (Button) findViewById(R.id.red);
+        blue = (Button) findViewById(R.id.blue);
         memeLayout = (RelativeLayout) findViewById(R.id.meme);
-
+        Vanilla = (Button) findViewById(R.id.vanilla);
+        editText = (EditText) findViewById(R.id.editText);
+        editText2 = (EditText) findViewById(R.id.editText2);
 
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            imageView = (ImageView) findViewById(R.id.mImageView);
-            Vanilla = (Button) findViewById(R.id.vanilla);
-            editText = (EditText) findViewById(R.id.editText);
-            editText2 = (EditText) findViewById(R.id.editText2);
             imageView.setImageBitmap(b);
         } else {
             //retrieve passed uri
@@ -151,13 +168,67 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
     }
 
 
+
     public void vanillaM(View v) {
         editText.setBackgroundColor(Color.WHITE);
         editText2.setBackgroundColor(Color.WHITE);
         editText.setHint("write something here");
         editText2.setHint("and here");
+    }
+//    public void vanillaM (View v){
+//        linearLayout2.setVisibility(View.VISIBLE);
+//    }
+
+    public void setTen (View v){
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+    }
+    public void setFifteen (View v){
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+    }
+    public void setTwenty (View v){
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+    }
+    public void setTwentyfive (View v){
+        linearLayout2.setVisibility(View.GONE);
+        linearLayout3.setVisibility(View.VISIBLE);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+        editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
+    }
+
+    public void setBlack (View v){
+        linearLayout3.setVisibility(View.GONE);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
+    }
+    public void setWhite (View v){
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText.setTextColor(Color.WHITE);
+        editText2.setTextColor(Color.WHITE);
+    }
+    public void setRed (View v){
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText.setTextColor(Color.RED);
+        editText2.setTextColor(Color.RED);
+    }
+    public void setBlue (View v){
+        linearLayout3.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        editText2.setVisibility(View.VISIBLE);
+        editText.setTextColor(Color.BLUE);
+        editText2.setTextColor(Color.BLUE);
     }
 
     //onClick method for the save button. Calls other methods to create the save image function
@@ -165,7 +236,6 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
         Bitmap image = getBitmapFromView(memeLayout);
         File pictureFile = createImageFile();
         addImageToFile(image, pictureFile);
-
     }
 
     /**
@@ -180,7 +250,6 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
         File imageFile = new File(path, imageName);
         Log.d("Path: ", path.getPath());
         return imageFile;
-
     }
 
     private void addImageToFile(Bitmap image, File file) {
@@ -216,6 +285,36 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
     }
 
 
+
+//        try{
+//        fos=new FileOutputStream(file);
+//        image.compress(Bitmap.CompressFormat.PNG,90,fos);
+//
+//        Toast.makeText(this,"Saved image to camera pictures",Toast.LENGTH_SHORT).show();
+//
+//        }catch(Exception e){
+//        Log.d(TAG,"trying to compress image did not work"+e.getMessage());
+//        }finally{
+//        try{
+//        if(fos!=null){
+//        fos.close(); //Closes the fileoutput stream
+//        //Scans the image file that was just created so user can immediately see it in Pictures
+//        try{
+//        Intent mediaScanIntent=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        Uri uri=Uri.fromFile(file);
+//        mediaScanIntent.setData(uri);
+//        sendBroadcast(mediaScanIntent);
+//        }catch(Exception e){
+//        Log.d("scanIntent","Failed: ");
+//        }
+//        }
+//        }catch(IOException e){
+//        Log.d(TAG,"fos did not close "+e.getMessage());
+//        }
+//        }
+//        }
+
+
     //Takes the current view and creates a bitmap representing that view.
     public Bitmap getBitmapFromView(View view) {
         Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
@@ -230,7 +329,8 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
         return returnedBitmap;
     }
 
-
+    //methods below work together to allow for a view to be dragged when it is touched
+    //and set onto another view
     public boolean onTouch(View v, MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
@@ -243,7 +343,7 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
             return false;
         }
     }
-
+    //this method catches the action and allows the view to be placed on it
 
     public boolean onDrag(View v, DragEvent e) {
         if (e.getAction() == DragEvent.ACTION_DROP) {
@@ -261,3 +361,4 @@ public class EditPhoto extends ActionBarActivity implements View.OnTouchListener
         return true;
     }
 }
+
