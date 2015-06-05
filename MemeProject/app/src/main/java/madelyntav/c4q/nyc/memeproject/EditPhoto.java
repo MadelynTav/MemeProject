@@ -250,6 +250,58 @@ public class EditPhoto extends ActionBarActivity {
         }
     }
 
+    public void invertColors(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.doInvert(b);
+            imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.doInvert(bitmap);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
+    public void greyscaleImage(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.doGreyscale(b);
+            imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.doGreyscale(bitmap);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
+    public void shadingFilterBlue(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.BLUE);
+            imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
+    public void shadingFilterRed(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.applyShadingFilter(b, Color.RED);
+            imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
+    public void shadingFilterGreen(View view){
+        if (getIntent().hasExtra("byteArray")) {
+            Bitmap engraved = ApplyFilters.applyShadingFilter(b,Color.GREEN);
+            imageView.setImageBitmap(engraved);
+        }else{
+            Bitmap engraved = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
+            imageView.setImageBitmap(engraved);
+        }
+    }
+
+
+
 }
 
 
