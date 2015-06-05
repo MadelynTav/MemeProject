@@ -1,8 +1,10 @@
 package madelyntav.c4q.nyc.memeproject;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,7 +13,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -63,10 +67,11 @@ public class MainActivity extends ActionBarActivity {
             //Image selected message
             Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
 
-            //get Uri from selected image
+           // get Uri from selected image
             Uri targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
             //turn selected image into a Bitmap image
             try {
@@ -80,36 +85,36 @@ public class MainActivity extends ActionBarActivity {
             mImageView.setImageBitmap(bitmap);
             startActivity(intent);
 
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                intent.putExtra("byteArray", bs.toByteArray());
-                startActivity(intent);
-
-            } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
-                //Image selected message
-                Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
-
-                //get Uri from selected image
-                targetUri = data.getData();
-                bitmap = null;
-                cr = getContentResolver();
-
-                //turn selected image into a Bitmap image
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                //pass image to intent
-                intent.putExtra("image", targetUri);
-                mImageView.setImageBitmap(bitmap);
-                startActivity(intent);
-
-            }
+//            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+//                Bundle extras = data.getExtras();
+//                Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+//                imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+//                intent.putExtra("byteArray", bs.toByteArray());
+//                startActivity(intent);
+//
+//            } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
+//                //Image selected message
+//                Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
+//
+//                //get Uri from selected image
+//                targetUri = data.getData();
+//                bitmap = null;
+//                cr = getContentResolver();
+//
+//                //turn selected image into a Bitmap image
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                //pass image to intent
+//                intent.putExtra("image", targetUri);
+//                mImageView.setImageBitmap(bitmap);
+//                startActivity(intent);
+//
+//            }
         }
     }
 

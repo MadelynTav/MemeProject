@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="effectsview" type="id" />
+    <item name="autofix" type="id" />
+    <item name="bw" type="id" />
+    <item name="brightness" type="id" />
+    <item name="contrast" type="id" />
+    <item name="crossprocess" type="id" />
+</resources>
