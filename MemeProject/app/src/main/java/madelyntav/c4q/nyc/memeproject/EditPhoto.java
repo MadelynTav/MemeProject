@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,10 +27,15 @@ import android.os.Bundle;
 
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -40,7 +46,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class EditPhoto extends Activity {
+public class EditPhoto extends Activity implements View.OnTouchListener,View.OnDragListener {
 
     Bitmap b;
     Bitmap bitmap;
@@ -63,6 +69,26 @@ public class EditPhoto extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
+
+        editText = (EditText) findViewById(R.id.editText);
+        editText2 = (EditText) findViewById(R.id.editText2);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/impact.ttf");
+
+        editText.setTypeface(custom_font);
+        editText2.setTypeface(custom_font);
+
+        editText.setOnTouchListener(this);
+        editText2.setOnTouchListener(this);
+
+
+
+        LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
+        LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
+        LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
+
+        textBot.setOnDragListener(this);
+        textMid.setOnDragListener(this);
+        textTop.setOnDragListener(this);
 
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView)findViewById(R.id.demotivationalImage);
@@ -245,6 +271,37 @@ public class EditPhoto extends Activity {
             canvas.drawColor(Color.WHITE);
         view.draw(canvas);
         return returnedBitmap;
+    }
+
+
+    public boolean onTouch(View v, MotionEvent e) {
+        if (e.getAction() == MotionEvent.ACTION_DOWN) {
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+            v.startDrag(null, shadowBuilder, v, 0);
+            v.isInEditMode();
+            v.setVisibility(View.INVISIBLE);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public boolean onDrag(View v, DragEvent e) {
+        if (e.getAction() == DragEvent.ACTION_DROP) {
+            View view = (View) e.getLocalState();
+            ViewGroup from = (ViewGroup) view.getParent();
+            from.removeView(view);
+            LinearLayout to = (LinearLayout) v;
+            to.addView(view);
+            view.setVisibility(View.VISIBLE);
+            view.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+
+        }
+        return true;
     }
 }
 
