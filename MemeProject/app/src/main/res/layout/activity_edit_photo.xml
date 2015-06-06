@@ -248,8 +248,8 @@
                 <!-- ImageView for demo -->
                 <ImageView
                     android:visibility="invisible"
-                    android:layout_width="280dp"
-                    android:layout_height="280dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:scaleType="fitXY"
                     android:id="@+id/demotivationalImage"
                     android:layout_centerHorizontal="true"
@@ -354,18 +354,6 @@
 
             </RelativeLayout>
 
-
         </LinearLayout>
-
-
-
-
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:id="@+id/linearLayout5" >-->
-    <!--</LinearLayout>-->
 
 </RelativeLayout>

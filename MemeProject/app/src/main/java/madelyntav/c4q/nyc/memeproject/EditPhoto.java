@@ -207,6 +207,8 @@ import java.util.Date;
 
             editText.setHint("write something here");
             editText2.setHint("and here");
+            memeLayout.setBackgroundColor(Color.TRANSPARENT);
+            imageView.setVisibility(View.VISIBLE);
             editText.setVisibility(View.VISIBLE);
             editText2.setVisibility(View.VISIBLE);
             demoImage.setVisibility(View.INVISIBLE);
@@ -422,6 +424,7 @@ import java.util.Date;
                 imageView.setImageBitmap(engraved);
                 demoImage.setImageBitmap(engraved);
             }
+            Toast.makeText(this, "Engraved!", Toast.LENGTH_SHORT).show();
         }
 
         // Applies inverted colors effect to image
@@ -435,6 +438,8 @@ import java.util.Date;
                 imageView.setImageBitmap(inverted);
                 demoImage.setImageBitmap(inverted);
             }
+            Toast.makeText(this,"Inverted!",Toast.LENGTH_SHORT).show();
+
         }
 
         // Applies greyscale effect to image
@@ -448,6 +453,7 @@ import java.util.Date;
                 imageView.setImageBitmap(greyscaled);
                 demoImage.setImageBitmap(greyscaled);
             }
+            Toast.makeText(this,"Old School Flow!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies blue shading effect to image
@@ -461,6 +467,7 @@ import java.util.Date;
                 imageView.setImageBitmap(blueShade);
                 demoImage.setImageBitmap(blueShade);
             }
+            Toast.makeText(this,"BLUE!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies red shading effect to image
@@ -474,10 +481,12 @@ import java.util.Date;
                 imageView.setImageBitmap(redShade);
                 demoImage.setImageBitmap(redShade);
             }
+            Toast.makeText(this,"RED!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies green shading effect to image
         public void shadingFilterGreen(View view) {
+
             if (getIntent().hasExtra("byteArray")) {
                 Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
                 imageView.setImageBitmap(greenShade);
@@ -487,6 +496,7 @@ import java.util.Date;
                 imageView.setImageBitmap(greenShade);
                 demoImage.setImageBitmap(greenShade);
             }
+            Toast.makeText(this,"GREEN FACES ONLY!!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies reflection effect to image
@@ -500,5 +510,6 @@ import java.util.Date;
                 imageView.setImageBitmap(reflected);
                 demoImage.setImageBitmap(reflected);
             }
+            Toast.makeText(this,"Reflected!",Toast.LENGTH_SHORT).show();
         }
     }
