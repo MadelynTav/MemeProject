@@ -178,6 +178,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/mImageView"
             android:layout_centerInParent="true"
+            android:scaleType="fitXY"
              />
         <LinearLayout
             android:orientation="vertical"
@@ -260,6 +261,7 @@
             android:textSize="40sp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
+            android:background="@null"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/demotivationalImage"
             android:id="@+id/demotivationalTitle"
@@ -270,10 +272,11 @@
             android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Sarcastic text"
+            android:hint="Sarcastic description"
             android:textColorHint="#FFFFFF"
             android:maxLength="36"
             android:textColor="#FFFFFF"
+            android:background="@null"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/demotivationalTitle"
             android:id="@+id/demotivationalText"

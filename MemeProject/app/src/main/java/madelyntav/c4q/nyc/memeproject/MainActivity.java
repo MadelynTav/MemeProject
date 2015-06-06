@@ -1,25 +1,21 @@
 package madelyntav.c4q.nyc.memeproject;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
-
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
     private ImageView mImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
@@ -67,43 +63,14 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             //pass image to intent
             intent.putExtra("image", targetUri);
-            mImageView.setImageBitmap(bitmap);
+            //mImageView.setImageBitmap(bitmap);
             startActivity(intent);
 
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
-                intent.putExtra("byteArray", bs.toByteArray());
-                startActivity(intent);
-
-            } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
-                //Image selected message
-                Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
-
-                //get Uri from selected image
-                targetUri = data.getData();
-                bitmap = null;
-                cr = getContentResolver();
-
-                //turn selected image into a Bitmap image
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                //pass image to intent
-                intent.putExtra("image", targetUri);
-                mImageView.setImageBitmap(bitmap);
-                startActivity(intent);
-
-            }
         }
+
+
     }
 
     //opens camera
@@ -112,6 +79,12 @@ public class MainActivity extends ActionBarActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
+    }
+
+    public void chooseMeme(View view){
+            Intent intent1 = new Intent(this, MemeList.class);
+            startActivity(intent1);
+        
     }
 
 }

@@ -2,74 +2,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/redb2"
     android:scaleType="center"
-    tools:context="madelyntav.c4q.nyc.memeproject.MainActivity"
-    android:background="@drawable/redb2">
+    tools:context="madelyntav.c4q.nyc.memeproject.MainActivity">
 
     <TextView
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meme-ify Me!"
         android:layout_centerHorizontal="true"
+        android:text="Meme-ify Me!"
         android:textSize="55dp"
-        android:textStyle="bold|italic"
-        android:id="@+id/header"/>
+        android:textStyle="bold|italic" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
-        android:textSize="19dp"
-        android:text="      Welcome to Meme-ify Me, the app that lets you create your own memes! "/>
+        android:text="      Welcome to Meme-ify Me, the app that lets you create your own memes! "
+        android:textSize="19dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <ImageView
-            android:paddingTop="90dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/cam"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:onClick="takePic"/>
+            android:onClick="takePic"
+            android:paddingTop="90dp"
+            android:src="@drawable/cam" />
 
         <TextView
             android:id="@+id/takePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take New Photo"
-            android:onClick="takePic"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:textSize="19dp"/>
+            android:onClick="takePic"
+            android:text="Take New Photo"
+            android:textSize="19dp" />
 
         <ImageView
-            android:paddingTop="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/folder"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:onClick="usePic"/>
+            android:onClick="usePic"
+            android:paddingTop="40dp"
+            android:src="@drawable/folder" />
 
         <TextView
             android:id="@+id/loadImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose Photo From Album"
-            android:onClick="usePic"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:textSize="19dp"/>
+            android:onClick="usePic"
+            android:text="Choose Photo From Album"
+            android:textSize="19dp" />
+
+        <!--<ImageView-->
+        <!--android:id="@+id/mImageView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/loadImageButton"/>-->
 
         <ImageView
-            android:id="@+id/mImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/loadImageButton"/>
+            android:id="@+id/memeList"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/blueb"
+            android:onClick="chooseMeme"
+            />
 
     </LinearLayout>
 
