@@ -64,14 +64,16 @@ import java.util.Date;
             setContentView(R.layout.activity_edit_photo);
 
             imageView = (ImageView) findViewById(R.id.mImageView);
+            demoImage = (ImageView) findViewById(R.id.demotivationalImage);
 
 
-            if (getIntent().hasExtra("byteArray")) {
-                Bundle extras = getIntent().getExtras();
-                byte[] byteArray = extras.getByteArray("byteArray");
-                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                imageView.setImageBitmap(bm);
-            } else {
+//            if (getIntent().hasExtra("byteArray")) {
+//                Bundle extras = getIntent().getExtras();
+//                byte[] byteArray = extras.getByteArray("byteArray");
+//                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//                imageView.setImageBitmap(bm);
+//                demoImage.setImageBitmap(bm);
+//            } else {
 
                 root = (RelativeLayout) findViewById(R.id.root);
                 linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
@@ -122,10 +124,9 @@ import java.util.Date;
                     demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
                     demoText = (EditText) findViewById(R.id.demotivationalText);
                     imageView.setImageBitmap(b);
+                    demoImage.setImageBitmap(b);
 
                 } else {
-
-                    demoImage.setImageBitmap(b);
 
                     //retrieve passed uri
                     Uri uri = getIntent().getExtras().getParcelable("image");
@@ -181,7 +182,6 @@ import java.util.Date;
                         String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b, "title", null);
                         Uri bmpUri = Uri.parse(pathOfBmp);
 
-
                         Intent attachIntent = new Intent(Intent.ACTION_SEND);
                         attachIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                         attachIntent.setType("image/png");
@@ -189,7 +189,7 @@ import java.util.Date;
                     }
                 });
             }
-        }
+
 
 
         public void vanillaM(View v) {
