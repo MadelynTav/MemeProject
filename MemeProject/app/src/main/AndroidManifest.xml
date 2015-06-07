@@ -13,7 +13,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="Meme-ify Me"
             android:screenOrientation="portrait"
             >
             <intent-filter>
