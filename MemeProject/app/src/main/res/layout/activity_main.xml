@@ -31,7 +31,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:onClick="takePic"
             android:paddingTop="90dp"
@@ -41,44 +40,43 @@
             android:id="@+id/takePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:onClick="takePic"
             android:text="Take New Photo"
-            android:textSize="19dp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:onClick="usePic"
-            android:paddingTop="40dp"
+            android:paddingTop="30dp"
             android:src="@drawable/folder" />
 
         <TextView
             android:id="@+id/loadImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:onClick="usePic"
             android:text="Choose Photo From Album"
-            android:textSize="19dp" />
-
-        <!--<ImageView-->
-        <!--android:id="@+id/mImageView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/loadImageButton"/>-->
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/memeList"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/blueb"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
             android:onClick="chooseMeme"
+            android:paddingTop="30dp"
+            android:src="@drawable/templatememeicon"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Choose A Meme From Template"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
