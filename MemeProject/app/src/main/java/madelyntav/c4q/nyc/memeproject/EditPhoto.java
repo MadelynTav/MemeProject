@@ -92,6 +92,7 @@ import java.util.Date;
                 editText2.setOnTouchListener(this);
 
 
+                //Drag and drop layouts for drag and drop EditText feature
                 LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
                 LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
                 LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
@@ -105,7 +106,9 @@ import java.util.Date;
                 memeLayout = (RelativeLayout) findViewById(R.id.meme);
 
 
-                //opens pic in this activity
+            //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
+
+            //opens pic in this activity
                 if (getIntent().hasExtra("byteArray")) {
                     b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
                     imageView = (ImageView) findViewById(R.id.mImageView);
@@ -137,7 +140,9 @@ import java.util.Date;
                     imageView.setImageBitmap(bitmap);
                     demoImage.setImageBitmap(bitmap);
                 }
+            //-----------------------------SHARE BUTTON ONCLICKLISTENER---------------------------//
 
+            // Shares image via Email, Text, Bluetooth, etc...
                 Button share = (Button) findViewById(R.id.share);
                 share.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -183,24 +188,19 @@ import java.util.Date;
                 });
             }
 
+        //----------------------------VANILLA AND DEMOTIVATIONAL METHODS--------------------------//
 
-
+        //Sets Vanilla meme editing view
         public void vanillaM(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-
-            linearLayout2.setVisibility(View.VISIBLE);
-
             editText = (EditText) findViewById(R.id.editText);
             editText2 = (EditText) findViewById(R.id.editText2);
             memeLayout = (RelativeLayout) findViewById(R.id.meme);
             demoImage = (ImageView) findViewById(R.id.demotivationalImage);
             demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
             demoText = (EditText) findViewById(R.id.demotivationalText);
-
-            editText.setHint("write something here");
-            editText2.setHint("and here");
-            memeLayout.setBackgroundColor(Color.TRANSPARENT);
+            linearLayout2.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.VISIBLE);
             editText.setVisibility(View.VISIBLE);
             editText2.setVisibility(View.VISIBLE);
@@ -209,6 +209,7 @@ import java.util.Date;
             demoText.setVisibility(View.INVISIBLE);
         }
 
+        //Sets demotivational meme editing view
         public void demotivate(View v) {
 
             editText = (EditText) findViewById(R.id.editText);
@@ -229,6 +230,8 @@ import java.util.Date;
 
         }
 
+        //-------------------------------IMAGE STORE AND SAVE METHODS-----------------------------//
+
         //onClick method for the save button. Calls other methods to create the save image function
         public void storeImage(View v) {
             editText.setHint("");
@@ -240,7 +243,7 @@ import java.util.Date;
         }
 
         /**
-         * Create a File for saving an image or video
+         * Create a File for saving an image
          * Handles file name, and where to store it
          */
         private File createImageFile() {
@@ -286,6 +289,7 @@ import java.util.Date;
 
         }
 
+        //------------------------------CREATE BITMAP FROM VIEW METHOD----------------------------//
 
         //Takes the current view and creates a bitmap representing that view.
         public Bitmap getBitmapFromView(View view) {
@@ -300,6 +304,9 @@ import java.util.Date;
             view.draw(canvas);
             return returnedBitmap;
         }
+
+
+        //---------------------------------DRAGGING EDITTEXT METHODS------------------------------//
 
         // onTouch and onDrag work together to allow for views to be moved around within the layout
         //to children of that layout
@@ -320,19 +327,33 @@ import java.util.Date;
             if (e.getAction() == DragEvent.ACTION_DROP) {//if the shadow has been released within the view
                 View view = (View) e.getLocalState();
                 ViewGroup from = (ViewGroup) view.getParent();
-                from.removeView(view);
+
                 LinearLayout to = (LinearLayout) v;
+
+                if((to.getResources().getInteger(Integer.valueOf(R.id.editText)) == (from.getResources().getInteger(Integer.valueOf(R.id.editText2))))) {
+
+
+
+                }
+                from.removeView(view);
                 to.addView(view);
                 view.setVisibility(View.VISIBLE);
+
+
                 view.requestFocus();
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+
 
             }
             return true;
         }
 
 
+        //----------------------------VANILLA EDITTEXT FONT SIZE METHODS--------------------------//
+
+
+        // Sets Vanilla font size to 10sp
         public void setTen(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -343,6 +364,7 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
         }
 
+        // Sets Vanilla font size to 15sp
         public void setFifteen(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -352,6 +374,7 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         }
 
+        // Sets Vanilla font size to 20sp
         public void setTwenty(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -361,6 +384,7 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         }
 
+        // Sets Vanilla font size to 25sp
         public void setTwentyfive(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -370,6 +394,9 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
         }
 
+        //---------------------------VANILLA EDITTEXT FONT COLOR METHODS--------------------------//
+
+        // Sets Vanilla font to black
         public void setBlack(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -378,6 +405,7 @@ import java.util.Date;
             editText2.setVisibility(View.VISIBLE);
         }
 
+        // Sets Vanilla font to white
         public void setWhite(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -388,6 +416,7 @@ import java.util.Date;
             editText2.setTextColor(Color.WHITE);
         }
 
+        // Sets Vanilla font to red
         public void setRed(View v) {
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
             linearLayout3.setVisibility(View.GONE);
@@ -397,6 +426,7 @@ import java.util.Date;
             editText2.setTextColor(Color.RED);
         }
 
+        // Sets Vanilla font to blue
         public void setBlue(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -407,6 +437,8 @@ import java.util.Date;
             editText2.setTextColor(Color.BLUE);
         }
 
+
+        //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
 
         // Applies engrave effect to image
         public void engravedImage(View view) {
