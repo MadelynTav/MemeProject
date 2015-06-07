@@ -64,14 +64,7 @@ import java.util.Date;
             setContentView(R.layout.activity_edit_photo);
 
             imageView = (ImageView) findViewById(R.id.mImageView);
-
-
-            if (getIntent().hasExtra("byteArray")) {
-                Bundle extras = getIntent().getExtras();
-                byte[] byteArray = extras.getByteArray("byteArray");
-                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                imageView.setImageBitmap(bm);
-            } else {
+            demoImage = (ImageView) findViewById(R.id.demotivationalImage);
 
                 root = (RelativeLayout) findViewById(R.id.root);
                 linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
@@ -122,10 +115,9 @@ import java.util.Date;
                     demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
                     demoText = (EditText) findViewById(R.id.demotivationalText);
                     imageView.setImageBitmap(b);
+                    demoImage.setImageBitmap(b);
 
                 } else {
-
-                    demoImage.setImageBitmap(b);
 
                     //retrieve passed uri
                     Uri uri = getIntent().getExtras().getParcelable("image");
@@ -155,6 +147,8 @@ import java.util.Date;
                         Vanilla = (Button) findViewById(R.id.vanilla);
                         editText = (EditText) findViewById(R.id.editText);
                         editText2 = (EditText) findViewById(R.id.editText2);
+                        editText.setHint("");
+                        editText2.setHint("");
                         //opens pic in this activity
                         if (getIntent().hasExtra("byteArray")) {
                             Bundle extras = getIntent().getExtras();
@@ -181,7 +175,6 @@ import java.util.Date;
                         String pathOfBmp = MediaStore.Images.Media.insertImage(getContentResolver(), b, "title", null);
                         Uri bmpUri = Uri.parse(pathOfBmp);
 
-
                         Intent attachIntent = new Intent(Intent.ACTION_SEND);
                         attachIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
                         attachIntent.setType("image/png");
@@ -189,7 +182,7 @@ import java.util.Date;
                     }
                 });
             }
-        }
+
 
 
         public void vanillaM(View v) {
@@ -207,6 +200,8 @@ import java.util.Date;
 
             editText.setHint("write something here");
             editText2.setHint("and here");
+            memeLayout.setBackgroundColor(Color.TRANSPARENT);
+            imageView.setVisibility(View.VISIBLE);
             editText.setVisibility(View.VISIBLE);
             editText2.setVisibility(View.VISIBLE);
             demoImage.setVisibility(View.INVISIBLE);
@@ -236,6 +231,8 @@ import java.util.Date;
 
         //onClick method for the save button. Calls other methods to create the save image function
         public void storeImage(View v) {
+            editText.setHint("");
+            editText2.setHint("");
             Bitmap image = getBitmapFromView(memeLayout);
             File pictureFile = createImageFile();
             addImageToFile(image, pictureFile);
@@ -422,6 +419,7 @@ import java.util.Date;
                 imageView.setImageBitmap(engraved);
                 demoImage.setImageBitmap(engraved);
             }
+            Toast.makeText(this, "Engraved!", Toast.LENGTH_SHORT).show();
         }
 
         // Applies inverted colors effect to image
@@ -435,6 +433,8 @@ import java.util.Date;
                 imageView.setImageBitmap(inverted);
                 demoImage.setImageBitmap(inverted);
             }
+            Toast.makeText(this,"Inverted!",Toast.LENGTH_SHORT).show();
+
         }
 
         // Applies greyscale effect to image
@@ -448,6 +448,7 @@ import java.util.Date;
                 imageView.setImageBitmap(greyscaled);
                 demoImage.setImageBitmap(greyscaled);
             }
+            Toast.makeText(this,"Old School Flow!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies blue shading effect to image
@@ -461,6 +462,7 @@ import java.util.Date;
                 imageView.setImageBitmap(blueShade);
                 demoImage.setImageBitmap(blueShade);
             }
+            Toast.makeText(this,"BLUE!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies red shading effect to image
@@ -474,10 +476,12 @@ import java.util.Date;
                 imageView.setImageBitmap(redShade);
                 demoImage.setImageBitmap(redShade);
             }
+            Toast.makeText(this,"RED!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies green shading effect to image
         public void shadingFilterGreen(View view) {
+
             if (getIntent().hasExtra("byteArray")) {
                 Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
                 imageView.setImageBitmap(greenShade);
@@ -487,6 +491,7 @@ import java.util.Date;
                 imageView.setImageBitmap(greenShade);
                 demoImage.setImageBitmap(greenShade);
             }
+            Toast.makeText(this,"GREEN FACES ONLY!!",Toast.LENGTH_SHORT).show();
         }
 
         // Applies reflection effect to image
@@ -500,11 +505,6 @@ import java.util.Date;
                 imageView.setImageBitmap(reflected);
                 demoImage.setImageBitmap(reflected);
             }
+            Toast.makeText(this,"Reflected!",Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
-
-
