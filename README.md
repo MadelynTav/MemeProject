@@ -13,8 +13,8 @@ Include your team name, how many hours you believe each of you worked on this ov
   -Number of hours: 12+
 
 * Kadeem Maraugh:  
-  -Responsible for: Saving image to phone, demotivational meme and UI.  
-  -Number of hours: 
+  -Responsible for: Saving image to phone, demotivational meme, choosing existing meme from listview and UI.  
+  -Number of hours: 10+
 
 * Madelyn Tavarez:    
   -Responsible for: Team captain, sharing/exporting images, drag and drop and UI
