@@ -66,15 +66,6 @@ import java.util.Date;
             imageView = (ImageView) findViewById(R.id.mImageView);
             demoImage = (ImageView) findViewById(R.id.demotivationalImage);
 
-
-//            if (getIntent().hasExtra("byteArray")) {
-//                Bundle extras = getIntent().getExtras();
-//                byte[] byteArray = extras.getByteArray("byteArray");
-//                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-//                imageView.setImageBitmap(bm);
-//                demoImage.setImageBitmap(bm);
-//            } else {
-
                 root = (RelativeLayout) findViewById(R.id.root);
                 linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
                 linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -156,6 +147,8 @@ import java.util.Date;
                         Vanilla = (Button) findViewById(R.id.vanilla);
                         editText = (EditText) findViewById(R.id.editText);
                         editText2 = (EditText) findViewById(R.id.editText2);
+                        editText.setHint("");
+                        editText2.setHint("");
                         //opens pic in this activity
                         if (getIntent().hasExtra("byteArray")) {
                             Bundle extras = getIntent().getExtras();
@@ -238,6 +231,8 @@ import java.util.Date;
 
         //onClick method for the save button. Calls other methods to create the save image function
         public void storeImage(View v) {
+            editText.setHint("");
+            editText2.setHint("");
             Bitmap image = getBitmapFromView(memeLayout);
             File pictureFile = createImageFile();
             addImageToFile(image, pictureFile);

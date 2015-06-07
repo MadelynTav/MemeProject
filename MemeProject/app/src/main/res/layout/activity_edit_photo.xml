@@ -179,65 +179,75 @@
 
     </LinearLayout>
 
+    <!-- Effect Buttons, ImageViews, and EditTexts -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/linearLayout3">
+
             <!--Effect Buttons-->
             <LinearLayout
                 android:id="@+id/effectButtons"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <Button
+                <ImageView
                     android:id="@+id/engrave"
-                    android:text="Engr"
+                    android:src="@drawable/engraved"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="engravedImage"/>
-                <Button
+                <ImageView
                     android:id="@+id/invert"
-                    android:text="Invt"
+                    android:src="@drawable/inverted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="invertColors"/>
-                <Button
+                    android:onClick="invertColors"
+                    android:layout_marginTop="1dp"/>
+                <ImageView
                     android:id="@+id/greyscale"
-                    android:text="Grey"
+                    android:src="@drawable/grey"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="greyscaleImage"/>
-                <Button
+                    android:onClick="greyscaleImage"
+                    android:layout_marginTop="1dp"/>
+                <ImageView
                     android:id="@+id/blueShade"
-                    android:text="Blue"
+                    android:src="@drawable/blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="shadingFilterBlue"/>
-                <Button
+                    android:onClick="shadingFilterBlue"
+                    android:layout_marginTop="1dp"/>
+                <ImageView
                     android:id="@+id/redShade"
-                    android:text="Red"
+                    android:src="@drawable/red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="shadingFilterRed"/>
-                <Button
+                    android:onClick="shadingFilterRed"
+                    android:layout_marginTop="1dp"/>
+                <ImageView
                     android:id="@+id/greenShade"
-                    android:text="Grn"
+                    android:src="@drawable/green"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="shadingFilterGreen"/>
-                <Button
+                    android:onClick="shadingFilterGreen"
+                    android:layout_marginTop="1dp"/>
+                <ImageView
                     android:id="@+id/reflect"
-                    android:text="Refl"
+                    android:src="@drawable/reflect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="reflectionEffect"/>
+                    android:onClick="reflectionEffect"
+                    android:layout_marginTop="1dp"/>
 
             </LinearLayout>
+
+            <!-- ImageViews and EditTexts -->
             <RelativeLayout
+                android:id="@+id/meme"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/meme">
+                android:layout_height="match_parent">
 
                 <!-- ImageView for Vanilla -->
         <ImageView
@@ -316,6 +326,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/editText2"
+                    android:visibility="invisible"
                     />
 
                 <LinearLayout
