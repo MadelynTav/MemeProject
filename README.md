@@ -5,7 +5,7 @@ Include your team name, how many hours you believe each of you worked on this ov
 ##Team Members:
 
 * Ray Acevedo:  
-  -Responsible for: Vanilla Meme editing, font customization, mainActivity UI and general UI.
+  -Responsible for: Vanilla Meme editing, camera functionality font customization, mainActivity UI and general UI.
   -Number of hours: 
 
 * Jose Garcia:  
