@@ -1,8 +1,7 @@
 package madelyntav.c4q.nyc.memeproject;
 
-import android.widget.Button;
-import android.content.Context;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,11 +20,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +37,7 @@ import java.util.Date;
 
     public class EditPhoto extends Activity implements View.OnTouchListener, View.OnDragListener {
 
-
+        private ColorPicker colorPicker;
         Bitmap b;
         Bitmap bitmap;
         private Button Vanilla;
@@ -56,12 +57,16 @@ import java.util.Date;
         Button red;
         Button blue;
         RelativeLayout root;
+        Button choseTextColor;
 
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_edit_photo);
+
+            colorPicker = (ColorPicker) findViewById(R.id.colorPicker);
+            //choseTextColor = (Button) findViewById(R.id.choseTextColor);
 
             imageView = (ImageView) findViewById(R.id.mImageView);
             demoImage = (ImageView) findViewById(R.id.demotivationalImage);
@@ -73,10 +78,10 @@ import java.util.Date;
                 fifteen = (Button) findViewById(R.id.fifteen);
                 twenty = (Button) findViewById(R.id.twenty);
                 twentyfive = (Button) findViewById(R.id.twentyfive);
-                black = (Button) findViewById(R.id.black);
-                white = (Button) findViewById(R.id.white);
-                red = (Button) findViewById(R.id.red);
-                blue = (Button) findViewById(R.id.blue);
+//                black = (Button) findViewById(R.id.black);
+//                white = (Button) findViewById(R.id.white);
+//                red = (Button) findViewById(R.id.red);
+//                blue = (Button) findViewById(R.id.blue);
                 Vanilla = (Button) findViewById(R.id.vanilla);
 
 
@@ -202,8 +207,10 @@ import java.util.Date;
             demoText = (EditText) findViewById(R.id.demotivationalText);
             linearLayout2.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.VISIBLE);
-            editText.setVisibility(View.VISIBLE);
-            editText2.setVisibility(View.VISIBLE);
+            //
+            //editText.setVisibility(View.VISIBLE);
+            //editText2.setVisibility(View.VISIBLE);
+            //above is commented out to force user to first chose text size and color
             demoImage.setVisibility(View.INVISIBLE);
             demoTitle.setVisibility(View.INVISIBLE);
             demoText.setVisibility(View.INVISIBLE);
@@ -397,12 +404,32 @@ import java.util.Date;
         //---------------------------VANILLA EDITTEXT FONT COLOR METHODS--------------------------//
 
         // Sets Vanilla font to black
+        public void choseColor (View v){
+            int color = colorPicker.getColor();
+            linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+            linearLayout3.setVisibility(View.GONE);
+            editText.setVisibility(View.VISIBLE);
+            editText2.setVisibility(View.VISIBLE);
+            editText.setTextColor(color);
+            editText2.setTextColor(color);
+            //String rgbString = "R: " + Color.red(color) + " B: " + Color.blue(color) + " G: " + Color.green(color);
+
+            //Toast.makeText(EditPhoto.this, rgbString, Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
         public void setBlack(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
             linearLayout3.setVisibility(View.GONE);
             editText.setVisibility(View.VISIBLE);
             editText2.setVisibility(View.VISIBLE);
+            editText.setTextColor(Color.BLACK);
+            editText2.setTextColor(Color.BLACK);
         }
 
         // Sets Vanilla font to white

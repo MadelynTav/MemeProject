@@ -141,41 +141,59 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Chose text color:"
-            android:layout_weight="1"/>
+            android:text="Chose your text color"
+            android:layout_weight="1"
+            android:textSize="20sp"/>
+
+
+        <madelyntav.c4q.nyc.memeproject.ColorPicker
+            android:id="@+id/colorPicker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:onClick="choseColor"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="black"
-            android:textSize="10dp"
-            android:id="@+id/black"
-            android:onClick="setBlack"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="white"
-            android:textSize="10dp"
-            android:textColor="#ffffff"
-            android:id="@+id/white"
-            android:onClick="setWhite"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="red"
-            android:textColor="#FF0000"
-            android:id="@+id/red"
-            android:onClick="setRed"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="blue"
-            android:textColor="#0000FF"
-            android:id="@+id/blue"
-            android:onClick="setBlue"
-            android:layout_weight="1"/>
+            android:id="@+id/choseTextColor"
+            android:text="Done"
+            android:layout_weight="1"
+            android:onClick="choseColor"
+            />
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="black"-->
+            <!--android:textSize="10dp"-->
+            <!--android:id="@+id/black"-->
+            <!--android:onClick="setBlack"-->
+            <!--android:layout_weight="1"/>-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="white"-->
+            <!--android:textSize="10dp"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:id="@+id/white"-->
+            <!--android:onClick="setWhite"-->
+            <!--android:layout_weight="1"/>-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="red"-->
+            <!--android:textColor="#FF0000"-->
+            <!--android:id="@+id/red"-->
+            <!--android:onClick="setRed"-->
+            <!--android:layout_weight="1"/>-->
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="blue"-->
+            <!--android:textColor="#0000FF"-->
+            <!--android:id="@+id/blue"-->
+            <!--android:onClick="setBlue"-->
+            <!--android:layout_weight="1"/>-->
 
     </LinearLayout>
 
