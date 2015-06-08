@@ -21,8 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_centerHorizontal="true">
 
         <Button
             android:layout_width="match_parent"
@@ -47,8 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout1"
-        >
+        android:id="@+id/linearLayout1">
 
         <Button
             android:layout_width="match_parent"
@@ -65,7 +63,6 @@
             android:layout_weight="1"
             android:onClick="storeImage" />
 
-
     </LinearLayout>
     </LinearLayout>
 
@@ -78,14 +75,6 @@
         android:id="@+id/linearLayout2"
         android:layout_below="@id/mainButtons"
         android:visibility="gone">
-
-    <!--<ImageView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:id="@+id/mImageView"-->
-        <!--android:layout_below="@+id/linearLayout"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="49dp" />-->
 
         <TextView
             android:layout_width="match_parent"
@@ -141,42 +130,24 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Chose text color:"
-            android:layout_weight="1"/>
+            android:text="Chose your text color"
+            android:layout_weight="1"
+            android:textSize="20sp"/>
+        <madelyntav.c4q.nyc.memeproject.ColorPicker
+            android:id="@+id/colorPicker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:onClick="choseColor"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="black"
-            android:textSize="10dp"
-            android:id="@+id/black"
-            android:onClick="setBlack"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="white"
-            android:textSize="10dp"
-            android:textColor="#ffffff"
-            android:id="@+id/white"
-            android:onClick="setWhite"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="red"
-            android:textColor="#FF0000"
-            android:id="@+id/red"
-            android:onClick="setRed"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="blue"
-            android:textColor="#0000FF"
-            android:id="@+id/blue"
-            android:onClick="setBlue"
-            android:layout_weight="1"/>
-
+            android:id="@+id/choseTextColor"
+            android:text="Done"
+            android:layout_weight="1"
+            android:onClick="choseColor"
+            />
     </LinearLayout>
 
     <!-- Effect Buttons, ImageViews, and EditTexts -->
@@ -257,6 +228,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/mImageView" />
+
                 <!-- ImageView for demo -->
                 <ImageView
                     android:visibility="invisible"
@@ -267,6 +239,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     />
+
                 <!-- Demotivational EditTexts -->
                 <EditText
                     android:visibility="invisible"
@@ -297,9 +270,6 @@
                     android:layout_below="@id/demotivationalTitle"/>
 
                 <!-- Vanilla EditTexts -->
-
-
-
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -324,6 +294,7 @@
                     android:shadowColor="#000000"
                     android:layout_alignParentTop="true" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -332,8 +303,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/textTop"
                     android:id="@+id/textMid"
-
                     android:singleLine="false" />
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
@@ -343,7 +314,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/textMid"
                     android:id="@+id/textBottom"
-
                     android:layout_alignParentEnd="true"
                     android:gravity="center|bottom" >
 
@@ -363,8 +333,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/editText2"
-                    android:visibility="invisible"
-                    />
+                    android:visibility="invisible"/>
                 </LinearLayout>
 
             </RelativeLayout>
