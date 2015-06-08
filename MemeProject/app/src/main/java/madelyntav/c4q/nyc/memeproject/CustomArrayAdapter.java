@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CustomArrayAdapter extends ArrayAdapter<String> {
 
-    List<String> memeNames= null;
+    List<String> memeNames = null;
     List<Integer> memeImages = null;
     private static LayoutInflater inflater = null;
 
@@ -32,13 +32,13 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView,
                         ViewGroup parent) {
-        if (convertView==null) {
-            convertView=newView(parent);
+        if (convertView == null) {
+            convertView = newView(parent);
         }
 
         bindView(position, convertView);
 
-        return(convertView);
+        return (convertView);
     }
 
     private View newView(ViewGroup parent) {
@@ -46,11 +46,11 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
     }
 
     private void bindView(int position, View row) {
-        TextView label=(TextView)row.findViewById(R.id.memeName);
+        TextView label = (TextView) row.findViewById(R.id.memeName);
 
         label.setText(memeNames.get(position));
 
-        ImageView icon=(ImageView)row.findViewById(R.id.memeImage);
+        ImageView icon = (ImageView) row.findViewById(R.id.memeImage);
 
         icon.setImageResource(memeImages.get(position));
     }

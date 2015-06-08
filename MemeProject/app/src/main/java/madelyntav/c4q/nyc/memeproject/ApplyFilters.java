@@ -36,10 +36,8 @@ public class ApplyFilters {
         int width = src.getWidth();
 
         // scan through every pixel
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 // get one pixel
                 pixelColor = src.getPixel(x, y);
                 // saving alpha channel
@@ -74,8 +72,8 @@ public class ApplyFilters {
         int height = src.getHeight();
 
         // scan through every single pixel
-        for(int x = 0; x < width; ++x) {
-            for(int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
                 // get one pixel color
                 pixel = src.getPixel(x, y);
                 // retrieve color of all channels
@@ -84,7 +82,7 @@ public class ApplyFilters {
                 G = Color.green(pixel);
                 B = Color.blue(pixel);
                 // take conversion up to one single value
-                R = G = B = (int)(GS_RED * R + GS_GREEN * G + GS_BLUE * B);
+                R = G = B = (int) (GS_RED * R + GS_GREEN * G + GS_BLUE * B);
                 // set new pixel color to output bitmap
                 bmOut.setPixel(x, y, Color.argb(A, R, G, B));
             }
@@ -104,8 +102,8 @@ public class ApplyFilters {
 
         int index = 0;
         // iteration through pixels
-        for(int y = 0; y < height; ++y) {
-            for(int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
                 // get current index in 2D-matrix
                 index = y * width + x;
                 // AND
@@ -132,10 +130,10 @@ public class ApplyFilters {
 
         // create a Bitmap with the flip matrix applied to it.
         // we only want the bottom half of the image
-        Bitmap reflectionImage = Bitmap.createBitmap(originalImage, 0, height/2, width, height/2, matrix, false);
+        Bitmap reflectionImage = Bitmap.createBitmap(originalImage, 0, height / 2, width, height / 2, matrix, false);
 
         // create a new bitmap with same width but taller to fit reflection
-        Bitmap bitmapWithReflection = Bitmap.createBitmap(width, (height + height/2), Bitmap.Config.ARGB_8888);
+        Bitmap bitmapWithReflection = Bitmap.createBitmap(width, (height + height / 2), Bitmap.Config.ARGB_8888);
 
         // create a new Canvas with the bitmap that's big enough for
         // the image plus gap plus reflection
@@ -146,7 +144,7 @@ public class ApplyFilters {
         Paint defaultPaint = new Paint();
         canvas.drawRect(0, height, width, height + reflectionGap, defaultPaint);
         // draw in the reflection
-        canvas.drawBitmap(reflectionImage,0, height + reflectionGap, null);
+        canvas.drawBitmap(reflectionImage, 0, height + reflectionGap, null);
 
         // create a shader that is a linear gradient that covers the reflection
         Paint paint = new Paint();
