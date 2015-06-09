@@ -28,7 +28,7 @@
         android:layout_centerInParent="true">
 
         <ImageView
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/cam"
@@ -47,7 +47,7 @@
             android:textSize="19dp"/>
 
         <ImageView
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/folder"
@@ -66,15 +66,24 @@
             android:textSize="19dp"/>
 
         <ImageView
-            android:id="@+id/mImageView"
+            android:id="@+id/memeList"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:onClick="chooseMeme"
+            android:paddingTop="20dp"
+            android:src="@drawable/templatememeicon"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/loadImageButton"/>
+            android:layout_gravity="center"
+            android:text="Choose A Meme From Template"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
 </RelativeLayout>
-
 
 
 
