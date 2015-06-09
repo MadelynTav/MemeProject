@@ -1,10 +1,8 @@
 package madelyntav.c4q.nyc.memeproject;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,10 +11,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -31,8 +28,6 @@ public class MainActivity extends ActionBarActivity {
 
 //        isExternalStorageReadable();
 
-        mImageView = (ImageView) findViewById(R.id.mImageView);
-        mImageView.setVisibility(View.INVISIBLE);
     }
 
     public boolean isExternalStorageReadable() {
@@ -58,6 +53,11 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void chooseMeme(View view){
+        Intent intent1 = new Intent(this, MemeList.class);
+        startActivity(intent1);
+
+    }
 
     @Override // saves pic and sends it to editPhoto activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -77,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
             //Image selected message
             Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
 
-           // get Uri from selected image
+            // get Uri from selected image
             Uri targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
@@ -92,7 +92,6 @@ public class MainActivity extends ActionBarActivity {
 
             //pass image to intent
             intent.putExtra("image", targetUri);
-            mImageView.setImageBitmap(bitmap);
             startActivity(intent);
 
         }
