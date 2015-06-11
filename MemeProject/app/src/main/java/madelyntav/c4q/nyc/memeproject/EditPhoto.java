@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -39,10 +40,13 @@ import java.util.Date;
 
         Bitmap b;
         Bitmap bitmap;
-        private Button Vanilla;
+        public static ImageView imageView;
+        private int color;
+        private ColorPicker colorPicker;
+        private Button vanilla;
         private Button demotivational;
         private EditText editText, editText2, demoTitle, demoText;
-        private ImageView imageView, demoImage;
+        private ImageView demoImage;
         private String TAG = "GallerySaving";
         RelativeLayout memeLayout;
         LinearLayout linearLayout2;
@@ -50,12 +54,9 @@ import java.util.Date;
         Button ten;
         Button fifteen;
         Button twenty;
-        Button twentyfive;
-        Button black;
-        Button white;
-        Button red;
-        Button blue;
+        Button twentyFive;
         RelativeLayout root;
+        private boolean isVanilla = true;
 
 
         @Override
@@ -63,8 +64,10 @@ import java.util.Date;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_edit_photo);
 
+            colorPicker = (ColorPicker) findViewById(R.id.colorPicker);
             imageView = (ImageView) findViewById(R.id.mImageView);
             demoImage = (ImageView) findViewById(R.id.demotivationalImage);
+
 
                 root = (RelativeLayout) findViewById(R.id.root);
                 linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
@@ -72,12 +75,11 @@ import java.util.Date;
                 ten = (Button) findViewById(R.id.ten);
                 fifteen = (Button) findViewById(R.id.fifteen);
                 twenty = (Button) findViewById(R.id.twenty);
-                twentyfive = (Button) findViewById(R.id.twentyfive);
-                black = (Button) findViewById(R.id.black);
-                white = (Button) findViewById(R.id.white);
-                red = (Button) findViewById(R.id.red);
-                blue = (Button) findViewById(R.id.blue);
-                Vanilla = (Button) findViewById(R.id.vanilla);
+                twentyFive = (Button) findViewById(R.id.twentyfive);
+
+
+                vanilla = (Button) findViewById(R.id.vanilla);
+                demotivational = (Button) findViewById(R.id.demotivational);
 
 
                 editText = (EditText) findViewById(R.id.editText);
@@ -93,9 +95,9 @@ import java.util.Date;
 
 
                 //Drag and drop layouts for drag and drop EditText feature
-                LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
-                LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
-                LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
+            LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
+            LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
+            LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
 
                 textBot.setOnDragListener(this);
                 textMid.setOnDragListener(this);
@@ -112,13 +114,14 @@ import java.util.Date;
                 if (getIntent().hasExtra("byteArray")) {
                     b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
                     imageView = (ImageView) findViewById(R.id.mImageView);
-                    Vanilla = (Button) findViewById(R.id.vanilla);
+                    vanilla = (Button) findViewById(R.id.vanilla);
                     editText = (EditText) findViewById(R.id.editText);
                     editText2 = (EditText) findViewById(R.id.editText2);
                     demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
                     demoText = (EditText) findViewById(R.id.demotivationalText);
                     imageView.setImageBitmap(b);
                     demoImage.setImageBitmap(b);
+
 
                 } else {
 
@@ -143,13 +146,13 @@ import java.util.Date;
             //-----------------------------SHARE BUTTON ONCLICKLISTENER---------------------------//
 
             // Shares image via Email, Text, Bluetooth, etc...
-                Button share = (Button) findViewById(R.id.share);
+                ImageButton share = (ImageButton) findViewById(R.id.share);
                 share.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         imageView = (ImageView) findViewById(R.id.mImageView);
-                        Vanilla = (Button) findViewById(R.id.vanilla);
+                        vanilla = (Button) findViewById(R.id.vanilla);
                         editText = (EditText) findViewById(R.id.editText);
                         editText2 = (EditText) findViewById(R.id.editText2);
                         editText.setHint("");
@@ -162,7 +165,7 @@ import java.util.Date;
                             imageView.setImageBitmap(bm);
                         }
 
-                        Button share = (Button) findViewById(R.id.share);
+                        ImageButton share = (ImageButton) findViewById(R.id.share);
                         share.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -186,28 +189,33 @@ import java.util.Date;
                         startActivity(attachIntent);
                     }
                 });
+
+
+                vanilla.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        isVanilla = true;
+                        vanillaM(view);
+
+                    }
+                });
+
+
+                demotivational.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        isVanilla = false;
+                        demotivate(view);
+
+                    }
+                });
+
+
+
             }
 
         //----------------------------VANILLA AND DEMOTIVATIONAL METHODS--------------------------//
 
-        //Sets Vanilla meme editing view
-        public void vanillaM(View v) {
-            linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
-            linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-            editText = (EditText) findViewById(R.id.editText);
-            editText2 = (EditText) findViewById(R.id.editText2);
-            memeLayout = (RelativeLayout) findViewById(R.id.meme);
-            demoImage = (ImageView) findViewById(R.id.demotivationalImage);
-            demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
-            demoText = (EditText) findViewById(R.id.demotivationalText);
-            linearLayout2.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.VISIBLE);
-            editText.setVisibility(View.VISIBLE);
-            editText2.setVisibility(View.VISIBLE);
-            demoImage.setVisibility(View.INVISIBLE);
-            demoTitle.setVisibility(View.INVISIBLE);
-            demoText.setVisibility(View.INVISIBLE);
-        }
 
         //Sets demotivational meme editing view
         public void demotivate(View v) {
@@ -220,13 +228,23 @@ import java.util.Date;
             demoText = (EditText) findViewById(R.id.demotivationalText);
 
 
-            memeLayout.setBackgroundColor(Color.BLACK);
-            imageView.setVisibility(View.INVISIBLE);
-            editText.setVisibility(View.INVISIBLE);
-            editText2.setVisibility(View.INVISIBLE);
-            demoImage.setVisibility(View.VISIBLE);
-            demoTitle.setVisibility(View.VISIBLE);
-            demoText.setVisibility(View.VISIBLE);
+            if (!isVanilla) {
+                memeLayout.setBackgroundColor(Color.BLACK);
+                memeLayout.setPadding(20, 20, 20, 20);
+                imageView.setVisibility(View.INVISIBLE);
+                editText.setVisibility(View.INVISIBLE);
+                editText2.setVisibility(View.INVISIBLE);
+                demoImage.setVisibility(View.VISIBLE);
+                demoTitle.setVisibility(View.VISIBLE);
+                demoText.setVisibility(View.VISIBLE);
+                ten.setVisibility(View.INVISIBLE);
+                fifteen.setVisibility(View.INVISIBLE);
+                twenty.setVisibility(View.INVISIBLE);
+                twentyFive.setVisibility(View.INVISIBLE);
+                colorPicker.setVisibility(View.INVISIBLE);
+                linearLayout2.setVisibility(View.GONE);
+                linearLayout3.setVisibility(View.GONE);
+            }
 
         }
 
@@ -236,9 +254,13 @@ import java.util.Date;
         public void storeImage(View v) {
             editText.setHint("");
             editText2.setHint("");
+            editText.setCursorVisible(false);
+            editText2.setCursorVisible(false);
             Bitmap image = getBitmapFromView(memeLayout);
             File pictureFile = createImageFile();
             addImageToFile(image, pictureFile);
+            Toast.makeText(this, "Saved to gallery", Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -264,7 +286,6 @@ import java.util.Date;
                 fos = new FileOutputStream(file);
                 image.compress(Bitmap.CompressFormat.PNG, 90, fos);
 
-                Toast.makeText(this, "Saved image to camera pictures", Toast.LENGTH_SHORT).show();
 
             } catch (Exception e) {
                 Log.d(TAG, "trying to compress image did not work" + e.getMessage());
@@ -353,7 +374,7 @@ import java.util.Date;
         //----------------------------VANILLA EDITTEXT FONT SIZE METHODS--------------------------//
 
 
-        // Sets Vanilla font size to 10sp
+        // Sets vanilla font size to 10sp
         public void setTen(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -364,7 +385,7 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
         }
 
-        // Sets Vanilla font size to 15sp
+        // Sets vanilla font size to 15sp
         public void setFifteen(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -374,7 +395,7 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         }
 
-        // Sets Vanilla font size to 20sp
+        // Sets vanilla font size to 20sp
         public void setTwenty(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -384,8 +405,8 @@ import java.util.Date;
             editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         }
 
-        // Sets Vanilla font size to 25sp
-        public void setTwentyfive(View v) {
+        // Sets vanilla font size to 25sp
+        public void setTwentyFive(View v) {
             linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
             linearLayout2.setVisibility(View.GONE);
@@ -396,7 +417,7 @@ import java.util.Date;
 
         //---------------------------VANILLA EDITTEXT FONT COLOR METHODS--------------------------//
 
-        // Sets Vanilla font to black
+        // Sets vanilla font to black
         public void setBlack(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -405,7 +426,7 @@ import java.util.Date;
             editText2.setVisibility(View.VISIBLE);
         }
 
-        // Sets Vanilla font to white
+        // Sets vanilla font to white
         public void setWhite(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -416,7 +437,7 @@ import java.util.Date;
             editText2.setTextColor(Color.WHITE);
         }
 
-        // Sets Vanilla font to red
+        // Sets vanilla font to red
         public void setRed(View v) {
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
             linearLayout3.setVisibility(View.GONE);
@@ -426,7 +447,7 @@ import java.util.Date;
             editText2.setTextColor(Color.RED);
         }
 
-        // Sets Vanilla font to blue
+        // Sets vanilla font to blue
         public void setBlue(View v) {
 
             linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
@@ -435,6 +456,9 @@ import java.util.Date;
             editText2.setVisibility(View.VISIBLE);
             editText.setTextColor(Color.BLUE);
             editText2.setTextColor(Color.BLUE);
+
+
+
         }
 
 
@@ -451,7 +475,7 @@ import java.util.Date;
                 imageView.setImageBitmap(engraved);
                 demoImage.setImageBitmap(engraved);
             }
-            Toast.makeText(this, "Engraved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Engraved", Toast.LENGTH_SHORT).show();
         }
 
         // Applies inverted colors effect to image
@@ -465,7 +489,7 @@ import java.util.Date;
                 imageView.setImageBitmap(inverted);
                 demoImage.setImageBitmap(inverted);
             }
-            Toast.makeText(this,"Inverted!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Inverted",Toast.LENGTH_SHORT).show();
 
         }
 
@@ -480,7 +504,7 @@ import java.util.Date;
                 imageView.setImageBitmap(greyscaled);
                 demoImage.setImageBitmap(greyscaled);
             }
-            Toast.makeText(this,"Old School Flow!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Greyscale",Toast.LENGTH_SHORT).show();
         }
 
         // Applies blue shading effect to image
@@ -494,7 +518,7 @@ import java.util.Date;
                 imageView.setImageBitmap(blueShade);
                 demoImage.setImageBitmap(blueShade);
             }
-            Toast.makeText(this,"BLUE!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Blue",Toast.LENGTH_SHORT).show();
         }
 
         // Applies red shading effect to image
@@ -508,7 +532,7 @@ import java.util.Date;
                 imageView.setImageBitmap(redShade);
                 demoImage.setImageBitmap(redShade);
             }
-            Toast.makeText(this,"RED!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Red",Toast.LENGTH_SHORT).show();
         }
 
         // Applies green shading effect to image
@@ -523,20 +547,49 @@ import java.util.Date;
                 imageView.setImageBitmap(greenShade);
                 demoImage.setImageBitmap(greenShade);
             }
-            Toast.makeText(this,"GREEN FACES ONLY!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Green",Toast.LENGTH_SHORT).show();
         }
 
-        // Applies reflection effect to image
-        public void reflectionEffect(View view) {
-            if (getIntent().hasExtra("byteArray")) {
-                Bitmap reflected = ApplyFilters.applyReflection(b);
-                imageView.setImageBitmap(reflected);
-                demoImage.setImageBitmap(reflected);
-            } else {
-                Bitmap reflected = ApplyFilters.applyReflection(bitmap);
-                imageView.setImageBitmap(reflected);
-                demoImage.setImageBitmap(reflected);
-            }
-            Toast.makeText(this,"Reflected!",Toast.LENGTH_SHORT).show();
+
+
+        public void choseColor (View v) {
+            color = colorPicker.getColor();
+            linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+            linearLayout3.setVisibility(View.GONE);
+            editText.setVisibility(View.VISIBLE);
+            editText2.setVisibility(View.VISIBLE);
+            editText.setTextColor(color);
+            editText2.setTextColor(color);
         }
+
+        public void vanillaM(View v) {
+                linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
+                linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
+                editText = (EditText) findViewById(R.id.editText);
+                editText2 = (EditText) findViewById(R.id.editText2);
+                editText.setVisibility(View.VISIBLE);
+                editText2.setVisibility(View.VISIBLE);
+                memeLayout = (RelativeLayout) findViewById(R.id.meme);
+                memeLayout.setPadding(0, 0, 0, 0);
+                demoImage = (ImageView) findViewById(R.id.demotivationalImage);
+                demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
+                demoText = (EditText) findViewById(R.id.demotivationalText);
+                linearLayout2.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+                demoImage.setVisibility(View.INVISIBLE);
+                demoTitle.setVisibility(View.INVISIBLE);
+                demoText.setVisibility(View.INVISIBLE);
+                ten.setVisibility(View.VISIBLE);
+                fifteen.setVisibility(View.VISIBLE);
+                twenty.setVisibility(View.VISIBLE);
+                twentyFive.setVisibility(View.VISIBLE);
+                colorPicker.setVisibility(View.VISIBLE);
+                memeLayout.setBackgroundColor(Color.parseColor("#CCCCCC"));
+
+
+
+        }
+
+
     }
+
