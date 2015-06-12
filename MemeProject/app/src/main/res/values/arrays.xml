@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colors_array">
+        <item>White</item>
+        <item>Black</item>
+        <item>Red</item>
+        <item>Blue</item>
+    </string-array>
+
+    <string-array name="size_array">
+        <item>X-Small</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="effect_array">
+        <item>Engrave</item>
+        <item>Invert</item>
+        <item>Grayscale</item>
+        <item>Reflect</item>
+        <item>Red Filter</item>
+        <item>Green Filter</item>
+        <item>Blue Filter</item>
+    </string-array>
+
+    <string-array name="template_array">
+        <item>temp</item>
+    </string-array>
+
+</resources>

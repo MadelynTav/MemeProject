@@ -13,11 +13,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
 
 public class MainActivity extends ActionBarActivity {
     private ImageView mImageView;
@@ -50,7 +50,6 @@ public class MainActivity extends ActionBarActivity {
         startActivityForResult(choosePictureIntent, 0);
     }
 
-
     public void takePic(View v) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -58,10 +57,9 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-
-    @Override // saves pic and sends it to editPhoto activity
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+    // Saves image and sends it to editPhoto activity
         Intent intent = new Intent(MainActivity.this, EditPhoto.class);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -72,30 +70,27 @@ public class MainActivity extends ActionBarActivity {
             intent.putExtra("byteArray", bs.toByteArray());
             startActivity(intent);
 
-
         } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
-            //Image selected message
+            // Image selected message
             Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
 
-           // get Uri from selected image
+            // get Uri from selected image
             Uri targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
-            //turn selected image into a Bitmap image
+            // Turn selected image into a Bitmap image
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            //pass image to intent
+            // Pass image to intent
             intent.putExtra("image", targetUri);
             mImageView.setImageBitmap(bitmap);
             startActivity(intent);
-
         }
     }
-
 }

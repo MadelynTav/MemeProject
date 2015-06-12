@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/meme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/memeImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:id="@+id/vanillaTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:text="Tap to edit"
+                android:textAllCaps="true"
+                android:textSize="32dp" />
+
+            <EditText
+                android:id="@+id/vanillaText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="Tap to edit"
+                android:textAllCaps="true"
+                android:textSize="32dp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Controls (icons, labels) within a horizontalscrollview -->
+    <HorizontalScrollView
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#212121"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menu_icons"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/btn_meme_type"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:onClick="onToggleClicked"
+                    android:textOff="Vanilla"
+                    android:textOn="Demotivational" />
+
+                <ImageButton
+                    android:id="@+id/btn_image_template"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_text_size"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_text_color"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_filter"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/save"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+
+                <ImageButton
+                    android:id="@+id/share"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_labels"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:orientation="horizontal">
+
+                <!-- This needs a better value for text -->
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Meme"
+                    android:textAppearance="@style/menuLabels" />
+
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Template"
+                    android:textAppearance="@style/menuLabels" />
+
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Text Size"
+                    android:textAppearance="@style/menuLabels" />
+
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Text Color"
+                    android:textAppearance="@style/menuLabels" />
+
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Filter"
+                    android:textAppearance="@style/menuLabels" />
+
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:textAppearance="@style/menuLabels" />
+
+                <TextView
+                    style="@style/gravityCenter"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    android:textAppearance="@style/menuLabels" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
