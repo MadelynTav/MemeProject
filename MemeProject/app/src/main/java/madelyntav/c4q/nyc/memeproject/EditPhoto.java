@@ -353,6 +353,7 @@ you dont need to set up views of activity in every method. One time is enough On
                 bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                 fos.flush();
                 fos.close();
+                //optional if the user wants to see the image in the folder
                 try {
                     Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                     Uri uri = Uri.fromFile(myFile);
