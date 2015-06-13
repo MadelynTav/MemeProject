@@ -1,3 +1,4 @@
+
 package madelyntav.c4q.nyc.memeproject;
 
 import android.app.Activity;
@@ -17,12 +18,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
+/*
+The refactored code by Yuliya Kaleda is included in the comments with /*
+ */
 
 public class MainActivity extends ActionBarActivity {
+
+    /*
+    it is a good convention to initialize static variables first
+     */
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int EXTERNAL_CONTENT_URI = 0;
+    private static final String BYTE_ARRAY = "byteArray";
+
     private ImageView mImageView;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int EXTERNAL_CONTENT_URI = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,11 @@ public class MainActivity extends ActionBarActivity {
         mImageView.setVisibility(View.INVISIBLE);
     }
 
+   /*
+    *
+    *
+    * Why do you need this code?
+
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state) ||
@@ -43,11 +58,26 @@ public class MainActivity extends ActionBarActivity {
         }
         return false;
     }
+    *
+    *
+    */
 
     public void usePic(View v) {
         Intent choosePictureIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(choosePictureIntent, 0);
+        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        /*
+        *
+        *
+        using constants is always more preferable rather than just their values, they are created for across app usage;
+        instead of 0 it is better to use EXTERNAL_CONTENT_URI.
+        I added Null Pointer Check for choosePictureIntent to eliminate the possible error (the same as you did for takePictureIntent)
+        *
+        *
+        */
+
+        if (choosePictureIntent.resolveActivity(getPackageManager())!=null){
+            startActivityForResult(choosePictureIntent, 0);
+        }
     }
 
 
@@ -59,7 +89,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override // saves pic and sends it to editPhoto activity
+    @Override
+    // saves pic and sends it to editPhoto activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Intent intent = new Intent(MainActivity.this, EditPhoto.class);
@@ -69,7 +100,10 @@ public class MainActivity extends ActionBarActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
-            intent.putExtra("byteArray", bs.toByteArray());
+            /*
+            for "byteArray" create a static variable
+             */
+            intent.putExtra(BYTE_ARRAY, bs.toByteArray());
             startActivity(intent);
 
 
@@ -79,7 +113,13 @@ public class MainActivity extends ActionBarActivity {
 
            // get Uri from selected image
             Uri targetUri = data.getData();
-            Bitmap bitmap = null;
+
+            // There is no necessity to convert image into Bitmap, because in your intent to the EditPhoto Activity
+            //you are sending Uri. Plus you don't need a bitmap to set ImageView, you can just use URI. Redundant code
+            /*
+            *
+            *
+            * Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
@@ -89,13 +129,15 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            *
+            *
+            */
 
             //pass image to intent
             intent.putExtra("image", targetUri);
-            mImageView.setImageBitmap(bitmap);
+            mImageView.setImageURI(targetUri); //changed to setImageURI
             startActivity(intent);
 
         }
     }
-
 }
