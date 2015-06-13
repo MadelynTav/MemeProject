@@ -4,16 +4,19 @@
     android:layout_height="match_parent"
     android:scaleType="center"
     tools:context="madelyntav.c4q.nyc.memeproject.MainActivity"
-    android:background="@drawable/redb2">
+    android:background="@drawable/adventure"
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Meme-ify Me!"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
         android:textSize="55dp"
-        android:textStyle="bold|italic"
         android:id="@+id/header"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
