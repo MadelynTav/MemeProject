@@ -32,7 +32,6 @@ public class MainActivity extends ActionBarActivity {
 //        isExternalStorageReadable();
 
         mImageView = (ImageView) findViewById(R.id.mImageView);
-        mImageView.setVisibility(View.INVISIBLE);
     }
 
     public boolean isExternalStorageReadable() {
@@ -75,9 +74,12 @@ public class MainActivity extends ActionBarActivity {
 
         } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
             //Image selected message
-            Toast.makeText(this, "Image Selected!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
-           // get Uri from selected image
+
+
+            // get Uri from selected image
             Uri targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();

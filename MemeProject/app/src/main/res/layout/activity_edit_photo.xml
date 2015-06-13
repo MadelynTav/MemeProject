@@ -8,65 +8,126 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:id="@+id/root"
     tools:context="madelyntav.c4q.nyc.memeproject.EditPhoto"
-    android:background="@drawable/images">
+    android:background="#CCC">
 
     <!-- Main Buttons -->
-<LinearLayout
-    android:id="@+id/mainButtons"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/mainButtons"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_height="wrap_content">
 
-        <Button
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/vanilla"
-            android:text="Vanilla"
-            android:onClick="vanillaM"
-            android:layout_weight="1"/>
+            android:gravity="center_horizontal"
+            >
 
-        <Button
+            <Button
+                android:id="@+id/vanilla"
+                android:text="VANILLA"
+                android:onClick="vanillaM"
+                style="@style/Buttons"/>
+
+            <Button
+                android:id="@+id/demotivational"
+                android:text="DEMO"
+                android:onClick="demotivate"
+                style="@style/Buttons"/>
+
+
+            <ImageButton
+                android:id="@+id/save"
+                android:src="@drawable/save"
+                android:background="@drawable/buttons"
+                android:onClick="storeImage"
+                style="@style/Buttons"/>
+
+            <ImageButton
+                android:id="@+id/share"
+                android:src="@drawable/share"
+                android:background="@drawable/buttons"
+                style="@style/Buttons"/>
+
+
+        </LinearLayout>
+
+
+        <!--Effect Buttons-->
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Demotivational"
-            android:id="@+id/demotivational"
-            android:onClick="demotivate"
-            android:layout_weight="1"/>
+            android:paddingTop="10dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout1"
-        >
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Share"
-            android:id="@+id/share"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/save"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="FILTER"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="13dp"
             android:layout_weight="1"
-            android:onClick="storeImage" />
+            android:onClick="vanillaM"/>
 
 
-    </LinearLayout>
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:background="#CCC">
+
+        <LinearLayout
+            android:id="@+id/effectButtons"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+
+
+            <Button
+                android:id="@+id/greyscale"
+                android:text="GREYSCALE "
+                style="@style/FilterButtons"
+                android:onClick="greyscaleImage"/>
+            <Button
+                android:id="@+id/blueShade"
+                android:text="BLUE "
+                style="@style/FilterButtons"
+                android:onClick="shadingFilterBlue"/>
+            <Button
+                android:id="@+id/redShade"
+                android:text="RED "
+                style="@style/FilterButtons"
+                android:onClick="shadingFilterRed"/>
+            <Button
+                android:id="@+id/greenShade"
+                android:text="GREEN "
+                style="@style/FilterButtons"
+                android:onClick="shadingFilterGreen"/>
+            <Button
+                android:id="@+id/engrave"
+                android:text="ENGRAVE "
+                style="@style/FilterButtons"
+                android:onClick="engravedImage"/>
+            <Button
+                android:id="@+id/invert"
+                android:text="INVERT "
+                style="@style/FilterButtons"
+                android:onClick="invertColors"/>
+
+        </LinearLayout>
+        </HorizontalScrollView>
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
     <!-- Choose font size Buttons -->
@@ -79,52 +140,40 @@
         android:layout_below="@id/mainButtons"
         android:visibility="gone">
 
-    <!--<ImageView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:id="@+id/mImageView"-->
-        <!--android:layout_below="@+id/linearLayout"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="49dp" />-->
-
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Chose text size:"
+            android:text="TEXT SIZE"
+            android:gravity="center_vertical"
+            android:paddingLeft="13dp"
+            android:textSize="12dp"
+            android:textStyle="bold"
             android:onClick="vanillaM"
             android:layout_weight="1"/>
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/TextButtons"
             android:text="10"
             android:textSize="10dp"
             android:id="@+id/ten"
-            android:onClick="setTen"
-            android:layout_weight="1"/>
+            android:onClick="setTen"/>
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/TextButtons"
             android:text="15"
             android:textSize="15dp"
             android:id="@+id/fifteen"
-            android:onClick="setFifteen"
-            android:layout_weight="1"/>
+            android:onClick="setFifteen"/>
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/TextButtons"
             android:text="20"
             android:textSize="20dp"
             android:id="@+id/twenty"
-            android:onClick="setTwenty"
-            android:layout_weight="1"/>
+            android:onClick="setTwenty"/>
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/TextButtons"
             android:text="25"
             android:textSize="25dp"
             android:id="@+id/twentyfive"
-            android:onClick="setTwentyfive"
-            android:layout_weight="1"/>
+            android:onClick="setTwentyFive"/>
 
     </LinearLayout>
 
@@ -138,237 +187,142 @@
         android:layout_below="@+id/linearLayout2"
         android:visibility="gone">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Chose text color:"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="black"
-            android:textSize="10dp"
-            android:id="@+id/black"
-            android:onClick="setBlack"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="white"
-            android:textSize="10dp"
-            android:textColor="#ffffff"
-            android:id="@+id/white"
-            android:onClick="setWhite"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="red"
-            android:textColor="#FF0000"
-            android:id="@+id/red"
-            android:onClick="setRed"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="blue"
-            android:textColor="#0000FF"
-            android:id="@+id/blue"
-            android:onClick="setBlue"
-            android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TEXT COLOR"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:paddingLeft="13dp"
+        android:layout_weight="1"
+        android:textSize="12dp"/>
 
+    <madelyntav.c4q.nyc.memeproject.ColorPicker
+        android:id="@+id/colorPicker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:onClick="choseColor"/>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/confirm"
+        android:background="#CCC"
+        android:id="@+id/choseTextColor"
+        android:layout_weight="1"
+        android:onClick="choseColor"
+        />
     </LinearLayout>
 
+
     <!-- Effect Buttons, ImageViews, and EditTexts -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/linearLayout3">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout3">
 
-            <!--Effect Buttons-->
-            <LinearLayout
-                android:id="@+id/effectButtons"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp">
-                <ImageView
-                    android:id="@+id/engrave"
-                    android:src="@drawable/engraved"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="engravedImage"/>
-                <ImageView
-                    android:id="@+id/invert"
-                    android:src="@drawable/inverted"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="invertColors"
-                    android:layout_marginTop="1dp"/>
-                <ImageView
-                    android:id="@+id/greyscale"
-                    android:src="@drawable/grey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="greyscaleImage"
-                    android:layout_marginTop="1dp"/>
-                <ImageView
-                    android:id="@+id/blueShade"
-                    android:src="@drawable/blue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="shadingFilterBlue"
-                    android:layout_marginTop="1dp"/>
-                <ImageView
-                    android:id="@+id/redShade"
-                    android:src="@drawable/red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="shadingFilterRed"
-                    android:layout_marginTop="1dp"/>
-                <ImageView
-                    android:id="@+id/greenShade"
-                    android:src="@drawable/green"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="shadingFilterGreen"
-                    android:layout_marginTop="1dp"/>
-                <ImageView
-                    android:id="@+id/reflect"
-                    android:src="@drawable/reflect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="reflectionEffect"
-                    android:layout_marginTop="1dp"/>
 
-            </LinearLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-            <!-- ImageViews and EditTexts -->
-            <RelativeLayout
-                android:id="@+id/meme"
+        <!-- ImageViews and EditTexts -->
+        <RelativeLayout
+            android:id="@+id/meme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="#CCC">
+
+
+
+            <!-- ImageView for Vanilla -->
+            <ImageView
+                android:visibility="visible"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ff000000">
+                android:background="#CCC"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/mImageView" />
+            <!-- ImageView for demo -->
+            <ImageView
+                android:visibility="invisible"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:background="@drawable/demo_pic"
+                android:id="@+id/demotivationalImage"
+                android:layout_centerHorizontal="true"
+                />
+            <!-- Demotivational EditTexts -->
+            <EditText
+                style="@style/DemotivateText"
+                android:textAllCaps="true"
+                android:typeface="serif"
+                android:textSize="40sp"
+                android:id="@+id/demotivationalTitle"
+                android:layout_below="@id/demotivationalImage"/>
+            <EditText
+                style="@style/DemotivateText"
+                android:textSize="20sp"
+                android:id="@+id/demotivationalText"
+                android:layout_below="@id/demotivationalTitle"/>
 
-                <!-- ImageView for Vanilla -->
-        <ImageView
-            android:visibility="visible"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/mImageView" />
-                <!-- ImageView for demo -->
-                <ImageView
-                    android:visibility="invisible"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:scaleType="fitXY"
-                    android:id="@+id/demotivationalImage"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    />
-                <!-- Demotivational EditTexts -->
-                <EditText
-                    android:visibility="invisible"
-                    android:gravity="center_horizontal"
-                    android:background="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Title"
-                    android:textColorHint="#FFFFFF"
-                    android:textSize="40sp"
-                    android:maxLength="12"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/demotivationalTitle"
-                    android:layout_below="@id/demotivationalImage"/>
-                <EditText
-                    android:visibility="invisible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Sarcastic text"
-                    android:textColorHint="#FFFFFF"
-                    android:maxLength="50"
-                    android:gravity="center"
-                    android:textColor="#FFFFFF"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/demotivationalText"
-                    android:layout_below="@id/demotivationalTitle"/>
-
-                <!-- Vanilla EditTexts -->
+            <!-- Vanilla EditTexts -->
 
 
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="150dp"
-                    android:textAlignment="center"
-                    android:background="#0000ffff"
-                    android:id="@+id/textTop" >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:textAlignment="center"
+                android:layout_alignParentTop="true"
+                android:id="@+id/textTop" >
 
                 <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Type Text Here"
-                    android:textSize="30sp"
-                    android:background="@null"
-                    android:maxLength="17"
-                    android:id="@+id/editText"
-                    android:visibility="invisible"
-                    android:padding="2dp"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:shadowColor="#000000"
-                    android:layout_alignParentTop="true" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="111dp"
-                    android:background="#0000ffff"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/textTop"
-                    android:id="@+id/textMid"
-
-                    android:singleLine="false" />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="130dp"
-                    android:background="#0000ffff"
-                    android:textAlignment="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/textMid"
-                    android:id="@+id/textBottom"
-
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|bottom" >
+                    style="@style/VanillaText"
+                    android:id="@+id/editText" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="111dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/textTop"
+                android:id="@+id/textMid"
+                android:singleLine="false" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/textMid"
+                android:id="@+id/textBottom"
+                android:layout_alignParentBottom="true"
+                android:gravity="center|bottom" >
 
                 <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Type Text Here"
-                    android:textSize="30sp"
-                    android:maxLength="17"
-                    android:gravity="center"
-                    android:padding="2dp"
-                    android:layout_centerInParent="true"
-                    android:textStyle="bold"
-                    android:background="@null"
-                    android:textColor="#ffffff"
-                    android:shadowColor="#000000"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
+                    style="@style/VanillaText"
                     android:id="@+id/editText2"
-                    android:visibility="invisible"
                     />
-                </LinearLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
 
-        </LinearLayout>
+
+
+        </RelativeLayout>
+
+</ScrollView>
+
+    </LinearLayout>
 
 </RelativeLayout>
