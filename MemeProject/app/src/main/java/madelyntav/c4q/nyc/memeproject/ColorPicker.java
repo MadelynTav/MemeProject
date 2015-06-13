@@ -308,7 +308,7 @@ public class ColorPicker extends View {
 
                     invalidate();
                 }
-
+                EditPhoto.getInstance().setTopColor(getColor());
                 return true;
         }
         return super.onTouchEvent(event);
