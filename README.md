@@ -18,11 +18,8 @@ Include your team name, how many hours you believe each of you worked on this ov
 
 * Madelyn Tavarez:    
   -Responsible for: Team captain, sharing/exporting images, drag and drop and UI
-
   -Number of hours: 
 
 * Alvin Kuang:
-
   -Responsible for: Front End and UI.
-
   -Number of hours: 
