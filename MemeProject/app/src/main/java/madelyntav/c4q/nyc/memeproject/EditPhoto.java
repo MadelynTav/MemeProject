@@ -57,6 +57,10 @@ import java.util.Date;
         Button twentyFive;
         RelativeLayout root;
         private boolean isVanilla = true;
+        public static EditPhoto getInstance() {
+            return instance;
+        }
+        static EditPhoto instance;
 
 
         @Override
@@ -210,7 +214,7 @@ import java.util.Date;
                     }
                 });
 
-
+            instance = this;
 
             }
 
@@ -585,11 +589,16 @@ import java.util.Date;
                 twentyFive.setVisibility(View.VISIBLE);
                 colorPicker.setVisibility(View.VISIBLE);
                 memeLayout.setBackgroundColor(Color.parseColor("#CCCCCC"));
-
-
-
         }
-
-
+        public void setTopColor(int color) {
+            editText = (EditText) findViewById(R.id.editText);
+            editText2 = (EditText) findViewById(R.id.editText2);
+            editText.setTextColor(color);
+            editText.setHintTextColor(color);
+            editText.invalidate();
+            editText2.setTextColor(color);
+            editText2.setHintTextColor(color);
+            editText2.invalidate();
+        }
     }
 
