@@ -26,9 +26,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        isExternalStorageReadable();
-
-        //mImageView = (ImageView) findViewById(R.id.mImageView);
     }
 
     public boolean isExternalStorageReadable() {
@@ -55,10 +52,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void chooseMeme(View view){
-
         Intent popularMemeIntent = new Intent(this, MemeList.class);
         startActivity(popularMemeIntent);
-
     }
 
     @Override // saves pic and sends it to editPhoto activity
@@ -97,7 +92,6 @@ public class MainActivity extends ActionBarActivity {
 
             //pass image to intent
             intent.putExtra("image", targetUri);
-            //mImageView.setImageBitmap(bitmap);
             startActivity(intent);
 
         }

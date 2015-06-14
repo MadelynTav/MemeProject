@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">MemeProject</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="meme_ify">Meme-Fy.Me</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_edit_meme">EditMeme</string>
     <string name="title_activity_edit_photo">EditPhoto</string>
+    <string name="title_activity_meme_list2">MemeList2</string>
 </resources>

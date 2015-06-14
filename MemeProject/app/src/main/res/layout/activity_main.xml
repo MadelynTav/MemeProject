@@ -16,11 +16,11 @@
         android:src="@drawable/logo"
         android:id="@+id/header"/>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="match_parent"
@@ -48,17 +48,16 @@
             android:onClick="usePic"/>
 
 
-</LinearLayout>
-
-
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:visibility="gone"
-    android:id="@+id/mImageView"/>
-
     </LinearLayout>
 
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/mImageView"/>
+
+</LinearLayout>
 
 
 

@@ -16,10 +16,10 @@ import java.util.HashMap;
 /**
  * Created by kadeemmaragh on 6/5/15.
  */
-public class MemeList extends Activity{
+public class MemeList extends Activity {
 
     ListView listView;
-    HashMap<Integer,String> memePairs;
+    HashMap<Integer, String> memePairs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class MemeList extends Activity{
         ArrayList<String> memeNames = new ArrayList<String>();
         addItemsToArrays(memeImages, memeNames);
 
-        CustomArrayAdapter memeAdapter = new CustomArrayAdapter(this,memeNames,memeImages);
+        CustomArrayAdapter memeAdapter = new CustomArrayAdapter(this, memeNames, memeImages);
 
         listView.setAdapter(memeAdapter);
 
@@ -70,15 +70,15 @@ public class MemeList extends Activity{
 
     }
 
-    public void addItemsToArrays(ArrayList<Integer> images, ArrayList<String> titles){
+    public void addItemsToArrays(ArrayList<Integer> images, ArrayList<String> titles) {
         int position = 0;
-        for(Integer image : memePairs.keySet()){
+        for (Integer image : memePairs.keySet()) {
 
-            images.add(position,image);
-            titles.add(position,memePairs.get(image));
+            images.add(position, image);
+            titles.add(position, memePairs.get(image));
             position++;
         }
     }
 
-
 }
+
