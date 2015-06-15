@@ -33,7 +33,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.logging.Handler;
 
 
 public class EditPhoto extends Activity implements View.OnTouchListener {
@@ -329,7 +329,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     // onTouch and onDrag work together to allow for views to be moved around within the layout
     //to children of that layout
-    public boolean onTouch(View view, MotionEvent event) {
+    public boolean onTouch(final View view, MotionEvent event) {
         final int X = (int) event.getRawX();
         final int Y = (int) event.getRawY();
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
@@ -352,10 +352,17 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 view.setLayoutParams(layoutParams);
                 break;
         }
+        android.os.Handler handler=new android.os.Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-        view.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+                view.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            }
+        },2000);
+
 
         return true;
     }

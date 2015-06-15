@@ -272,9 +272,7 @@
 
 
 
-
-
-                    <EditText
+                 <EditText
                         style="@style/VanillaText"
                         android:id="@+id/editText" />
 
