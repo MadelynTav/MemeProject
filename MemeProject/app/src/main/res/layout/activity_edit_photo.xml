@@ -230,7 +230,7 @@
             android:layout_height="wrap_content">
 
             <!-- ImageViews and EditTexts -->
-            <RelativeLayout
+            <FrameLayout
                 android:id="@+id/meme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -243,8 +243,8 @@
                 <ImageView
                     android:visibility="visible"
                     android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="345dp"
+                    android:layout_height="450dp"
                     android:background="#CCC"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
@@ -264,62 +264,39 @@
                 <!-- Demotivational EditTexts -->
                 <EditText
                     style="@style/DemotivateText"
-                    android:textAllCaps="true"
-                    android:typeface="serif"
-                    android:textSize="40sp"
-                    android:id="@+id/demotivationalTitle"
-                    android:layout_below="@id/demotivationalImage"/>
-                <EditText
-                    style="@style/DemotivateText"
                     android:textSize="20sp"
                     android:id="@+id/demotivationalText"
-                    android:layout_below="@id/demotivationalTitle"/>
+                    />
 
                 <!-- Vanilla EditTexts -->
 
 
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:textAlignment="center"
-                    android:layout_alignParentTop="true"
-                    android:id="@+id/textTop" >
+
 
                     <EditText
                         style="@style/VanillaText"
                         android:id="@+id/editText" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="111dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/textTop"
-                    android:id="@+id/textMid"
-                    android:singleLine="false" />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="150dp"
-                    android:textAlignment="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/textMid"
-                    android:id="@+id/textBottom"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center|bottom" >
-
-                    <EditText
-                        style="@style/VanillaText"
-                        android:id="@+id/editText2"
-                        />
-                </LinearLayout>
 
 
+                <EditText
+                    style="@style/VanillaText"
+                    android:id="@+id/editText2"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginTop="5dp" />
+
+                <EditText
+                    style="@style/DemotivateText"
+                    android:textAllCaps="true"
+                    android:typeface="serif"
+                    android:textSize="40sp"
+                    android:id="@+id/demotivationalTitle"
+                    android:layout_below="@id/demotivationalImage"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="center_horizontal|bottom" />
 
 
-            </RelativeLayout>
+            </FrameLayout>
 
         </ScrollView>
 

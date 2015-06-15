@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,11 +36,13 @@ import java.util.Date;
 
 
 
-public class EditPhoto extends Activity implements View.OnTouchListener, View.OnDragListener {
+public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
     Bitmap b;
     Bitmap bitmap;
+    private int delta_x;
+    private int delta_y;
     public static ImageView imageView;
     private int color;
     private ColorPicker colorPicker;
@@ -48,7 +51,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener, View.On
     private EditText editText, editText2, demoTitle, demoText;
     private ImageView demoImage;
     private String TAG = "GallerySaving";
-    RelativeLayout memeLayout;
+    FrameLayout memeLayout;
     LinearLayout linearLayout2;
     LinearLayout linearLayout3;
     Button ten;
@@ -98,18 +101,9 @@ public class EditPhoto extends Activity implements View.OnTouchListener, View.On
         editText2.setOnTouchListener(this);
 
 
-        //Drag and drop layouts for drag and drop EditText feature
-        LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
-        LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
-        LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
-
-        textBot.setOnDragListener(this);
-        textMid.setOnDragListener(this);
-        textTop.setOnDragListener(this);
-
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
-        memeLayout = (RelativeLayout) findViewById(R.id.meme);
+        memeLayout = (FrameLayout) findViewById(R.id.meme);
 
 
         //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
@@ -226,7 +220,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener, View.On
 
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
-        memeLayout = (RelativeLayout) findViewById(R.id.meme);
+        memeLayout = (FrameLayout) findViewById(R.id.meme);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
         demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
         demoText = (EditText) findViewById(R.id.demotivationalText);
@@ -335,42 +329,34 @@ public class EditPhoto extends Activity implements View.OnTouchListener, View.On
 
     // onTouch and onDrag work together to allow for views to be moved around within the layout
     //to children of that layout
-    public boolean onTouch(View v, MotionEvent e) {
-        if (e.getAction() == MotionEvent.ACTION_DOWN) {//Action_Down means a pressed gesture had started, view has been set in motion
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);//Creates an image that the system displays during the drag and drop operation.
-            v.startDrag(null, shadowBuilder, v, 0);
-            v.isInEditMode();
-            v.setVisibility(View.INVISIBLE);
-            return true;
-        } else {
-            return false;
+    public boolean onTouch(View view, MotionEvent event) {
+        final int X = (int) event.getRawX();
+        final int Y = (int) event.getRawY();
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+                delta_x = X - lParams.leftMargin;
+                delta_y = Y - lParams.topMargin;
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view
+                        .getLayoutParams();
+                layoutParams.leftMargin = X - delta_x;
+                layoutParams.topMargin = Y - delta_y;
+                view.setLayoutParams(layoutParams);
+                break;
         }
-    }
 
+        view.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
 
-    public boolean onDrag(View v, DragEvent e) {
-        if (e.getAction() == DragEvent.ACTION_DROP) {//if the shadow has been released within the view
-            View view = (View) e.getLocalState();
-            ViewGroup from = (ViewGroup) view.getParent();
-
-            LinearLayout to = (LinearLayout) v;
-
-            if((to.getResources().getInteger(Integer.valueOf(R.id.editText)) == (from.getResources().getInteger(Integer.valueOf(R.id.editText2))))) {
-
-
-
-            }
-            from.removeView(view);
-            to.addView(view);
-            view.setVisibility(View.VISIBLE);
-
-
-            view.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-
-
-        }
         return true;
     }
 
@@ -573,7 +559,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener, View.On
         editText2 = (EditText) findViewById(R.id.editText2);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
-        memeLayout = (RelativeLayout) findViewById(R.id.meme);
+        memeLayout = (FrameLayout) findViewById(R.id.meme);
         memeLayout.setPadding(0, 0, 0, 0);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
         demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
