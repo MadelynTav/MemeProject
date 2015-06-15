@@ -51,7 +51,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     private EditText editText, editText2, demoTitle, demoText;
     private ImageView demoImage;
     private String TAG = "GallerySaving";
-    FrameLayout memeLayout;
+    RelativeLayout memeLayout;
     LinearLayout linearLayout2;
     LinearLayout linearLayout3;
     Button ten;
@@ -103,7 +103,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
-        memeLayout = (FrameLayout) findViewById(R.id.meme);
+        memeLayout = (RelativeLayout) findViewById(R.id.meme);
 
 
         //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
@@ -220,7 +220,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
-        memeLayout = (FrameLayout) findViewById(R.id.meme);
+        memeLayout = (RelativeLayout) findViewById(R.id.meme);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
         demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
         demoText = (EditText) findViewById(R.id.demotivationalText);
@@ -334,7 +334,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         final int Y = (int) event.getRawY();
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                FrameLayout.LayoutParams lParams = (FrameLayout.LayoutParams) view.getLayoutParams();
+                RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
                 delta_x = X - lParams.leftMargin;
                 delta_y = Y - lParams.topMargin;
                 break;
@@ -345,7 +345,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             case MotionEvent.ACTION_POINTER_UP:
                 break;
             case MotionEvent.ACTION_MOVE:
-                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view
+                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view
                         .getLayoutParams();
                 layoutParams.leftMargin = X - delta_x;
                 layoutParams.topMargin = Y - delta_y;
@@ -566,7 +566,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         editText2 = (EditText) findViewById(R.id.editText2);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
-        memeLayout = (FrameLayout) findViewById(R.id.meme);
+        memeLayout = (RelativeLayout) findViewById(R.id.meme);
         memeLayout.setPadding(0, 0, 0, 0);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
         demoTitle = (EditText) findViewById(R.id.demotivationalTitle);

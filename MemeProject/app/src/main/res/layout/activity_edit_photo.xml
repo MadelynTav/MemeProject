@@ -230,7 +230,7 @@
             android:layout_height="wrap_content">
 
             <!-- ImageViews and EditTexts -->
-            <FrameLayout
+            <RelativeLayout
                 android:id="@+id/meme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -278,10 +278,22 @@
 
 
                 <EditText
-                    style="@style/VanillaText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/editText2"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:layout_marginTop="5dp" />
+                    android:hint="Type Text Here"
+                    android:textSize="30dp"
+                    android:maxLength="20"
+                    android:gravity="center_horizontal"
+                    android:layout_centerInParent="true"
+                    android:textStyle="bold"
+                    android:background="@null"
+                    android:textColor="#ffffff"
+                    android:shadowColor="#000000"
+                    android:layout_marginTop="800dp"
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_marginLeft="20dp" />
 
                 <EditText
                     style="@style/DemotivateText"
@@ -294,7 +306,7 @@
                     android:layout_gravity="center_horizontal|bottom" />
 
 
-            </FrameLayout>
+            </RelativeLayout>
 
         </ScrollView>
 
