@@ -27,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,12 +72,14 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
 
+
         colorPicker = (ColorPicker) findViewById(R.id.colorPicker);
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
 
 
         root = (RelativeLayout) findViewById(R.id.root);
+        memeLayout = (RelativeLayout) findViewById(R.id.meme);
         linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
         linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         ten = (Button) findViewById(R.id.ten);
@@ -91,6 +94,10 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         editText = (EditText) findViewById(R.id.editText);
         editText2 = (EditText) findViewById(R.id.editText2);
+        demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
+        demoText = (EditText) findViewById(R.id.demotivationalText);
+        demoTitle.setVisibility(View.GONE);
+        demoText.setVisibility(View.GONE);
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/impact.ttf");
 
         editText.setTypeface(custom_font);
@@ -101,9 +108,14 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         editText2.setOnTouchListener(this);
 
 
+
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
         memeLayout = (RelativeLayout) findViewById(R.id.meme);
+
+
+
+
 
 
         //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
@@ -111,12 +123,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         //opens pic in this activity
         if (getIntent().hasExtra("byteArray")) {
             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            imageView = (ImageView) findViewById(R.id.mImageView);
-            vanilla = (Button) findViewById(R.id.vanilla);
-            editText = (EditText) findViewById(R.id.editText);
-            editText2 = (EditText) findViewById(R.id.editText2);
-            demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
-            demoText = (EditText) findViewById(R.id.demotivationalText);
             imageView.setImageBitmap(b);
             demoImage.setImageBitmap(b);
 
@@ -132,12 +138,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //create bitmap for use within activity
-            try {
-                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
             imageView.setImageBitmap(bitmap);
             demoImage.setImageBitmap(bitmap);
         }
@@ -210,6 +211,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         instance = this;
 
+
     }
 
     //----------------------------VANILLA AND DEMOTIVATIONAL METHODS--------------------------//
@@ -218,20 +220,13 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     //Sets demotivational meme editing view
     public void demotivate(View v) {
 
-        editText = (EditText) findViewById(R.id.editText);
-        editText2 = (EditText) findViewById(R.id.editText2);
-        memeLayout = (RelativeLayout) findViewById(R.id.meme);
-        demoImage = (ImageView) findViewById(R.id.demotivationalImage);
-        demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
-        demoText = (EditText) findViewById(R.id.demotivationalText);
-
 
         if (!isVanilla) {
             memeLayout.setBackgroundColor(Color.BLACK);
             memeLayout.setPadding(20, 20, 20, 20);
             imageView.setVisibility(View.INVISIBLE);
-            editText.setVisibility(View.INVISIBLE);
-            editText2.setVisibility(View.INVISIBLE);
+            editText.setVisibility(View.GONE);
+            editText2.setVisibility(View.GONE);
             demoImage.setVisibility(View.VISIBLE);
             demoTitle.setVisibility(View.VISIBLE);
             demoText.setVisibility(View.VISIBLE);
@@ -250,15 +245,31 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     //onClick method for the save button. Calls other methods to create the save image function
     public void storeImage(View v) {
-        editText.setHint("");
-        editText2.setHint("");
-        editText.setCursorVisible(false);
-        editText2.setCursorVisible(false);
+        if (isVanilla) {
+            if (editText.getText().toString().equals("")) {
+                editText.setVisibility(View.GONE);
+            } else if (editText2.getText().toString().equals("")) {
+                editText2.setVisibility(View.GONE);
+            }
+            editText.setCursorVisible(false);
+            editText2.setCursorVisible(false);
+        } else {
+            demoText.setCursorVisible(false);
+            demoTitle.setCursorVisible(false);
+        }
+
         Bitmap image = getBitmapFromView(memeLayout);
         File pictureFile = createImageFile();
         addImageToFile(image, pictureFile);
         Toast.makeText(this, "Saved to gallery", Toast.LENGTH_SHORT).show();
 
+        if (isVanilla) {
+            editText.setCursorVisible(true);
+            editText2.setCursorVisible(true);
+        } else {
+            demoText.setCursorVisible(true);
+            demoTitle.setCursorVisible(true);
+        }
 
     }
 
@@ -361,7 +372,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
             }
-        },2000);
+        }, 2000);
 
 
         return true;
@@ -384,8 +395,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     // Sets vanilla font size to 15sp
     public void setFifteen(View v) {
-        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         linearLayout2.setVisibility(View.GONE);
         linearLayout3.setVisibility(View.VISIBLE);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
@@ -394,8 +403,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     // Sets vanilla font size to 20sp
     public void setTwenty(View v) {
-        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         linearLayout2.setVisibility(View.GONE);
         linearLayout3.setVisibility(View.VISIBLE);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
@@ -404,59 +411,13 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     // Sets vanilla font size to 25sp
     public void setTwentyFive(View v) {
-        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         linearLayout2.setVisibility(View.GONE);
         linearLayout3.setVisibility(View.VISIBLE);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
         editText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25);
     }
 
-    //---------------------------VANILLA EDITTEXT FONT COLOR METHODS--------------------------//
 
-    // Sets vanilla font to black
-    public void setBlack(View v) {
-
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-        linearLayout3.setVisibility(View.GONE);
-        editText.setVisibility(View.VISIBLE);
-        editText2.setVisibility(View.VISIBLE);
-    }
-
-    // Sets vanilla font to white
-    public void setWhite(View v) {
-
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-        linearLayout3.setVisibility(View.GONE);
-        editText.setVisibility(View.VISIBLE);
-        editText2.setVisibility(View.VISIBLE);
-        editText.setTextColor(Color.WHITE);
-        editText2.setTextColor(Color.WHITE);
-    }
-
-    // Sets vanilla font to red
-    public void setRed(View v) {
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-        linearLayout3.setVisibility(View.GONE);
-        editText.setVisibility(View.VISIBLE);
-        editText2.setVisibility(View.VISIBLE);
-        editText.setTextColor(Color.RED);
-        editText2.setTextColor(Color.RED);
-    }
-
-    // Sets vanilla font to blue
-    public void setBlue(View v) {
-
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-        linearLayout3.setVisibility(View.GONE);
-        editText.setVisibility(View.VISIBLE);
-        editText2.setVisibility(View.VISIBLE);
-        editText.setTextColor(Color.BLUE);
-        editText2.setTextColor(Color.BLUE);
-
-
-
-    }
 
 
     //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
@@ -562,30 +523,33 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     public void vanillaM(View v) {
         linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
         linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
-        editText = (EditText) findViewById(R.id.editText);
-        editText2 = (EditText) findViewById(R.id.editText2);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
         memeLayout = (RelativeLayout) findViewById(R.id.meme);
         memeLayout.setPadding(0, 0, 0, 0);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
-        demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
-        demoText = (EditText) findViewById(R.id.demotivationalText);
         linearLayout2.setVisibility(View.VISIBLE);
         imageView.setVisibility(View.VISIBLE);
         demoImage.setVisibility(View.INVISIBLE);
-        demoTitle.setVisibility(View.INVISIBLE);
-        demoText.setVisibility(View.INVISIBLE);
+        demoTitle.setVisibility(View.GONE);
+        demoText.setVisibility(View.GONE);
         ten.setVisibility(View.VISIBLE);
         fifteen.setVisibility(View.VISIBLE);
         twenty.setVisibility(View.VISIBLE);
         twentyFive.setVisibility(View.VISIBLE);
         colorPicker.setVisibility(View.VISIBLE);
         memeLayout.setBackgroundColor(Color.parseColor("#CCCCCC"));
+
+        if (colorPicker.isSelected()) {
+            editText.setVisibility(View.VISIBLE);
+            editText2.setVisibility(View.VISIBLE);
+        } else {
+            editText.setVisibility(View.GONE);
+            editText2.setVisibility(View.GONE);
+        }
+
     }
     public void setTopColor(int color) {
-        editText = (EditText) findViewById(R.id.editText);
-        editText2 = (EditText) findViewById(R.id.editText2);
         editText.setTextColor(color);
         editText.setHintTextColor(color);
         editText.invalidate();
