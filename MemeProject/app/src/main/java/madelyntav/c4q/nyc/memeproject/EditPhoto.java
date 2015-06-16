@@ -139,12 +139,16 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-
+            //create bitmap for use within activity
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             imageView.setImageBitmap(bitmap);
             demoImage.setImageBitmap(bitmap);
         }
+
         //-----------------------------SHARE BUTTON ONCLICKLISTENER---------------------------//
 
         // Shares image via Email, Text, Bluetooth, etc...
@@ -552,7 +556,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     public void choseColor (View v) {
         color = colorPicker.getColor();
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         linearLayout3.setVisibility(View.GONE);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
@@ -561,13 +564,9 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     }
 
     public void vanillaM(View v) {
-        linearLayout2 = (LinearLayout) findViewById(R.id.linearLayout2);
-        linearLayout3 = (LinearLayout) findViewById(R.id.linearLayout3);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
-        memeLayout = (RelativeLayout) findViewById(R.id.meme);
         memeLayout.setPadding(0, 0, 0, 0);
-        demoImage = (ImageView) findViewById(R.id.demotivationalImage);
         linearLayout2.setVisibility(View.VISIBLE);
         imageView.setVisibility(View.VISIBLE);
         demoImage.setVisibility(View.INVISIBLE);

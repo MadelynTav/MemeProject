@@ -1,5 +1,4 @@
 package madelyntav.c4q.nyc.memeproject;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,16 +10,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
+    private ImageView mImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
-    protected static Uri targetUri;
-    private Intent takePictureIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void takePic(View v) {
-        takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
@@ -66,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bs);
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
             intent.putExtra("byteArray", bs.toByteArray());
             startActivity(intent);
 
@@ -76,11 +73,13 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(this, "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
 
-
+            // TODO: causing small photo error?!
             // get Uri from selected image
-            targetUri = data.getData();
+            Uri targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
+
+            // TODO: is this code used??
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
             //turn selected image into a Bitmap image
@@ -89,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             //pass image to intent
             intent.putExtra("image", targetUri);
