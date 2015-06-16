@@ -1,8 +1,7 @@
 package madelyntav.c4q.nyc.memeproject;
 
-import android.widget.Button;
-import android.content.Context;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,24 +15,22 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Handler;
 
 
 public class EditPhoto extends Activity implements View.OnTouchListener {
@@ -121,7 +118,13 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             demoImage.setImageBitmap(b);
 
 
-        } else {
+        }
+        else if(getIntent().hasExtra("drawable")){
+            int drawableID = getIntent().getExtras().getInt("drawable");
+            imageView.setImageDrawable(getResources().getDrawable(drawableID));
+            demoImage.setImageDrawable(getResources().getDrawable(drawableID));
+        }
+        else {
 
             //retrieve passed uri
             Uri uri = getIntent().getExtras().getParcelable("image");

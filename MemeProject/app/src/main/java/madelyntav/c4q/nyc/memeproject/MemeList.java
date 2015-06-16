@@ -2,14 +2,11 @@ package madelyntav.c4q.nyc.memeproject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -58,11 +55,7 @@ public class MemeList extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MemeList.this, EditPhoto.class);
-                Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(),
-                        memeImages.get(position));
-                ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 90, bs);
-                intent.putExtra("byteArray", bs.toByteArray());
+                intent.putExtra("drawable", memeImages.get(position));
                 startActivity(intent);
 
             }
@@ -81,4 +74,3 @@ public class MemeList extends Activity {
     }
 
 }
-
