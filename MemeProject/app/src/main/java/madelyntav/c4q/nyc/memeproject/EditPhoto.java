@@ -1,5 +1,9 @@
 package madelyntav.c4q.nyc.memeproject;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Button;
 import android.content.Context;
 import android.app.Activity;
@@ -65,6 +69,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         return instance;
     }
     static EditPhoto instance;
+    private NotificationManager mNotificationManager;
+    private Bitmap returnedBitmap;
 
 
     @Override
@@ -109,11 +115,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
 
-        imageView = (ImageView) findViewById(R.id.mImageView);
-        demoImage = (ImageView) findViewById(R.id.demotivationalImage);
-        memeLayout = (RelativeLayout) findViewById(R.id.meme);
-
-
 
 
 
@@ -138,6 +139,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
 
             imageView.setImageBitmap(bitmap);
             demoImage.setImageBitmap(bitmap);
@@ -222,6 +225,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
         if (!isVanilla) {
+            linearLayout3.setBackgroundColor(Color.BLACK);
             memeLayout.setBackgroundColor(Color.BLACK);
             memeLayout.setPadding(20, 20, 20, 20);
             imageView.setVisibility(View.INVISIBLE);
@@ -261,7 +265,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         Bitmap image = getBitmapFromView(memeLayout);
         File pictureFile = createImageFile();
         addImageToFile(image, pictureFile);
-        Toast.makeText(this, "Saved to gallery", Toast.LENGTH_SHORT).show();
 
         if (isVanilla) {
             editText.setCursorVisible(true);
@@ -270,6 +273,38 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             demoText.setCursorVisible(true);
             demoTitle.setCursorVisible(true);
         }
+
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        NotificationCompat.Builder builder =  new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.logo);
+
+        Bitmap logo = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.logo);
+
+        builder.setLargeIcon(logo);
+        builder.setContentTitle("Meme-ify Me");
+        builder.setContentText("Image has been saved to gallery");
+
+
+        //Intent is created to bring you from current application context to "MainActivity" activity
+        Intent resultIntent = new Intent(Intent.ACTION_MAIN, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //This code adds the pendingIntent to the builder which is what applies specifications to the notification !
+        builder.setContentIntent(pendingIntent);
+        builder.setVisibility(Notification.VISIBILITY_PUBLIC);
+
+        Notification.BigPictureStyle style = new Notification.BigPictureStyle();
+        style.bigPicture(bitmap);
+        // TODO: builder.setStyle(style);
+        Notification notification = builder.build();
+
+
+        mNotificationManager.notify(1234, notification);
+        Toast.makeText(this, "Saved to gallery", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -323,7 +358,12 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     //Takes the current view and creates a bitmap representing that view.
     public Bitmap getBitmapFromView(View view) {
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        if (isVanilla) {
+            returnedBitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(), Bitmap.Config.ARGB_8888);
+        } else {
+            returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        }
+
         Canvas canvas = new Canvas(returnedBitmap);
 
         Drawable bgDrawable = view.getBackground();

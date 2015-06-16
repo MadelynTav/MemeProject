@@ -17,9 +17,10 @@ import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
-    private ImageView mImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
+    protected static Uri targetUri;
+    private Intent takePictureIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void takePic(View v) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
@@ -65,20 +66,19 @@ public class MainActivity extends ActionBarActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bs);
             intent.putExtra("byteArray", bs.toByteArray());
             startActivity(intent);
 
 
         } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
             //Image selected message
-//            Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
 
 
             // get Uri from selected image
-            Uri targetUri = data.getData();
+            targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
             ByteArrayOutputStream bs = new ByteArrayOutputStream();

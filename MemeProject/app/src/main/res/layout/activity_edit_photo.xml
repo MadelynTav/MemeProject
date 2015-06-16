@@ -224,21 +224,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout3"
         android:layout_margin="5dp"
-        android:background="#CCC"
-        android:gravity="center">
+        android:background="#CCC">
 
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/scroll">
 
             <!-- ImageViews and EditTexts -->
             <RelativeLayout
                 android:id="@+id/meme"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_height="wrap_content">
 
 
 
@@ -249,6 +247,8 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
+                    android:src="@drawable/logo"
+                    android:background="@null"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/mImageView" />
                 <!-- ImageView for demo -->
@@ -257,11 +257,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
+                    android:src="@drawable/logo"
                     android:adjustViewBounds="true"
                     android:background="@drawable/demo_pic"
                     android:id="@+id/demotivationalImage"
-                    android:layout_centerHorizontal="true"
-                    />
+                    android:layout_centerHorizontal="true"/>
                 <!-- Demotivational EditTexts -->
 
 
