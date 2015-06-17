@@ -23,7 +23,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public boolean isExternalStorageReadable() {
@@ -88,8 +87,6 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             //pass image to intent
             intent.putExtra("image", targetUri);
             startActivity(intent);

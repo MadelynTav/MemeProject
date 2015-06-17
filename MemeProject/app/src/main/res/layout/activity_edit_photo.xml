@@ -274,6 +274,7 @@
                     android:inputType="textCapCharacters"
                     android:typeface="serif"
                     android:textSize="40sp"
+                    android:maxLength="10"
                     android:id="@+id/demotivationalTitle"
                     android:layout_below="@id/demotivationalImage"
                     android:hint="Enter Title" />
