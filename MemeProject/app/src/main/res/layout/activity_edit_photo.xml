@@ -268,8 +268,8 @@
                 <EditText
                         style="@style/VanillaText"
                         android:id="@+id/editText2"
-                    android:layout_above="@+id/demotivationalTitle"
-                    android:layout_alignStart="@+id/editText" />
+                    android:layout_below="@+id/demotivationalText"
+                    android:layout_centerHorizontal="true" />
 
 
 
