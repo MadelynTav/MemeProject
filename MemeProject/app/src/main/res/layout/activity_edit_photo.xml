@@ -48,6 +48,7 @@
                 android:id="@+id/share"
                 android:src="@drawable/share"
                 android:background="@drawable/buttons"
+                android:onClick="shareImage"
                 style="@style/Buttons"/>
 
 
@@ -254,28 +255,18 @@
                 <ImageView
                     android:visibility="invisible"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="400dp"
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
                     android:background="@drawable/demo_pic"
                     android:id="@+id/demotivationalImage"
                     android:layout_centerHorizontal="true"
                     />
-                <!-- Demotivational EditTexts -->
-                <EditText
-                    style="@style/DemotivateText"
-                    android:textSize="20sp"
-                    android:id="@+id/demotivationalText"
-                    />
 
                 <!-- Vanilla EditTexts -->
-
-
-
                  <EditText
                         style="@style/VanillaText"
                         android:id="@+id/editText" />
-
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -295,15 +286,23 @@
 
                     android:layout_marginLeft="20dp" />
 
+                <!-- Demotivational EditTexts -->
                 <EditText
                     style="@style/DemotivateText"
-                    android:textAllCaps="true"
+                    android:inputType="textCapCharacters"
                     android:typeface="serif"
                     android:textSize="40sp"
                     android:id="@+id/demotivationalTitle"
                     android:layout_below="@id/demotivationalImage"
-                    android:layout_marginLeft="40dp"
-                    android:layout_gravity="center_horizontal|bottom" />
+                    />
+
+                <EditText
+                    style="@style/DemotivateText"
+                    android:textSize="20sp"
+                    android:id="@+id/demotivationalText"
+                    android:layout_below="@id/demotivationalTitle"
+                    android:maxLength="30"
+                    />
 
 
             </RelativeLayout>
