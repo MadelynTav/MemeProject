@@ -298,6 +298,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         //This code adds the pendingIntent to the builder which is what applies specifications to the notification !
         builder.setContentIntent(pendingIntent);
         builder.setVisibility(Notification.VISIBILITY_PUBLIC);
+        builder.setAutoCancel(true);
 
         NotificationCompat.Style style = new NotificationCompat.BigPictureStyle().bigPicture(image);
         builder.setStyle(style);
