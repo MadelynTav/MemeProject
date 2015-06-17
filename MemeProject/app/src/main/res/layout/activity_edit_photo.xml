@@ -228,11 +228,6 @@
         android:background="#CCC">
 
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scroll">
-
             <!-- ImageViews and EditTexts -->
             <RelativeLayout
                 android:id="@+id/meme"
@@ -256,7 +251,7 @@
                 <ImageView
                     android:visibility="invisible"
                     android:layout_width="fill_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="300dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo"
                     android:adjustViewBounds="true"
@@ -272,7 +267,9 @@
 
                 <EditText
                         style="@style/VanillaText"
-                        android:id="@+id/editText2"/>
+                        android:id="@+id/editText2"
+                    android:layout_above="@+id/demotivationalTitle"
+                    android:layout_alignStart="@+id/editText" />
 
 
 
@@ -284,7 +281,7 @@
                     android:textSize="40sp"
                     android:id="@+id/demotivationalTitle"
                     android:layout_below="@id/demotivationalImage"
-                    />
+                    android:hint="Enter Title" />
 
                 <EditText
                     style="@style/DemotivateText"
@@ -292,13 +289,11 @@
                     android:id="@+id/demotivationalText"
                     android:layout_below="@id/demotivationalTitle"
                     android:maxLength="30"
-                    />
+                    android:hint="Enter Description" />
 
 
 
             </RelativeLayout>
-
-        </ScrollView>
 
     </LinearLayout>
 

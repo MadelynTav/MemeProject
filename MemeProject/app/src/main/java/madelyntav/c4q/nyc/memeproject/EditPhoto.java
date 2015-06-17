@@ -385,6 +385,9 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 delta_y = Y - lParams.topMargin;
                 break;
             case MotionEvent.ACTION_UP:
+                view.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 break;
@@ -398,18 +401,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 view.setLayoutParams(layoutParams);
                 break;
         }
-        android.os.Handler handler = new android.os.Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                view.requestFocus();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-            }
-        }, 2000);
-
-
         return true;
     }
 
