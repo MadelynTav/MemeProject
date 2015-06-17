@@ -288,7 +288,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         builder.setLargeIcon(logo);
         builder.setContentTitle("Meme-ify Me");
-        builder.setContentText("Image has been saved to gallery");
 
 
         //Intent is created to bring you from current application context to "MainActivity" activity
@@ -297,10 +296,9 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         //This code adds the pendingIntent to the builder which is what applies specifications to the notification !
         builder.setContentIntent(pendingIntent);
-        builder.setVisibility(Notification.VISIBILITY_PUBLIC);
         builder.setAutoCancel(true);
 
-        NotificationCompat.Style style = new NotificationCompat.BigPictureStyle().bigPicture(image);
+        NotificationCompat.Style style = new NotificationCompat.BigPictureStyle().bigPicture(image).setSummaryText("Image has been saved to gallery");
         builder.setStyle(style);
         Notification notification = builder.build();
 
