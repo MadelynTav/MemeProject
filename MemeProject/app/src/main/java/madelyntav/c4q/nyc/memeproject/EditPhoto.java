@@ -601,7 +601,9 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     public void vanillaM(View v) {
         editText.setVisibility(View.VISIBLE);
+        editText.setHintTextColor(Color.RED);
         editText2.setVisibility(View.VISIBLE);
+        editText2.setHintTextColor(Color.RED);
         memeLayout.setPadding(0, 0, 0, 0);
         linearLayout2.setVisibility(View.VISIBLE);
         imageView.setVisibility(View.VISIBLE);
