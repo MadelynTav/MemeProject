@@ -48,6 +48,7 @@
                 android:id="@+id/share"
                 android:src="@drawable/share"
                 android:background="@drawable/buttons"
+                android:onClick="shareImage"
                 style="@style/Buttons"/>
 
 
@@ -243,8 +244,8 @@
                 <!-- ImageView for Vanilla -->
                 <ImageView
                     android:visibility="visible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo"
@@ -254,8 +255,8 @@
                 <!-- ImageView for demo -->
                 <ImageView
                     android:visibility="invisible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="400dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo"
                     android:adjustViewBounds="true"
@@ -264,39 +265,34 @@
                     android:layout_centerHorizontal="true"/>
                 <!-- Demotivational EditTexts -->
 
-
-                <EditText
-                    style="@style/DemotivateText"
-                    android:textAllCaps="true"
-                    android:typeface="serif"
-                    android:hint="ENTER TEXT"
-                    android:textSize="40sp"
-                    android:id="@+id/demotivationalTitle"
-                    android:layout_below="@+id/demotivationalImage"/>
-
-
-                <EditText
-                    style="@style/DemotivateText"
-                    android:hint="Enter Text"
-                    android:textSize="20sp"
-                    android:id="@+id/demotivationalText"
-                    android:layout_below="@+id/demotivationalTitle"
-                    />
-
-
                 <!-- Vanilla EditTexts -->
-
-
-
                  <EditText
                         style="@style/VanillaText"
                         android:id="@+id/editText" />
-
 
                 <EditText
                         style="@style/VanillaText"
                         android:id="@+id/editText2"/>
 
+
+
+                <!-- Demotivational EditTexts -->
+                <EditText
+                    style="@style/DemotivateText"
+                    android:inputType="textCapCharacters"
+                    android:typeface="serif"
+                    android:textSize="40sp"
+                    android:id="@+id/demotivationalTitle"
+                    android:layout_below="@id/demotivationalImage"
+                    />
+
+                <EditText
+                    style="@style/DemotivateText"
+                    android:textSize="20sp"
+                    android:id="@+id/demotivationalText"
+                    android:layout_below="@id/demotivationalTitle"
+                    android:maxLength="30"
+                    />
 
 
 
