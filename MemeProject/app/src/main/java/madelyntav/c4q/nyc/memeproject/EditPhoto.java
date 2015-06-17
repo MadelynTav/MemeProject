@@ -483,7 +483,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     // Applies engrave effect to image
     public void engravedImage(View view) {
         Handler handler= new Handler();
-        handler.postDelayed(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
@@ -499,14 +499,14 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 Toast.makeText(EditPhoto.this, "Engraved", Toast.LENGTH_SHORT).show();
 
             }
-        },1000);
+        });
 
     }
 
     // Applies inverted colors effect to image
     public void invertColors(View view) {
         Handler handler= new Handler();
-        handler.postDelayed(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
@@ -521,14 +521,14 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 Toast.makeText(EditPhoto.this, "Inverted", Toast.LENGTH_SHORT).show();
 
             }
-        },1000);
+        });
 
     }
 
     // Applies greyscale effect to image
     public void greyscaleImage(View view) {
         Handler handler=new Handler();
-        handler.postDelayed(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
@@ -542,7 +542,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 }
                 Toast.makeText(EditPhoto.this, "Greyscale", Toast.LENGTH_SHORT).show();
             }
-        },1000);
+        });
 
     }
 
