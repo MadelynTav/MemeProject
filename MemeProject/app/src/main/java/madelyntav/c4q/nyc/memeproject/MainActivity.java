@@ -23,7 +23,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public boolean isExternalStorageReadable() {
@@ -63,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bs);
             intent.putExtra("byteArray", bs.toByteArray());
             startActivity(intent);
 
@@ -88,8 +87,6 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             //pass image to intent
             intent.putExtra("image", targetUri);
             startActivity(intent);
