@@ -229,7 +229,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
         if (!isVanilla) {
-            linearLayout3.setBackgroundColor(Color.BLACK);
             memeLayout.setBackgroundColor(Color.BLACK);
             memeLayout.setPadding(20, 20, 20, 20);
             imageView.setVisibility(View.INVISIBLE);
@@ -293,16 +292,15 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
         //Intent is created to bring you from current application context to "MainActivity" activity
-        Intent resultIntent = new Intent(Intent.ACTION_MAIN, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent resultIntent = new Intent(Intent.ACTION_VIEW, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //This code adds the pendingIntent to the builder which is what applies specifications to the notification !
         builder.setContentIntent(pendingIntent);
         builder.setVisibility(Notification.VISIBILITY_PUBLIC);
 
-        Notification.BigPictureStyle style = new Notification.BigPictureStyle();
-        style.bigPicture(bitmap);
-        // TODO: builder.setStyle(style);
+        NotificationCompat.Style style = new NotificationCompat.BigPictureStyle().bigPicture(image);
+        builder.setStyle(style);
         Notification notification = builder.build();
 
 

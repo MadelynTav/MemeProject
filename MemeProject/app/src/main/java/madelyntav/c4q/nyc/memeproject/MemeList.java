@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class MemeList extends Activity {
         ArrayList<String> memeNames = new ArrayList<String>();
         addItemsToArrays(memeImages, memeNames);
 
-        CustomArrayAdapter memeAdapter = new CustomArrayAdapter(this, memeNames, memeImages);
+        CustomArrayAdapter memeAdapter = new CustomArrayAdapter(getApplicationContext(), memeNames, memeImages);
 
         listView.setAdapter(memeAdapter);
 
@@ -64,6 +65,8 @@ public class MemeList extends Activity {
                 imageBitmap.compress(Bitmap.CompressFormat.PNG, 90, bs);
                 intent.putExtra("byteArray", bs.toByteArray());
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
+
 
             }
         });
