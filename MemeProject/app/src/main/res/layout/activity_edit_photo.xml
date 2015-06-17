@@ -284,7 +284,7 @@
                     android:textSize="20sp"
                     android:id="@+id/demotivationalText"
                     android:layout_below="@id/demotivationalTitle"
-                    android:maxLength="30"
+                    android:maxLength="25"
                     android:hint="Enter Description" />
 
 
