@@ -88,14 +88,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-
-
-
-                    <Button
-                        android:id="@+id/greyscale"
-                        android:text="GREYSCALE "
-                        style="@style/FilterButtons"
-                        android:onClick="greyscaleImage"/>
                     <Button
                         android:id="@+id/blueShade"
                         android:text="BLUE "
@@ -111,6 +103,11 @@
                         android:text="GREEN "
                         style="@style/FilterButtons"
                         android:onClick="shadingFilterGreen"/>
+                    <Button
+                        android:id="@+id/greyscale"
+                        android:text="GREYSCALE "
+                        style="@style/FilterButtons"
+                        android:onClick="greyscaleImage"/>
                     <Button
                         android:id="@+id/engrave"
                         android:text="ENGRAVE "
@@ -262,16 +259,14 @@
 
                 <!-- Vanilla EditTexts -->
                  <EditText
-                        style="@style/VanillaText"
-                        android:id="@+id/editText" />
+                    style="@style/VanillaText"
+                    android:id="@+id/editText" />
 
                 <EditText
-                        style="@style/VanillaText"
-                        android:id="@+id/editText2"
+                    style="@style/VanillaText"
+                    android:id="@+id/editText2"
                     android:layout_below="@+id/demotivationalText"
                     android:layout_centerHorizontal="true" />
-
-
 
                 <!-- Demotivational EditTexts -->
                 <EditText

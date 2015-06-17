@@ -4,6 +4,7 @@ package madelyntav.c4q.nyc.memeproject;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Button;
 import android.content.Context;
@@ -475,52 +476,74 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         editText.setTextColor(Color.BLUE);
         editText2.setTextColor(Color.BLUE);
 
-
     }
 
     //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
 
     // Applies engrave effect to image
     public void engravedImage(View view) {
-        if (getIntent().hasExtra("byteArray")) {
-            Bitmap engraved = ApplyFilters.engrave(bitmap);
-            imageView.setImageBitmap(engraved);
-            demoImage.setImageBitmap(engraved);
-        } else {
-            Bitmap engraved = ApplyFilters.engrave(bitmap);
-            imageView.setImageBitmap(engraved);
-            demoImage.setImageBitmap(engraved);
-        }
-        Toast.makeText(this, "Engraved", Toast.LENGTH_SHORT).show();
+        Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getIntent().hasExtra("byteArray")) {
+
+                    Bitmap engraved = ApplyFilters.engrave(bitmap);
+                    imageView.setImageBitmap(engraved);
+                    demoImage.setImageBitmap(engraved);
+                } else {
+                    Bitmap engraved = ApplyFilters.engrave(bitmap);
+                    imageView.setImageBitmap(engraved);
+                    demoImage.setImageBitmap(engraved);
+                }
+                Toast.makeText(EditPhoto.this, "Engraved", Toast.LENGTH_SHORT).show();
+
+            }
+        },1000);
+
     }
 
     // Applies inverted colors effect to image
     public void invertColors(View view) {
-        if (getIntent().hasExtra("byteArray")) {
-            Bitmap inverted = ApplyFilters.doInvert(bitmap);
-            imageView.setImageBitmap(inverted);
-            demoImage.setImageBitmap(inverted);
-        } else {
-            Bitmap inverted = ApplyFilters.doInvert(bitmap);
-            imageView.setImageBitmap(inverted);
-            demoImage.setImageBitmap(inverted);
-        }
-        Toast.makeText(this, "Inverted", Toast.LENGTH_SHORT).show();
+        Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getIntent().hasExtra("byteArray")) {
+                    Bitmap inverted = ApplyFilters.doInvert(bitmap);
+                    imageView.setImageBitmap(inverted);
+                    demoImage.setImageBitmap(inverted);
+                } else {
+                    Bitmap inverted = ApplyFilters.doInvert(bitmap);
+                    imageView.setImageBitmap(inverted);
+                    demoImage.setImageBitmap(inverted);
+                }
+                Toast.makeText(EditPhoto.this, "Inverted", Toast.LENGTH_SHORT).show();
+
+            }
+        },1000);
 
     }
 
     // Applies greyscale effect to image
     public void greyscaleImage(View view) {
-        if (getIntent().hasExtra("byteArray")) {
-            Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
-            imageView.setImageBitmap(greyscaled);
-            demoImage.setImageBitmap(greyscaled);
-        } else {
-            Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
-            imageView.setImageBitmap(greyscaled);
-            demoImage.setImageBitmap(greyscaled);
-        }
-        Toast.makeText(this, "Greyscale", Toast.LENGTH_SHORT).show();
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getIntent().hasExtra("byteArray")) {
+                    Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+                    imageView.setImageBitmap(greyscaled);
+                    demoImage.setImageBitmap(greyscaled);
+                } else {
+                    Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+                    imageView.setImageBitmap(greyscaled);
+                    demoImage.setImageBitmap(greyscaled);
+                }
+                Toast.makeText(EditPhoto.this, "Greyscale", Toast.LENGTH_SHORT).show();
+            }
+        },1000);
+
     }
 
     // Applies blue shading effect to image
