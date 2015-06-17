@@ -1,5 +1,4 @@
 package madelyntav.c4q.nyc.memeproject;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,7 +10,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -72,15 +70,16 @@ public class MainActivity extends ActionBarActivity {
 
         } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
             //Image selected message
-//            Toast.makeText(this, "Image selected", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
 
-
+            // TODO: causing small photo error?!
             // get Uri from selected image
             Uri targetUri = data.getData();
             Bitmap bitmap = null;
             ContentResolver cr = getContentResolver();
+
+            // TODO: is this code used??
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
             //turn selected image into a Bitmap image
@@ -89,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             //pass image to intent
             intent.putExtra("image", targetUri);

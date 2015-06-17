@@ -13,10 +13,10 @@
     <TextView
         android:id="@+id/memeName"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textAlignment="center"
-        android:paddingStart="10dp"/>
+        android:gravity="center_vertical"
+        android:padding="10dp"/>
 
 
 </LinearLayout>

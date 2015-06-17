@@ -222,51 +222,67 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayout3">
+        android:layout_below="@id/linearLayout3"
+        android:layout_margin="5dp"
+        android:background="#CCC">
 
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/scroll">
 
             <!-- ImageViews and EditTexts -->
             <RelativeLayout
                 android:id="@+id/meme"
                 android:layout_width="wrap_content"
-                android:layout_height="450dp"
-                android:gravity="center_vertical"
-                android:background="#CCC">
+                android:layout_height="wrap_content">
 
 
 
                 <!-- ImageView for Vanilla -->
                 <ImageView
                     android:visibility="visible"
-                    android:gravity="center"
-                    android:layout_width="345dp"
-                    android:layout_height="450dp"
-                    android:background="#CCC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
+                    android:src="@drawable/logo"
+                    android:background="@null"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/mImageView" />
                 <!-- ImageView for demo -->
                 <ImageView
                     android:visibility="invisible"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:scaleType="fitXY"
+                    android:src="@drawable/logo"
                     android:adjustViewBounds="true"
                     android:background="@drawable/demo_pic"
                     android:id="@+id/demotivationalImage"
-                    android:layout_centerHorizontal="true"
-                    />
+                    android:layout_centerHorizontal="true"/>
                 <!-- Demotivational EditTexts -->
+
+
                 <EditText
                     style="@style/DemotivateText"
+                    android:textAllCaps="true"
+                    android:typeface="serif"
+                    android:hint="ENTER TEXT"
+                    android:textSize="40sp"
+                    android:id="@+id/demotivationalTitle"
+                    android:layout_below="@+id/demotivationalImage"/>
+
+
+                <EditText
+                    style="@style/DemotivateText"
+                    android:hint="Enter Text"
                     android:textSize="20sp"
                     android:id="@+id/demotivationalText"
+                    android:layout_below="@+id/demotivationalTitle"
                     />
+
 
                 <!-- Vanilla EditTexts -->
 
@@ -278,32 +294,10 @@
 
 
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText2"
-                    android:hint="Type Text Here"
-                    android:textSize="30dp"
-                    android:maxLength="20"
-                    android:gravity="center_horizontal"
-                    android:layout_centerInParent="true"
-                    android:textStyle="bold"
-                    android:background="@null"
-                    android:textColor="#ffffff"
-                    android:shadowColor="#000000"
-                    android:layout_marginTop="500dp"
-                    android:layout_centerHorizontal="true"
+                        style="@style/VanillaText"
+                        android:id="@+id/editText2"/>
 
-                    android:layout_marginLeft="20dp" />
 
-                <EditText
-                    style="@style/DemotivateText"
-                    android:textAllCaps="true"
-                    android:typeface="serif"
-                    android:textSize="40sp"
-                    android:id="@+id/demotivationalTitle"
-                    android:layout_below="@id/demotivationalImage"
-                    android:layout_marginLeft="40dp"
-                    android:layout_gravity="center_horizontal|bottom" />
 
 
             </RelativeLayout>
