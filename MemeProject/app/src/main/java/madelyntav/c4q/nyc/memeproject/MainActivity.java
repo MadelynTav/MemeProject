@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
     private ImageView mImageView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
+    protected static Uri targetUri;
 
 
     @Override
@@ -37,9 +38,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void usePic(View v) {
-        Intent choosePictureIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(choosePictureIntent, 0);
+        Intent choosePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(choosePictureIntent, EXTERNAL_CONTENT_URI);
     }
 
 
@@ -53,12 +53,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void chooseMeme(View view){
-        Intent popularMemeIntent = new Intent(this, MemeList.class);
+        Intent popularMemeIntent = new Intent(MainActivity.this, MemeList.class);
         startActivity(popularMemeIntent);
     }
 
     @Override // saves pic and sends it to editPhoto activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
         Intent intent = new Intent(MainActivity.this, EditPhoto.class);
 
@@ -68,36 +69,43 @@ public class MainActivity extends ActionBarActivity {
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
             intent.putExtra("byteArray", bs.toByteArray());
-            startActivity(intent);
 
 
-        } else if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK) {
+        }
+
+        if (requestCode == EXTERNAL_CONTENT_URI && resultCode == RESULT_OK & data!= null) {
             //Image selected message
             Toast.makeText(this, "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
 
-            // TODO: causing small photo error?!
-            // get Uri from selected image
-            Uri targetUri = data.getData();
-            Bitmap bitmap = null;
-            ContentResolver cr = getContentResolver();
-
-            // TODO: is this code used??
-            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-
-            //turn selected image into a Bitmap image
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            //pass image to intent
+//            // TODO: causing small photo error?!
+//            // get Uri from selected image
+            targetUri = data.getData();
             intent.putExtra("image", targetUri);
-            startActivity(intent);
+
+
+//            Bitmap bitmap = null;
+//            ContentResolver cr = getContentResolver();
+//
+//            // TODO: is this code used??
+//            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+//
+//            //turn selected image into a Bitmap image
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(cr, targetUri);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+
 
         }
+        //pass image to intent
+        if (targetUri != null) {
+            startActivity(intent);
+        }
+
     }
 
 }

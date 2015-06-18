@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,12 +49,12 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     private int delta_x;
     private int delta_y;
     public static ImageView imageView;
+    public static ImageView demoImage;
     private int color;
     private ColorPicker colorPicker;
     private Button vanilla;
     private Button demotivational;
     private EditText editText, editText2, demoTitle, demoText;
-    private ImageView demoImage;
     private String TAG = "GallerySaving";
     RelativeLayout memeLayout;
     LinearLayout linearLayout2;
@@ -69,6 +70,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     }
     static EditPhoto instance;
     ImageButton share;
+    private Uri uri;
 
 
     @Override
@@ -117,45 +119,34 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
 
         //opens pic in this activity
-        if(true){
-            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-            // String filePath=storageDir+"/"+MainActivity.FILE_NAME;
-
-            BitmapFactory.Options options = new BitmapFactory.Options();
-//            b = BitmapFactory.decodeFile(MainActivity.actualFile,options);
-             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            imageView = (ImageView) findViewById(R.id.mImageView);
-            vanilla = (Button) findViewById(R.id.vanilla);
-            editText = (EditText) findViewById(R.id.editText);
-            editText2 = (EditText) findViewById(R.id.editText2);
-            demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
-            demoText = (EditText) findViewById(R.id.demotivationalText);
+        if (getIntent().hasExtra("byteArray")) {
+            b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView.setImageBitmap(b);
             demoImage.setImageBitmap(b);
-            // Log.d("b height: "+ b.getHeight(),"  width: "+b.getWidth());
 
 
         } else {
 
             //retrieve passed uri
-            Uri uri = getIntent().getExtras().getParcelable("image");
-            //retrieve bitmap uri from intent
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //create bitmap for use within activity
-            try {
-                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            imageView.setImageBitmap(bitmap);
-            demoImage.setImageBitmap(bitmap);
-            Log.d(TAG,"bitmap height: "+ bitmap.getHeight()+"  width: "+bitmap.getWidth());
+            uri = (Uri) getIntent().getExtras().get("image");
+            //retrieve bitmap uri from intent
+//            try {
+//                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            //create bitmap for use within activity
+//            try {
+//                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            imageView.setImageURI(uri);
+            demoImage.setImageURI(uri);
+//            Log.d(TAG,"bitmap height: "+ bitmap.getHeight()+"  width: "+bitmap.getWidth());
         }
 
 
@@ -206,10 +197,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             }
         });
 
-
-        //Sets imageviews to the bitmaps once it receives it from the intent
-        imageView.setImageBitmap(b);
-        demoImage.setImageBitmap(b);
 
         instance = this;
 
