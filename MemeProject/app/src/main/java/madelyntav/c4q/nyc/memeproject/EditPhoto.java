@@ -483,7 +483,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     // Applies engrave effect to image
     public void engravedImage(View view) {
         Handler handler= new Handler();
-        handler.post(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
@@ -499,7 +499,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                 Toast.makeText(EditPhoto.this, "Engraved", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        },1000);
 
     }
 
