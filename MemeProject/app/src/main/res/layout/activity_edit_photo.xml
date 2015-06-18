@@ -274,7 +274,8 @@
             <EditText
                 style="@style/VanillaText"
                 android:id="@+id/editText2"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentTop="true"
+                android:layout_alignEnd="@+id/demotivationalText" />
 
             <!-- Demotivational EditTexts -->
             <EditText
