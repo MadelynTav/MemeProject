@@ -222,6 +222,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout3"
         android:layout_margin="5dp"
+        android:gravity="center_horizontal"
         android:background="#CCC">
 
 
@@ -230,7 +231,7 @@
             android:id="@+id/meme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:gravity="center">
 
 
 

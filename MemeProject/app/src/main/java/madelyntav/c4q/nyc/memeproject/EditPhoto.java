@@ -123,8 +123,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             // String filePath=storageDir+"/"+MainActivity.FILE_NAME;
 
             BitmapFactory.Options options = new BitmapFactory.Options();
-            b = BitmapFactory.decodeFile(MainActivity.actualFile,options);
-            // b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+//            b = BitmapFactory.decodeFile(MainActivity.actualFile,options);
+             b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
             imageView = (ImageView) findViewById(R.id.mImageView);
             vanilla = (Button) findViewById(R.id.vanilla);
             editText = (EditText) findViewById(R.id.editText);
