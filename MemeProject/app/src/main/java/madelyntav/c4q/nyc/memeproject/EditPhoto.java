@@ -471,14 +471,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                uri = (Uri) getIntent().getExtras().get("image");
-                try {
-                    uriBm = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), uri));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
                 imageView.setImageBitmap(uriBm);
                 demoImage.setImageBitmap(uriBm);
                 Toast.makeText(EditPhoto.this, "Cleared", Toast.LENGTH_SHORT).show();
@@ -490,15 +482,14 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     // Applies engrave effect to image
     public void engravedImage(View view) {
-        Handler handler= new Handler();
-        handler.post(new Runnable() {
+        new Handler().post(new Runnable() {
             @Override
             public void run() {
 
                     Bitmap engraved = ApplyFilters.engrave(uriBm);
                     imageView.setImageBitmap(engraved);
                     demoImage.setImageBitmap(engraved);
-                
+
                 Toast.makeText(EditPhoto.this, "Engraved", Toast.LENGTH_SHORT).show();
 
             }
