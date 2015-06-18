@@ -1,14 +1,10 @@
 package madelyntav.c4q.nyc.memeproject;
 
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.os.Handler;
-import android.support.v4.app.NotificationCompat;
-import android.widget.Button;
-import android.content.Context;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,7 +16,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -32,8 +30,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,26 +42,34 @@ import java.util.Date;
 public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
-    Bitmap bitmap,b;
-    private int delta_x, delta_y, color;
-    public static  ImageView imageView;
-    private String TAG = "GallerySaving";
+    private NotificationManager mNotificationManager;
+    private Bitmap returnedBitmap;
+    Bitmap b;
+    Bitmap bitmap;
+    private int delta_x;
+    private int delta_y;
+    public static ImageView imageView;
+    private int color;
     private ColorPicker colorPicker;
-    private Button ten, fifteen, twenty, twentyFive,vanilla;
-    ImageButton share;
+    private Button vanilla;
+    private Button demotivational;
     private EditText editText, editText2, demoTitle, demoText;
     private ImageView demoImage;
-    RelativeLayout memeLayout, root;
-    LinearLayout linearLayout2, linearLayout3;
+    private String TAG = "GallerySaving";
+    RelativeLayout memeLayout;
+    LinearLayout linearLayout2;
+    LinearLayout linearLayout3;
+    Button ten;
+    Button fifteen;
+    Button twenty;
+    Button twentyFive;
+    RelativeLayout root;
     private boolean isVanilla = true;
-
     public static EditPhoto getInstance() {
         return instance;
     }
-
     static EditPhoto instance;
-    private NotificationManager mNotificationManager;
-    private Bitmap returnedBitmap;
+    ImageButton share;
 
 
     @Override
@@ -112,32 +118,47 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
 
         //opens pic in this activity
-        if (getIntent().hasExtra("byteArray")) {
+        if(true){
+            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-            b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            // String filePath=storageDir+"/"+MainActivity.FILE_NAME;
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            b = BitmapFactory.decodeFile(MainActivity.actualFile,options);
+            // b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+            imageView = (ImageView) findViewById(R.id.mImageView);
+            vanilla = (Button) findViewById(R.id.vanilla);
+            editText = (EditText) findViewById(R.id.editText);
+            editText2 = (EditText) findViewById(R.id.editText2);
+            demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
+            demoText = (EditText) findViewById(R.id.demotivationalText);
             imageView.setImageBitmap(b);
             demoImage.setImageBitmap(b);
+            // Log.d("b height: "+ b.getHeight(),"  width: "+b.getWidth());
 
-
-
-            bitmap = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-        }
-        //Gets drawable resource from the intent
-        else if (getIntent().hasExtra("drawable")) {
-            int drawableID = getIntent().getExtras().getInt("drawable");
-            bitmap = BitmapFactory.decodeResource(getResources(), drawableID);
 
         } else {
+
             //retrieve passed uri
             Uri uri = getIntent().getExtras().getParcelable("image");
             //retrieve bitmap uri from intent
             try {
-                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //create bitmap for use within activity
+            try {
+                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageView.setImageBitmap(bitmap);
+            demoImage.setImageBitmap(bitmap);
+            Log.d(TAG,"bitmap height: "+ bitmap.getHeight()+"  width: "+bitmap.getWidth());
         }
+
 
 
         //-----------------------------SHARE BUTTON ONCLICKLISTENER---------------------------//
@@ -189,8 +210,8 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
         //Sets imageviews to the bitmaps once it receives it from the intent
-        imageView.setImageBitmap(bitmap);
-        demoImage.setImageBitmap(bitmap);
+        imageView.setImageBitmap(b);
+        demoImage.setImageBitmap(b);
 
         instance = this;
 
@@ -488,11 +509,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
 
-                    Bitmap engraved = ApplyFilters.engrave(bitmap);
+                    Bitmap engraved = ApplyFilters.engrave(b);
                     imageView.setImageBitmap(engraved);
                     demoImage.setImageBitmap(engraved);
                 } else {
-                    Bitmap engraved = ApplyFilters.engrave(bitmap);
+                    Bitmap engraved = ApplyFilters.engrave(b);
                     imageView.setImageBitmap(engraved);
                     demoImage.setImageBitmap(engraved);
                 }
@@ -510,11 +531,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             @Override
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
-                    Bitmap inverted = ApplyFilters.doInvert(bitmap);
+                    Bitmap inverted = ApplyFilters.doInvert(b);
                     imageView.setImageBitmap(inverted);
                     demoImage.setImageBitmap(inverted);
                 } else {
-                    Bitmap inverted = ApplyFilters.doInvert(bitmap);
+                    Bitmap inverted = ApplyFilters.doInvert(b);
                     imageView.setImageBitmap(inverted);
                     demoImage.setImageBitmap(inverted);
                 }
@@ -532,11 +553,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             @Override
             public void run() {
                 if (getIntent().hasExtra("byteArray")) {
-                    Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+                    Bitmap greyscaled = ApplyFilters.doGreyscale(b);
                     imageView.setImageBitmap(greyscaled);
                     demoImage.setImageBitmap(greyscaled);
                 } else {
-                    Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
+                    Bitmap greyscaled = ApplyFilters.doGreyscale(b);
                     imageView.setImageBitmap(greyscaled);
                     demoImage.setImageBitmap(greyscaled);
                 }
@@ -549,11 +570,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     // Applies blue shading effect to image
     public void shadingFilterBlue(View view) {
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
+            Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
             imageView.setImageBitmap(blueShade);
             demoImage.setImageBitmap(blueShade);
         } else {
-            Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
+            Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
             imageView.setImageBitmap(blueShade);
             demoImage.setImageBitmap(blueShade);
         }
@@ -563,11 +584,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     // Applies red shading effect to image
     public void shadingFilterRed(View view) {
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
+            Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
             imageView.setImageBitmap(redShade);
             demoImage.setImageBitmap(redShade);
         } else {
-            Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
+            Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
             imageView.setImageBitmap(redShade);
             demoImage.setImageBitmap(redShade);
         }
@@ -577,11 +598,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     // Applies green shading effect to image
     public void shadingFilterGreen(View view) {
         if (getIntent().hasExtra("byteArray")) {
-            Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
+            Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
             imageView.setImageBitmap(greenShade);
             demoImage.setImageBitmap(greenShade);
         } else {
-            Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
+            Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
             imageView.setImageBitmap(greenShade);
             demoImage.setImageBitmap(greenShade);
         }
