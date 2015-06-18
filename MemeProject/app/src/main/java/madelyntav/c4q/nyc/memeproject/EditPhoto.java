@@ -120,34 +120,42 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
         //opens pic in this activity
 
-        if (getIntent().hasExtra("byteArray")) {
-            b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-            imageView.setImageBitmap(b);
-            demoImage.setImageBitmap(b);
+        uri = (Uri) getIntent().getExtras().get("image");
 
+        imageView.setImageURI(uri);
+        demoImage.setImageURI(uri);
 
-        } else {
-
-            //retrieve passed uri
-
-            uri = (Uri) getIntent().getExtras().get("image");
-            //retrieve bitmap uri from intent
-//            try {
-//                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+//        if (getIntent().hasExtra("byteArray")) {
+//            b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+//            imageView.setImageBitmap(b);
+//            demoImage.setImageBitmap(b);
 //
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            //create bitmap for use within activity
-//            try {
-//                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            imageView.setImageURI(uri);
-            demoImage.setImageURI(uri);
-//            Log.d(TAG,"bitmap height: "+ bitmap.getHeight()+"  width: "+bitmap.getWidth());
-        }
+//
+//        } else {
+//
+//            //retrieve passed uri
+//
+//            uri = (Uri) getIntent().getExtras().get("image");
+//            //retrieve bitmap uri from intent
+////            try {
+////                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+////
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////            }
+////            //create bitmap for use within activity
+////            try {
+////                bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+////            } catch (IOException e) {
+////                e.printStackTrace();
+////            }
+//
+//
+//            imageView.setImageURI(uri);
+//            demoImage.setImageURI(uri);
+////            Log.d(TAG,"bitmap height: "+ bitmap.getHeight()+"  width: "+bitmap.getWidth());
+//
+//        }
 
 
 

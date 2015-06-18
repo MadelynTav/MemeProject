@@ -19,6 +19,8 @@ public class MainActivity extends ActionBarActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int EXTERNAL_CONTENT_URI = 0;
     protected static Uri targetUri;
+    private String stringVariable = "file:///sdcard/_pictureholder_id.jpg";
+
 
 
     @Override
@@ -45,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void takePic(View v) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.parse(stringVariable));
+        takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.parse(stringVariable));
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -64,11 +66,15 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(MainActivity.this, EditPhoto.class);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
-            intent.putExtra("byteArray", bs.toByteArray());
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+//            imageBitmap.compress(Bitmap.CompressFormat.PNG, 50, bs);
+//            intent.putExtra("byteArray", bs.toByteArray());
+
+            targetUri = Uri.parse(stringVariable);
+            intent.putExtra("image", targetUri);
+
 
 
         }
