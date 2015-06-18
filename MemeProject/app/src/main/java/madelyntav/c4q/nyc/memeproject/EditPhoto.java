@@ -270,17 +270,23 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             } else if (editText2.getText().toString().equals("")) {
                 editText2.setVisibility(View.GONE);
             }
+        }
+
+
             editText.setCursorVisible(false);
             editText2.setCursorVisible(false);
-        } else {
             demoText.setCursorVisible(false);
             demoTitle.setCursorVisible(false);
-        }
+
 
         Bitmap image = getBitmapFromView(memeLayout);
         File pictureFile = createImageFile();
         addImageToFile(image, pictureFile);
 
+        editText.setCursorVisible(true);
+        editText2.setCursorVisible(true);
+        demoText.setCursorVisible(true);
+        demoTitle.setCursorVisible(true);
 
 
 
@@ -315,10 +321,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         Toast.makeText(this, "Saved to gallery", Toast.LENGTH_SHORT).show();
 
 
-        editText.setCursorVisible(true);
-        editText2.setCursorVisible(true);
-        demoText.setCursorVisible(true);
-        demoTitle.setCursorVisible(true);
+
 
     }
 
@@ -372,21 +375,17 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     //Takes the current view and creates a bitmap representing that view.
     public Bitmap getBitmapFromView(View view) {
-        if (isVanilla) {
-            returnedBitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(returnedBitmap);
+        view.setDrawingCacheEnabled(true);
+        returnedBitmap = view.getDrawingCache();
 
-            Drawable bgDrawable = view.getBackground();
-            if (bgDrawable != null)
-                bgDrawable.draw(canvas);
-            else
-                canvas.drawColor(Color.WHITE);
-            view.draw(canvas);
-        } else {
-            returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-
+//        Canvas canvas = new Canvas(returnedBitmap);
+//
+//        Drawable bgDrawable = view.getBackground();
+//        if (bgDrawable != null)
+//            bgDrawable.draw(canvas);
+//        else
+//            canvas.drawColor(Color.WHITE);
+//        view.draw(canvas);
         return returnedBitmap;
     }
 
