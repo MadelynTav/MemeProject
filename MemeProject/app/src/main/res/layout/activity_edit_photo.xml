@@ -119,6 +119,12 @@
                         style="@style/FilterButtons"
                         android:onClick="invertColors"/>
 
+                    <Button
+                        android:id="@+id/clear"
+                        android:text="CLEAR "
+                        style="@style/FilterButtons"
+                        android:onClick="clearImage"/>
+
                 </LinearLayout>
             </HorizontalScrollView>
 

@@ -464,22 +464,41 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
       //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
 
+
+    // Applies engrave effect to image
+    public void clearImage(View view) {
+        Handler handler= new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                uri = (Uri) getIntent().getExtras().get("image");
+                try {
+                    uriBm = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), uri));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                imageView.setImageBitmap(uriBm);
+                demoImage.setImageBitmap(uriBm);
+                Toast.makeText(EditPhoto.this, "Cleared", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
     // Applies engrave effect to image
     public void engravedImage(View view) {
         Handler handler= new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (getIntent().hasExtra("byteArray")) {
 
                     Bitmap engraved = ApplyFilters.engrave(uriBm);
                     imageView.setImageBitmap(engraved);
                     demoImage.setImageBitmap(engraved);
-                } else {
-                    Bitmap engraved = ApplyFilters.engrave(uriBm);
-                    imageView.setImageBitmap(engraved);
-                    demoImage.setImageBitmap(engraved);
-                }
+                
                 Toast.makeText(EditPhoto.this, "Engraved", Toast.LENGTH_SHORT).show();
 
             }
@@ -493,15 +512,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (getIntent().hasExtra("byteArray")) {
+
                     Bitmap inverted = ApplyFilters.doInvert(uriBm);
                     imageView.setImageBitmap(inverted);
                     demoImage.setImageBitmap(inverted);
-                } else {
-                    Bitmap inverted = ApplyFilters.doInvert(uriBm);
-                    imageView.setImageBitmap(inverted);
-                    demoImage.setImageBitmap(inverted);
-                }
+
                 Toast.makeText(EditPhoto.this, "Inverted", Toast.LENGTH_SHORT).show();
 
             }
@@ -515,15 +530,11 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (getIntent().hasExtra("byteArray")) {
+
                     Bitmap greyscaled = ApplyFilters.doGreyscale(uriBm);
                     imageView.setImageBitmap(greyscaled);
                     demoImage.setImageBitmap(greyscaled);
-                } else {
-                    Bitmap greyscaled = ApplyFilters.doGreyscale(uriBm);
-                    imageView.setImageBitmap(greyscaled);
-                    demoImage.setImageBitmap(greyscaled);
-                }
+
                 Toast.makeText(EditPhoto.this, "Greyscale", Toast.LENGTH_SHORT).show();
             }
         });
@@ -532,43 +543,31 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     // Applies blue shading effect to image
     public void shadingFilterBlue(View view) {
-        if (getIntent().hasExtra("byteArray")) {
+
             Bitmap blueShade = ApplyFilters.applyShadingFilter(uriBm, Color.BLUE);
             imageView.setImageBitmap(blueShade);
             demoImage.setImageBitmap(blueShade);
-        } else {
-            Bitmap blueShade = ApplyFilters.applyShadingFilter(uriBm, Color.BLUE);
-            imageView.setImageBitmap(blueShade);
-            demoImage.setImageBitmap(blueShade);
-        }
+
         Toast.makeText(this, "Blue", Toast.LENGTH_SHORT).show();
     }
 
     // Applies red shading effect to image
     public void shadingFilterRed(View view) {
-        if (getIntent().hasExtra("byteArray")) {
+
             Bitmap redShade = ApplyFilters.applyShadingFilter(uriBm, Color.RED);
             imageView.setImageBitmap(redShade);
             demoImage.setImageBitmap(redShade);
-        } else {
-            Bitmap redShade = ApplyFilters.applyShadingFilter(uriBm, Color.RED);
-            imageView.setImageBitmap(redShade);
-            demoImage.setImageBitmap(redShade);
-        }
+
         Toast.makeText(this, "Red", Toast.LENGTH_SHORT).show();
     }
 
     // Applies green shading effect to image
     public void shadingFilterGreen(View view) {
-        if (getIntent().hasExtra("byteArray")) {
+
             Bitmap greenShade = ApplyFilters.applyShadingFilter(uriBm, Color.GREEN);
             imageView.setImageBitmap(greenShade);
             demoImage.setImageBitmap(greenShade);
-        } else {
-            Bitmap greenShade = ApplyFilters.applyShadingFilter(uriBm, Color.GREEN);
-            imageView.setImageBitmap(greenShade);
-            demoImage.setImageBitmap(greenShade);
-        }
+
         Toast.makeText(this, "Green", Toast.LENGTH_SHORT).show();
     }
 
