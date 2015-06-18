@@ -222,74 +222,75 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout3"
         android:layout_margin="5dp"
+        android:gravity="center_horizontal"
         android:background="#CCC">
 
 
-            <!-- ImageViews and EditTexts -->
-            <RelativeLayout
-                android:id="@+id/meme"
+        <!-- ImageViews and EditTexts -->
+        <RelativeLayout
+            android:id="@+id/meme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+
+
+            <!-- ImageView for Vanilla -->
+            <ImageView
+                android:visibility="visible"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@null"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/mImageView" />
+            <!-- ImageView for demo -->
+            <ImageView
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:background="@drawable/demo_pic"
+                android:id="@+id/demotivationalImage"
+                android:layout_centerHorizontal="true"/>
+            <!-- Demotivational EditTexts -->
+
+            <!-- Vanilla EditTexts -->
+            <EditText
+                style="@style/VanillaText"
+                android:id="@+id/editText"
+                android:layout_alignParentTop="true"/>
+
+            <EditText
+                style="@style/VanillaText"
+                android:id="@+id/editText2"
+                android:layout_alignParentBottom="true"/>
+
+            <!-- Demotivational EditTexts -->
+            <EditText
+                style="@style/DemotivateText"
+                android:inputType="textCapCharacters"
+                android:typeface="serif"
+                android:textSize="40sp"
+                android:maxLength="10"
+                android:id="@+id/demotivationalTitle"
+                android:layout_below="@id/demotivationalImage"
+                android:hint="ENTER TITLE" />
+
+            <EditText
+                style="@style/DemotivateText"
+                android:textSize="20sp"
+                android:id="@+id/demotivationalText"
+                android:layout_below="@id/demotivationalTitle"
+                android:maxLength="25"
+                android:hint="Enter Description" />
 
 
 
-                <!-- ImageView for Vanilla -->
-                <ImageView
-                    android:visibility="visible"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo"
-                    android:background="@null"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/mImageView" />
-                <!-- ImageView for demo -->
-                <ImageView
-                    android:visibility="invisible"
-                    android:layout_width="fill_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/logo"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/demo_pic"
-                    android:id="@+id/demotivationalImage"
-                    android:layout_centerHorizontal="true"/>
-                <!-- Demotivational EditTexts -->
-
-                <!-- Vanilla EditTexts -->
-                 <EditText
-                    style="@style/VanillaText"
-                    android:id="@+id/editText" />
-
-                <EditText
-                    style="@style/VanillaText"
-                    android:id="@+id/editText2"
-                    android:layout_below="@+id/demotivationalText"
-                    android:layout_centerHorizontal="true" />
-
-                <!-- Demotivational EditTexts -->
-                <EditText
-                    style="@style/DemotivateText"
-                    android:inputType="textCapCharacters"
-                    android:typeface="serif"
-                    android:textSize="40sp"
-                    android:maxLength="10"
-                    android:id="@+id/demotivationalTitle"
-                    android:layout_below="@id/demotivationalImage"
-                    android:hint="Enter Title" />
-
-                <EditText
-                    style="@style/DemotivateText"
-                    android:textSize="20sp"
-                    android:id="@+id/demotivationalText"
-                    android:layout_below="@id/demotivationalTitle"
-                    android:maxLength="25"
-                    android:hint="Enter Description" />
-
-
-
-            </RelativeLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

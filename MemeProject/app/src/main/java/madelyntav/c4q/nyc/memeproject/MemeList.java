@@ -1,13 +1,16 @@
 package madelyntav.c4q.nyc.memeproject;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +21,7 @@ public class MemeList extends Activity {
 
     ListView listView;
     HashMap<Integer, String> memePairs;
+    private Uri uri;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,13 +60,19 @@ public class MemeList extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MemeList.this, EditPhoto.class);
-                intent.putExtra("drawable", memeImages.get(position));
+
+                uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getResources().getResourcePackageName(memeImages.get(position)) + '/' + getResources().getResourceTypeName(memeImages.get(position)) + '/' + getResources().getResourceEntryName(memeImages.get(position)));
+
+                intent.putExtra("image", uri);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
 
             }
         });
+
+
+
 
     }
 
