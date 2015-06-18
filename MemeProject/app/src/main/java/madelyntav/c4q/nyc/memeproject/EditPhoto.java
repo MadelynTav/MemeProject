@@ -44,7 +44,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     private NotificationManager mNotificationManager;
     private Bitmap returnedBitmap;
-    Bitmap bitmap, bm, uriBm;
+    Bitmap bitmap, bm, uriBm, image;
     private int delta_x;
     private int delta_y;
     public static ImageView imageView;
@@ -264,6 +264,13 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
     //onClick method for the save button. Calls other methods to create the save image function
     public void storeImage(View v) {
+
+
+        editText.setCursorVisible(false);
+        editText2.setCursorVisible(false);
+        demoText.setCursorVisible(false);
+        demoTitle.setCursorVisible(false);
+
         if (isVanilla) {
             if (editText.getText().toString().equals("")) {
                 editText.setVisibility(View.GONE);
@@ -273,15 +280,10 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         }
 
 
-            editText.setCursorVisible(false);
-            editText2.setCursorVisible(false);
-            demoText.setCursorVisible(false);
-            demoTitle.setCursorVisible(false);
+            image = getBitmapFromView(memeLayout);
+            File pictureFile = createImageFile();
+            addImageToFile(image, pictureFile);
 
-
-        Bitmap image = getBitmapFromView(memeLayout);
-        File pictureFile = createImageFile();
-        addImageToFile(image, pictureFile);
 
         editText.setCursorVisible(true);
         editText2.setCursorVisible(true);
@@ -376,16 +378,17 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     //Takes the current view and creates a bitmap representing that view.
     public Bitmap getBitmapFromView(View view) {
         view.setDrawingCacheEnabled(true);
-        returnedBitmap = view.getDrawingCache();
 
+        returnedBitmap = view.getDrawingCache();
 //        Canvas canvas = new Canvas(returnedBitmap);
 //
 //        Drawable bgDrawable = view.getBackground();
 //        if (bgDrawable != null)
-//            bgDrawable.draw(canvas);
+//             bgDrawable.draw(canvas);
 //        else
 //            canvas.drawColor(Color.WHITE);
 //        view.draw(canvas);
+
         return returnedBitmap;
     }
 
