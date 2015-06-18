@@ -465,6 +465,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
       //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
 
 
+
     // Applies engrave effect to image
     public void clearImage(View view) {
         Handler handler= new Handler();
@@ -590,14 +591,6 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         twentyFive.setVisibility(View.VISIBLE);
         colorPicker.setVisibility(View.VISIBLE);
         memeLayout.setBackgroundColor(Color.parseColor("#CCCCCC"));
-
-        if (colorPicker.isSelected()) {
-            editText.setVisibility(View.VISIBLE);
-            editText2.setVisibility(View.VISIBLE);
-        } else {
-            editText.setVisibility(View.GONE);
-            editText2.setVisibility(View.GONE);
-        }
 
 
     }
