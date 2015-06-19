@@ -107,46 +107,47 @@ import java.util.Date;
 //                textMid.setOnDragListener(this);
 //                textTop.setOnDragListener(this);
 
-                imageView = (ImageView) findViewById(R.id.mImageView);
-                demoImage = (ImageView) findViewById(R.id.demotivationalImage);
+               // imageView = (ImageView) findViewById(R.id.mImageView);
+                //demoImage = (ImageView) findViewById(R.id.demotivationalImage);
                 memeLayout = (RelativeLayout) findViewById(R.id.meme);
 
 
             //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
 
             //opens pic in this activity
-                if (getIntent().hasExtra("byteArray")) {
-                    b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
-                    imageView = (ImageView) findViewById(R.id.mImageView);
-                    vanilla = (Button) findViewById(R.id.vanilla);
-                    editText = (EditText) findViewById(R.id.editText);
-                    editText2 = (EditText) findViewById(R.id.editText2);
-                    demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
-                    demoText = (EditText) findViewById(R.id.demotivationalText);
-                    imageView.setImageBitmap(b);
-                    demoImage.setImageBitmap(b);
+            if (getIntent().hasExtra("byteArray")) {
+                b = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("byteArray"), 0, getIntent().getByteArrayExtra("byteArray").length);
+                //imageView = (ImageView) findViewById(R.id.mImageView);
+                vanilla = (Button) findViewById(R.id.vanilla);
+                editText = (EditText) findViewById(R.id.editText);
+                editText2 = (EditText) findViewById(R.id.editText2);
+                demoTitle = (EditText) findViewById(R.id.demotivationalTitle);
+                demoText = (EditText) findViewById(R.id.demotivationalText);
+                imageView.setImageBitmap(b);
+                demoImage.setImageBitmap(b);
 
 
-                } else {
+            } else {
 
-                    //retrieve passed uri
-                    Uri uri = getIntent().getExtras().getParcelable("image");
-                    //retrieve bitmap uri from intent
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                //retrieve passed uri
+                Uri uri = getIntent().getExtras().getParcelable("image");
+                //retrieve bitmap uri from intent
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    //create bitmap for use within activity
-                    try {
-                        bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    imageView.setImageBitmap(bitmap);
-                    demoImage.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                //create bitmap for use within activity
+                try {
+                    bitmap = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                imageView.setImageBitmap(bitmap);
+                demoImage.setImageBitmap(bitmap);
+            }
+
             //-----------------------------SHARE BUTTON ONCLICKLISTENER---------------------------//
 
             // Shares image via Email, Text, Bluetooth, etc...
@@ -194,7 +195,6 @@ import java.util.Date;
                     }
                 });
 
-
                 vanilla.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -203,7 +203,6 @@ import java.util.Date;
 
                     }
                 });
-
 
                 demotivational.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -264,8 +263,6 @@ import java.util.Date;
             File pictureFile = createImageFile();
             addImageToFile(image, pictureFile);
             Toast.makeText(this, "Saved to gallery", Toast.LENGTH_SHORT).show();
-
-
         }
 
         /**
@@ -471,10 +468,14 @@ import java.util.Date;
         // Applies engrave effect to image
         public void engravedImage(View view) {
             if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap engraved = ApplyFilters.engrave(b);
                 imageView.setImageBitmap(engraved);
                 demoImage.setImageBitmap(engraved);
             } else {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap engraved = ApplyFilters.engrave(bitmap);
                 imageView.setImageBitmap(engraved);
                 demoImage.setImageBitmap(engraved);
@@ -485,10 +486,14 @@ import java.util.Date;
         // Applies inverted colors effect to image
         public void invertColors(View view) {
             if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap inverted = ApplyFilters.doInvert(b);
                 imageView.setImageBitmap(inverted);
                 demoImage.setImageBitmap(inverted);
             } else {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap inverted = ApplyFilters.doInvert(bitmap);
                 imageView.setImageBitmap(inverted);
                 demoImage.setImageBitmap(inverted);
@@ -500,10 +505,14 @@ import java.util.Date;
         // Applies greyscale effect to image
         public void greyscaleImage(View view) {
             if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap greyscaled = ApplyFilters.doGreyscale(b);
                 imageView.setImageBitmap(greyscaled);
                 demoImage.setImageBitmap(greyscaled);
             } else {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap greyscaled = ApplyFilters.doGreyscale(bitmap);
                 imageView.setImageBitmap(greyscaled);
                 demoImage.setImageBitmap(greyscaled);
@@ -514,10 +523,14 @@ import java.util.Date;
         // Applies blue shading effect to image
         public void shadingFilterBlue(View view) {
             if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap blueShade = ApplyFilters.applyShadingFilter(b, Color.BLUE);
                 imageView.setImageBitmap(blueShade);
                 demoImage.setImageBitmap(blueShade);
             } else {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap blueShade = ApplyFilters.applyShadingFilter(bitmap, Color.BLUE);
                 imageView.setImageBitmap(blueShade);
                 demoImage.setImageBitmap(blueShade);
@@ -528,10 +541,14 @@ import java.util.Date;
         // Applies red shading effect to image
         public void shadingFilterRed(View view) {
             if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap redShade = ApplyFilters.applyShadingFilter(b, Color.RED);
                 imageView.setImageBitmap(redShade);
                 demoImage.setImageBitmap(redShade);
             } else {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap redShade = ApplyFilters.applyShadingFilter(bitmap, Color.RED);
                 imageView.setImageBitmap(redShade);
                 demoImage.setImageBitmap(redShade);
@@ -543,10 +560,14 @@ import java.util.Date;
         public void shadingFilterGreen(View view) {
 
             if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap greenShade = ApplyFilters.applyShadingFilter(b, Color.GREEN);
                 imageView.setImageBitmap(greenShade);
                 demoImage.setImageBitmap(greenShade);
             } else {
+                imageView.setImageBitmap(null);
+                demoImage.setImageBitmap(null);
                 Bitmap greenShade = ApplyFilters.applyShadingFilter(bitmap, Color.GREEN);
                 imageView.setImageBitmap(greenShade);
                 demoImage.setImageBitmap(greenShade);
@@ -554,7 +575,20 @@ import java.util.Date;
             Toast.makeText(this,"Green",Toast.LENGTH_SHORT).show();
         }
 
-
+        public void clearImage(View view){
+            if (getIntent().hasExtra("byteArray")) {
+                imageView.setImageBitmap(null);
+                imageView.setImageBitmap(b);
+                demoImage.setImageBitmap(null);
+                demoImage.setImageBitmap(b);
+            } else {
+                imageView.setImageBitmap(null);
+                imageView.setImageBitmap(bitmap);
+                demoImage.setImageBitmap(null);
+                demoImage.setImageBitmap(bitmap);
+            }
+            Toast.makeText(this,"Normal",Toast.LENGTH_SHORT).show();
+        }
 
         public void choseColor (View v) {
             color = colorPicker.getColor();

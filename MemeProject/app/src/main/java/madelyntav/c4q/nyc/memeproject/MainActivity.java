@@ -98,7 +98,6 @@ public class MainActivity extends ActionBarActivity {
             targetUri = data.getData();
             intent.putExtra("image", targetUri);
 
-
 //            Bitmap bitmap = null;
 //            ContentResolver cr = getContentResolver();
 //
@@ -111,16 +110,11 @@ public class MainActivity extends ActionBarActivity {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-//
-//
-
 
         }
         //pass image to intent
         if (targetUri != null) {
             startActivity(intent);
         }
-
     }
-
 }
