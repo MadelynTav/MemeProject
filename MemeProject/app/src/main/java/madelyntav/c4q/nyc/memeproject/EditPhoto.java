@@ -465,6 +465,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
       //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
 
 
+
     // Applies engrave effect to image
     public void clearImage(View view) {
         Handler handler= new Handler();
