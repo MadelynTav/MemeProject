@@ -37,6 +37,7 @@ import java.util.Date;
 
     public class EditPhoto extends Activity implements View.OnTouchListener, View.OnDragListener {
 
+
         Bitmap b;
         Bitmap bitmap;
         public static ImageView imageView;
@@ -92,17 +93,19 @@ import java.util.Date;
                 editText.setTypeface(custom_font);
                 editText2.setTypeface(custom_font);
 
+
                 editText.setOnTouchListener(this);
                 editText2.setOnTouchListener(this);
 
-                //Drag and drop layouts for drag and drop EditText feature
-            LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
-            LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
-            LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
 
-                textBot.setOnDragListener(this);
-                textMid.setOnDragListener(this);
-                textTop.setOnDragListener(this);
+                //Drag and drop layouts for drag and drop EditText feature
+//            LinearLayout textTop = (LinearLayout) findViewById(R.id.textTop);
+//            LinearLayout textMid = (LinearLayout) findViewById(R.id.textMid);
+//            LinearLayout textBot = (LinearLayout) findViewById(R.id.textBottom);
+//
+//                textBot.setOnDragListener(this);
+//                textMid.setOnDragListener(this);
+//                textTop.setOnDragListener(this);
 
                 imageView = (ImageView) findViewById(R.id.mImageView);
                 demoImage = (ImageView) findViewById(R.id.demotivationalImage);
@@ -191,6 +194,7 @@ import java.util.Date;
                     }
                 });
 
+
                 vanilla.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -200,15 +204,18 @@ import java.util.Date;
                     }
                 });
 
+
                 demotivational.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         isVanilla = false;
                         demotivate(view);
+
                     }
                 });
 
             instance = this;
+
             }
 
         //----------------------------VANILLA AND DEMOTIVATIONAL METHODS--------------------------//
@@ -323,6 +330,7 @@ import java.util.Date;
             return returnedBitmap;
         }
 
+
         //---------------------------------DRAGGING EDITTEXT METHODS------------------------------//
 
         // onTouch and onDrag work together to allow for views to be moved around within the layout
@@ -339,6 +347,7 @@ import java.util.Date;
             }
         }
 
+
         public boolean onDrag(View v, DragEvent e) {
             if (e.getAction() == DragEvent.ACTION_DROP) {//if the shadow has been released within the view
                 View view = (View) e.getLocalState();
@@ -347,6 +356,8 @@ import java.util.Date;
                 LinearLayout to = (LinearLayout) v;
 
                 if((to.getResources().getInteger(Integer.valueOf(R.id.editText)) == (from.getResources().getInteger(Integer.valueOf(R.id.editText2))))) {
+
+
 
                 }
                 from.removeView(view);
@@ -358,9 +369,11 @@ import java.util.Date;
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
 
+
             }
             return true;
         }
+
 
         //----------------------------VANILLA EDITTEXT FONT SIZE METHODS--------------------------//
 
@@ -448,7 +461,10 @@ import java.util.Date;
             editText.setTextColor(Color.BLUE);
             editText2.setTextColor(Color.BLUE);
 
+
+
         }
+
 
         //----------------------------------IMAGE EFFECTS METHODS---------------------------------//
 
@@ -537,6 +553,8 @@ import java.util.Date;
             }
             Toast.makeText(this,"Green",Toast.LENGTH_SHORT).show();
         }
+
+
 
         public void choseColor (View v) {
             color = colorPicker.getColor();

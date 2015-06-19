@@ -27,7 +27,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-
 public class ColorPicker extends View {
 
 
@@ -341,5 +340,4 @@ public class ColorPicker extends View {
         }
     }
 }
-
 
