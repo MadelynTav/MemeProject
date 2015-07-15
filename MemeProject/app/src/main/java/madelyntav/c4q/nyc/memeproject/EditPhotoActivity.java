@@ -9,10 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -39,7 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class EditPhoto extends Activity implements View.OnTouchListener {
+public class EditPhotoActivity extends Activity implements View.OnTouchListener {
 
 
     private NotificationManager mNotificationManager;
@@ -50,7 +48,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     public static ImageView imageView;
     public static ImageView demoImage;
     private int color;
-    private ColorPicker colorPicker;
+    private ColorPickerView colorPickerView;
     private Button vanilla;
     private Button demotivational;
     private EditText editText, editText2, demoTitle, demoText;
@@ -64,10 +62,10 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
     Button twentyFive;
     RelativeLayout root;
     private boolean isVanilla = true;
-    public static EditPhoto getInstance() {
+    public static EditPhotoActivity getInstance() {
         return instance;
     }
-    static EditPhoto instance;
+    static EditPhotoActivity instance;
     ImageButton share;
     private Uri uri;
 
@@ -78,7 +76,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         setContentView(R.layout.activity_edit_photo);
 
 
-        colorPicker = (ColorPicker) findViewById(R.id.colorPicker);
+        colorPickerView = (ColorPickerView) findViewById(R.id.colorPicker);
         imageView = (ImageView) findViewById(R.id.mImageView);
         demoImage = (ImageView) findViewById(R.id.demotivationalImage);
 
@@ -253,7 +251,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         fifteen.setVisibility(View.INVISIBLE);
         twenty.setVisibility(View.INVISIBLE);
         twentyFive.setVisibility(View.INVISIBLE);
-        colorPicker.setVisibility(View.INVISIBLE);
+        colorPickerView.setVisibility(View.INVISIBLE);
         linearLayout2.setVisibility(View.GONE);
         linearLayout3.setVisibility(View.GONE);
 
@@ -474,7 +472,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
             public void run() {
                 imageView.setImageBitmap(uriBm);
                 demoImage.setImageBitmap(uriBm);
-                Toast.makeText(EditPhoto.this, "Cleared", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPhotoActivity.this, "Cleared", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -491,7 +489,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                     imageView.setImageBitmap(engraved);
                     demoImage.setImageBitmap(engraved);
 
-                Toast.makeText(EditPhoto.this, "Engraved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPhotoActivity.this, "Engraved", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -509,7 +507,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                     imageView.setImageBitmap(inverted);
                     demoImage.setImageBitmap(inverted);
 
-                Toast.makeText(EditPhoto.this, "Inverted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPhotoActivity.this, "Inverted", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -527,7 +525,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
                     imageView.setImageBitmap(greyscaled);
                     demoImage.setImageBitmap(greyscaled);
 
-                Toast.makeText(EditPhoto.this, "Greyscale", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPhotoActivity.this, "Greyscale", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -565,7 +563,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
 
 
     public void choseColor(View v) {
-        color = colorPicker.getColor();
+        color = colorPickerView.getColor();
         linearLayout3.setVisibility(View.GONE);
         editText.setVisibility(View.VISIBLE);
         editText2.setVisibility(View.VISIBLE);
@@ -589,7 +587,7 @@ public class EditPhoto extends Activity implements View.OnTouchListener {
         fifteen.setVisibility(View.VISIBLE);
         twenty.setVisibility(View.VISIBLE);
         twentyFive.setVisibility(View.VISIBLE);
-        colorPicker.setVisibility(View.VISIBLE);
+        colorPickerView.setVisibility(View.VISIBLE);
         memeLayout.setBackgroundColor(Color.parseColor("#CCCCCC"));
 
 

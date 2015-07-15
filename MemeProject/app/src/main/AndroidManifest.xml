@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".EditPhoto"
+            android:name=".EditPhotoActivity"
             android:label="@string/title_activity_edit_photo"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MemeList"
+        <activity android:name=".MemeListActivity"
             android:label="MemeList"
             android:screenOrientation="portrait">
 
