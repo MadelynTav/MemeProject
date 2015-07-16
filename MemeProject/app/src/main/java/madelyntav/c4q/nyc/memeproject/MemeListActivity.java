@@ -4,20 +4,22 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.sql.SQLException;
+import java.util.List;
 
 public class MemeListActivity extends Activity {
 
     private ListView mListView;
-    private HashMap<Integer, String> mMemeHashMap;
     private Uri mUri;
+    private DatabaseHelper mHelper;
+    private MemeTemplateAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,47 +27,58 @@ public class MemeListActivity extends Activity {
         setContentView(R.layout.activity_meme_list);
         mListView = (ListView) findViewById(R.id.listView);
 
-        mMemeHashMap = new HashMap<>();
-        mMemeHashMap.put(R.drawable.actual_advice_mallard, "Actual Advice Mallard");
-        mMemeHashMap.put(R.drawable.but_thats_none_of_my_business, "But That's None Of My Business");
-        mMemeHashMap.put(R.drawable.creepy_condescending_wonka, "Creepy Condescending Wonka");
-        mMemeHashMap.put(R.drawable.futurama_fry, "Skeptical Fry");
-        mMemeHashMap.put(R.drawable.good_guy_greg, "Good Guy Greg");
-        mMemeHashMap.put(R.drawable.liam_neeson_taken, "Liam Neeson Taken");
-        mMemeHashMap.put(R.drawable.one_does_not_simply, "One Does Not Simply");
-        mMemeHashMap.put(R.drawable.scumbag_steve, "Scumbag Steve");
-        mMemeHashMap.put(R.drawable.shut_up_and_take_my_money_fry, "Shut Up And Take My Money");
-        mMemeHashMap.put(R.drawable.ten_guy, "Ten Guy");
-        mMemeHashMap.put(R.drawable.the_most_interesting_man_in_the_world, "The Most Interesting Man In The World");
-        mMemeHashMap.put(R.drawable.third_world_skeptical_kid, "Third World Skeptical Kid");
-        mMemeHashMap.put(R.drawable.unhelpful_high_school_teacher, "Unhelpful High School Teacher");
-        mMemeHashMap.put(R.drawable.yao_ming, "Yao Ming");
-        mMemeHashMap.put(R.drawable.you_the_real_mvp, "You The Real MVP");
+        new DatabaseTask().execute();
 
-        final ArrayList<Integer> memeImages = new ArrayList<Integer>();
-        ArrayList<String> memeNames = new ArrayList<String>();
-        addItemsToArrays(memeImages, memeNames);
-        CustomArrayAdapter memeAdapter = new CustomArrayAdapter(getApplicationContext(), memeNames, memeImages);
-        mListView.setAdapter(memeAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MemeListActivity.this, EditPhotoActivity.class);
-                mUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getResources().getResourcePackageName(memeImages.get(position)) + '/' + getResources().getResourceTypeName(memeImages.get(position)) + '/' + getResources().getResourceEntryName(memeImages.get(position)));
-                intent.putExtra("image", mUri);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
-    public void addItemsToArrays(ArrayList<Integer> images, ArrayList<String> titles) {
-        int position = 0;
-        for (Integer image : mMemeHashMap.keySet()) {
+    private class DatabaseTask extends AsyncTask<Void, Void, List<MemeTemplate>> {
 
-            images.add(position, image);
-            titles.add(position, mMemeHashMap.get(image));
-            position++;
+        @Override
+        protected List<MemeTemplate> doInBackground(Void... voids) {
+            mHelper = DatabaseHelper.getInstance(getApplicationContext());
+            try {
+                if (mHelper.loadData().size() == 0) {
+                    mHelper.insertRow("Actual Advice Mallard", R.drawable.actual_advice_mallard);
+                    mHelper.insertRow("But That's None Of My Business", R.drawable.but_thats_none_of_my_business);
+                    mHelper.insertRow("Creepy Condescending Wonka", R.drawable.creepy_condescending_wonka);
+                    mHelper.insertRow("Skeptical Fry", R.drawable.futurama_fry);
+                    mHelper.insertRow("Good Guy Greg", R.drawable.good_guy_greg);
+                    mHelper.insertRow("Liam Neeson Taken", R.drawable.liam_neeson_taken);
+                    mHelper.insertRow("One Does Not Simply", R.drawable.one_does_not_simply);
+                    mHelper.insertRow("Scumbag Steve", R.drawable.scumbag_steve);
+                    mHelper.insertRow("Shut Up And Take My Money", R.drawable.shut_up_and_take_my_money_fry);
+                    mHelper.insertRow("Ten Guy", R.drawable.ten_guy);
+                    mHelper.insertRow("The Most Interesting Man In The World", R.drawable.the_most_interesting_man_in_the_world);
+                    mHelper.insertRow("Third World Skeptical Kid", R.drawable.third_world_skeptical_kid);
+                    mHelper.insertRow("Unhelpful High School Teacher", R.drawable.unhelpful_high_school_teacher);
+                    mHelper.insertRow("Yao Ming", R.drawable.yao_ming);
+                    mHelper.insertRow("You The Real MVP", R.drawable.you_the_real_mvp);
+                }
+                return mHelper.loadData();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<MemeTemplate> memeTemplates) {
+            mAdapter = new MemeTemplateAdapter(MemeListActivity.this, memeTemplates);
+            mListView.setAdapter(mAdapter);
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(MemeListActivity.this, EditPhotoActivity.class);
+                    int resourceId = mAdapter.getItem(position).getResource_id();
+                    mUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getResources().getResourcePackageName(resourceId) + '/' + getResources().getResourceTypeName(resourceId) + '/' + getResources().getResourceEntryName(resourceId));
+                    intent.putExtra("image", mUri);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
+
 }

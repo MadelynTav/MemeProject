@@ -1,6 +1,5 @@
 package madelyntav.c4q.nyc.memeproject;
 
-
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -36,9 +35,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class EditPhotoActivity extends Activity implements View.OnTouchListener {
-
 
     private NotificationManager mNotificationManager;
     private Bitmap returnedBitmap;
@@ -69,12 +66,10 @@ public class EditPhotoActivity extends Activity implements View.OnTouchListener 
     ImageButton share;
     private Uri uri;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
-
 
         colorPickerView = (ColorPickerView) findViewById(R.id.colorPicker);
         imageView = (ImageView) findViewById(R.id.mImageView);
@@ -104,13 +99,6 @@ public class EditPhotoActivity extends Activity implements View.OnTouchListener 
 
         editText.setOnTouchListener(this);
         editText2.setOnTouchListener(this);
-
-
-
-
-
-
-
 
 
         //----------------------------GET IMAGE FROM PREVIOUS INTENT--------------------------//
@@ -589,7 +577,6 @@ public class EditPhotoActivity extends Activity implements View.OnTouchListener 
         twentyFive.setVisibility(View.VISIBLE);
         colorPickerView.setVisibility(View.VISIBLE);
         memeLayout.setBackgroundColor(Color.parseColor("#CCCCCC"));
-
 
     }
 
