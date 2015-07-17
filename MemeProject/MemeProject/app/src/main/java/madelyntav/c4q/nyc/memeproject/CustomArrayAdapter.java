@@ -46,9 +46,9 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
     }
 
     private void bindView(int position, View row) {
-        TextView label=(TextView)row.findViewById(R.id.memeName);
+//        TextView label=(TextView)row.findViewById(R.id.memeName);
 
-        label.setText(memeNames.get(position));
+//        label.setText(memeNames.get(position));
 
         ImageView icon=(ImageView)row.findViewById(R.id.memeImage);
 

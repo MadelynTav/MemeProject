@@ -103,6 +103,13 @@
                         android:text="GREEN "
                         style="@style/FilterButtons"
                         android:onClick="shadingFilterGreen"/>
+
+                    <Button
+                        android:id="@+id/clear"
+                        android:text="CLEAR "
+                        style="@style/FilterButtons"
+                        android:onClick="clearImage"/>
+
                     <Button
                         android:id="@+id/greyscale"
                         android:text="GREYSCALE "
@@ -118,12 +125,6 @@
                         android:text="INVERT "
                         style="@style/FilterButtons"
                         android:onClick="invertColors"/>
-
-                    <Button
-                        android:id="@+id/clear"
-                        android:text="CLEAR "
-                        style="@style/FilterButtons"
-                        android:onClick="clearImage"/>
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -274,7 +275,8 @@
             <EditText
                 style="@style/VanillaText"
                 android:id="@+id/editText2"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentTop="true"
+                android:layout_alignEnd="@+id/demotivationalText" />
 
             <!-- Demotivational EditTexts -->
             <EditText

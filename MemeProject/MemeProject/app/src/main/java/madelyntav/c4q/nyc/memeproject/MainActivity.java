@@ -66,6 +66,14 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(MainActivity.this, EditPhoto.class);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+            intent.putExtra("byteArray", bs.toByteArray());
+            startActivity(intent);
+
 //            Bundle extras = data.getExtras();
 //            Bitmap imageBitmap = (Bitmap) extras.get("data");
 //            ByteArrayOutputStream bs = new ByteArrayOutputStream();
@@ -74,6 +82,7 @@ public class MainActivity extends ActionBarActivity {
 
             targetUri = Uri.parse(stringVariable);
             intent.putExtra("image", targetUri);
+
 
 
 
