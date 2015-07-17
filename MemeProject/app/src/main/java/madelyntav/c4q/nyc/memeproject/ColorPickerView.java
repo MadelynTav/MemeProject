@@ -27,7 +27,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class ColorPicker extends View {
+public class ColorPickerView extends View {
 
 
     /**
@@ -74,17 +74,17 @@ public class ColorPicker extends View {
      */
     private float[] colorHSV = new float[]{0f, 0f, 1f};
 
-    public ColorPicker(Context context, AttributeSet attrs, int defStyle) {
+    public ColorPickerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
-    public ColorPicker(Context context, AttributeSet attrs) {
+    public ColorPickerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ColorPicker(Context context) {
+    public ColorPickerView(Context context) {
         super(context);
         init();
     }
@@ -307,7 +307,7 @@ public class ColorPicker extends View {
 
                     invalidate();
                 }
-                EditPhoto.getInstance().setTopColor(getColor());
+                EditPhotoActivity.getInstance().setTopColor(getColor());
                 return true;
         }
         return super.onTouchEvent(event);
