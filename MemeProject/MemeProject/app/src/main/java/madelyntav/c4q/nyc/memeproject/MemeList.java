@@ -86,7 +86,6 @@ public class MemeList extends Activity {
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Please select VANILLA or DEMO layout to begin", Toast.LENGTH_SHORT).show();
 
-
             }
         });
 
