@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void chooseMeme(View view){
-        Intent popularMemeIntent = new Intent(MainActivity.this, MemeList.class);
+        Intent popularMemeIntent = new Intent(MainActivity.this, TemplateActivity.class);
         startActivity(popularMemeIntent);
     }
 
