@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MemeList"
+        <activity android:name=".MemeListActivity"
             android:label="MemeList"
             android:screenOrientation="portrait">
 

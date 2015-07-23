@@ -1,5 +1,4 @@
 package madelyntav.c4q.nyc.memeproject;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,8 +9,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -28,7 +27,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
     }
+
 
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
@@ -55,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void chooseMeme(View view){
-        Intent popularMemeIntent = new Intent(MainActivity.this, MemeList.class);
+        Intent popularMemeIntent = new Intent(MainActivity.this, MemeListActivity.class);
         startActivity(popularMemeIntent);
     }
 
@@ -122,5 +124,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
+
+
 
 }
