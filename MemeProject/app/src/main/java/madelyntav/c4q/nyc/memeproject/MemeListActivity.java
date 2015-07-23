@@ -10,42 +10,43 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.InputStream;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import madelyntav.c4q.nyc.memeproject.database.DatabaseHelper;
+import madelyntav.c4q.nyc.memeproject.database.MemeTemplate;
 
 /**
  * Created by kadeemmaragh on 6/5/15.
  */
-public class MemeList extends Activity {
+public class MemeListActivity extends Activity {
 
     ListView listView;
     HashMap<Integer, String> memePairs;
     private Uri uri;
+    private DatabaseHelper databaseHelper = null;
+    private Dao<MemeTemplate, String> memeTemplateDao;
+    private List<MemeTemplate> memeTemplateList;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meme_list);
+        try {
+            memeTemplateDao = getDbHelper().getMemeTemplateDao();
+            memeTemplateList = memeTemplateDao.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         listView = (ListView) findViewById(R.id.listView);
 
-        memePairs = new HashMap<>();
-        memePairs.put(R.drawable.actual_advice_mallard, "Actual Advice Mallard");
-        memePairs.put(R.drawable.but_thats_none_of_my_business, "But That's None Of My Business");
-        memePairs.put(R.drawable.creepy_condescending_wonka, "Creepy Condescending Wonka");
-        memePairs.put(R.drawable.futurama_fry, "Skeptical Fry");
-        memePairs.put(R.drawable.good_guy_greg, "Good Guy Greg");
-        memePairs.put(R.drawable.liam_neeson_taken, "Liam Neeson Taken");
-        memePairs.put(R.drawable.one_does_not_simply, "One Does Not Simply");
-        memePairs.put(R.drawable.scumbag_steve, "Scumbag Steve");
-        memePairs.put(R.drawable.shut_up_and_take_my_money_fry, "Shut Up And Take My Money");
-        memePairs.put(R.drawable.ten_guy, "Ten Guy");
-        memePairs.put(R.drawable.the_most_interesting_man_in_the_world, "The Most Interesting Man In The World");
-        memePairs.put(R.drawable.third_world_skeptical_kid, "Third World Skeptical Kid");
-        memePairs.put(R.drawable.unhelpful_high_school_teacher, "Unhelpful High School Teacher");
-        memePairs.put(R.drawable.yao_ming, "Yao Ming");
-        memePairs.put(R.drawable.you_the_real_mvp, "You The Real MVP");
 
 
         final ArrayList<Integer> memeImages = new ArrayList<Integer>();
@@ -59,7 +60,7 @@ public class MemeList extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MemeList.this, EditPhoto.class);
+                Intent intent = new Intent(MemeListActivity.this, EditPhoto.class);
 
                 uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getResources().getResourcePackageName(memeImages.get(position)) + '/' + getResources().getResourceTypeName(memeImages.get(position)) + '/' + getResources().getResourceEntryName(memeImages.get(position)));
 
@@ -76,14 +77,34 @@ public class MemeList extends Activity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+
     public void addItemsToArrays(ArrayList<Integer> images, ArrayList<String> titles) {
         int position = 0;
-        for (Integer image : memePairs.keySet()) {
 
-            images.add(position, image);
-            titles.add(position, memePairs.get(image));
+        for (MemeTemplate memeTemplate :  memeTemplateList)   {
+
+            String imageName = memeTemplate.imageName;
+            int imageDrawable =  DatabaseHelper.getImageDrawable(imageName) ;
+            images.add(position,  imageDrawable);
+            titles.add(position, memeTemplate.title);
             position++;
         }
+    }
+
+
+    private DatabaseHelper getDbHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 
 }
